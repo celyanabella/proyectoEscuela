@@ -93,8 +93,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Artículos</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Categorías</a></li>
+                <li><a href="{{URL::action('MatriculaController@index')}}"><i class="fa fa-circle-o"></i> Nuevo Ingreso</a></li>
+                <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
               </ul>
             </li>
             

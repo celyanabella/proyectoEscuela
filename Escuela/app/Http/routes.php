@@ -19,9 +19,9 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
  
  /*DESCOMENTAR ESTE GRUPO DE RUTAS CUANDO SE QUIERA AGREAGAR EL PRIMER USUARIO EN LA BASE DE DATOS*/
-  /*Route::get('register', 'Auth\AuthController@getRegister');
-    Route::get('register', 'Auth\AuthController@tregistro'); 
-    Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);*/
+  //Route::get('register', 'Auth\AuthController@getRegister');
+    //Route::get('register', 'Auth\AuthController@tregistro'); 
+    //Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
 
 });
 
@@ -62,10 +62,16 @@ Route::group(['middleware' => 'usuarioAdmin'], function () {
 
 
 
-
      //COLOCAR SUS RUTAS ACA PARA USUARIO ADMIN
 
-
+Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('datos/Responsable','ResponsableController');
+Route::resource('datos/Estudiante','EstudianteController');
+Route::resource('detalle/grado','GradoController');
+Route::resource('detalle/seccion','SeccionController');
+Route::resource('detalle/turno','TurnoController');
+Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
+Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso
 
 
 
@@ -115,7 +121,8 @@ Route::group(['middleware' => 'usuarioAdmin'], function () {
 
 Route::group(['middleware' => 'usuarioStandard'], function () { 
      
- 
+ # Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
+  # Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
 
 });
 
@@ -123,13 +130,6 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
 
 
 
-Route::resource('datos/tipoResponsable','TipoResponsableController');
-Route::resource('datos/Responsable','ResponsableController');
-Route::resource('datos/Estudiante','EstudianteController');
-Route::resource('detalle/grado','GradoController');
-Route::resource('detalle/seccion','SeccionController');
-Route::resource('detalle/turno','TurnoController');
-Route::resource('expediente/matricula','MatriculaController');		 //Nuevo Ingreso
-Route::resource('expediente/matricula2','Matricula2Controller');	//Antiguo Ingreso
+
 
 

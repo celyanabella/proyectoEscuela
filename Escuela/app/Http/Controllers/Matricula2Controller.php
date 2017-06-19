@@ -52,6 +52,8 @@ class Matricula2Controller extends Controller
 
     public function index(Request $request)
     {
+        $usuarioactual=\Auth::user();
+
     	if($request)
         {
             $query = trim($request->get('searchText'));
@@ -67,7 +69,7 @@ class Matricula2Controller extends Controller
             ->orderBy('ma.id_matricula','desc')
             ->paginate(7);
             #->get();
-            return view('expediente.matricula2.index',["matriculas"=>$matriculas,"searchText"=>$query]);
+            return view('expediente.matricula2.index',["matriculas"=>$matriculas,"searchText"=>$query, "usuarioactual"=>$usuarioactual]);
         }
 
     }
@@ -88,11 +90,14 @@ class Matricula2Controller extends Controller
 
     public function show($id)		//Para mostrar
     {
-    	return view("expediente.matricula2.show",["matricula"=>Matricula::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+    	return view("expediente.matricula2.show",["matricula"=>Matricula::findOrFail($id), "usuarioactual"=>$usuarioactual]);
     }
 
     public function edit($id)
     {
+        $usuarioactual=\Auth::user();
+
     	$matricula = Matricula::findOrFail($id);
 
         $tipos = TipoResponsable::all();
@@ -119,12 +124,14 @@ class Matricula2Controller extends Controller
 
         $matriculas = DB::table('matricula')->get();
 
-    	return view("expediente.matricula2.edit",["matricula"=>$matricula, "detalleg"=>$detalleg, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos, "matriculas"=>$matriculas, "estudiante"=>$estudiante, "detallepartida"=>$detallepartida, "detalleM"=>$detalleM, "detalleP"=>$detalleP, "detalleC"=>$detalleC]);
+    	return view("expediente.matricula2.edit",["matricula"=>$matricula, "detalleg"=>$detalleg, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos, "matriculas"=>$matriculas, "estudiante"=>$estudiante, "detallepartida"=>$detallepartida, "detalleM"=>$detalleM, "detalleP"=>$detalleP, "detalleC"=>$detalleC, "usuarioactual"=>$usuarioactual]);
     }
 
 
     public function update(Matricula3FormRequest $request, $id)
     {	
+        $usuarioactual=\Auth::user();
+
     	try{
             DB::beginTransaction();
 
@@ -332,6 +339,8 @@ class Matricula2Controller extends Controller
 
     public function destroy($id)
     {
+        $usuarioactual=\Auth::user();
+        
     	$matricula2=Matricula::findOrFail($id);
     	$matricula2->estado = 'Inactivo';
     	$matricula2->update();
