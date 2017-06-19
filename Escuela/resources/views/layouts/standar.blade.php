@@ -120,18 +120,6 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Clientes</a></li>
               </ul>
             </li>
-                       
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder"></i> <span>Gestion de Usuarios</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-              <li><a href="{{ route('form_nuevo_usuario') }}"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
-              <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
-
-              </ul>
-            </li>-->
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
@@ -166,6 +154,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Sistema Escolar</h3>
+                  
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     
