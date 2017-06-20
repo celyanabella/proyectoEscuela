@@ -2,8 +2,10 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Busqueda de Estudiante  
+		<h3>Busqueda de Estudiante</h3>
+		
 		@include('datos.Estudiante.search')
+		
 	</div>
 </div>
 
@@ -29,8 +31,7 @@
 
 					
 					<td>
-						<a href="{{URL::action('EstudianteController@edit',$est->nie)}}"><button class="btn btn-info">VER</button></a>
-                         
+						<a href="{{URL::action('EstudianteController@show',$est->nie)}}"><button class="btn btn-info">VER</button></a>
 					</td>
 				</tr>
 				@include('datos.Estudiante.modal')

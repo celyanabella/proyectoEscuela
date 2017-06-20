@@ -30,18 +30,18 @@
         <a href="#"><b>Bienvenido</b> al Sistema</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Ingrese al sistema</p>
+        <p class="login-box-msg">Ingrese sus credenciales</p>
         
         <form action="login" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
 
           <div class="form-group has-feedback">
 
-                <input type="text" class="form-control" name="name" >
+                <input type="text" class="form-control" name="name" placeholder="username">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" name="password">
+            <input type="password" class="form-control" name="password" placeholder="password">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
          

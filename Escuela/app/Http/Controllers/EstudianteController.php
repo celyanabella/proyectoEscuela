@@ -22,9 +22,10 @@ class EstudianteController extends Controller
     {
     	if($request)
     	{
+            $usuarioactual=\Auth::user();
             //los query capturan los criterios de busqueda que son enviados desde el search.blade de estudiante
-    	    $query1 = trim($request->get('searchNombre'));
-            $query2 = trim($request->get('searchApellido'));
+            $query1 = trim($request->get('searchNombre'));
+            $query2 = trim($request->get('searchText'));
             $query3 = trim($request->get('searchNie'));
             #$query4 = $request->get('fechamatricula');
             $query5 = $request->get('idgrado');
@@ -33,26 +34,38 @@ class EstudianteController extends Controller
           
           //la consulta es guardada en la variable $est recordar que join
           //genera una nueva tabla con todos las columnas especificada en el select
-    		$est = DB::table('estudiante')
-            ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombreGrado','seccion.nombreSeccion')
+            $est = DB::table('estudiante')
+            ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombre as nombreGrado','seccion.nombre as nombreSeccion')
             ->join('matricula as matricula','estudiante.nie','=','matricula.nie','full outer')
             ->join('detalle_grado as detalle_grado','matricula.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
             ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado','full outer')
             ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion','full outer')
+            ->join('turno as turno','detalle_grado.idturno','=','turno.idturno','full outer')
             
-            ->where('estudiante.nombre',$query1)
-            ->orWhere('estudiante.apellido',$query2)
+            #->where('estudiante.nombre',$query1)
+            #->Where('estudiante.apellido','LIKE','%'.$query2.'%')
             #->orWhere('matricula.fechamatricula',$query4)
-            ->orWhere('grado.idgrado',$query5)
-            #->orWhere('estudiante.nie',$query3)
+            
+           
+               ->Where('seccion.idseccion','=',$query6)
+            
+            
+            
+               ->Where('grado.idgrado','=',$query5)
+            
+          
+               ->Where('turno.idturno','=',$query7)
+         
+            
+           
             ->get();
         //catalogos de grados,secciones y turnos
         $grados = DB::table('grado')->get();
-    	$secciones = DB::table('seccion')->get();
-    	$turnos = DB::table('turno')->get();
+        $secciones = DB::table('seccion')->get();
+        $turnos = DB::table('turno')->get();
 
             //se retorna el array de resultados a la vista en una variable "estudiantes" y ademas los catalogos de turno,seccion y grado
-            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
+            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchText"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual]);
 
     	}
     	

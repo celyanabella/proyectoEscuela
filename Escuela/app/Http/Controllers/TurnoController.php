@@ -20,44 +20,56 @@ class TurnoController extends Controller
 
     public function index(Request $request)
     {
+        $usuarioactual=\Auth::user();
+
     	if($request)
     	{
     		$query = trim($request->get('searchText'));
     		$turnos = DB::table('turno')->where('nombre','LIKE','%'.$query.'%')
     		->orderBy('idturno','desc')
     		->paginate(7);
-    		return view('detalle.turno.index',["turnos"=>$turnos,"searchText"=>$query]);
+    		return view('detalle.turno.index',["turnos"=>$turnos,"searchText"=>$query, "usuarioactual"=>$usuarioactual]);
     	}
 
     }
 
     public function create()
     {
-    	return view("detalle.turno.create");
+        $usuarioactual=\Auth::user();
+
+    	return view("detalle.turno.create",["usuarioactual"=>$usuarioactual]);
     }
 
     public function store( TurnoFormRequest $request)		//Para almacenar
     {
+        $usuarioactual=\Auth::user();
+
     	$turno = new Turno;
     	$turno -> nombre = $request -> get('nombre');
     	$turno -> estado = 'Activo';
     	$turno -> save();
 
-    	return Redirect::to('detalle/turno');
+    	return Redirect::to('detalle/turno',["usuarioactual"=>$usuarioactual]);
     }
 
     public function show($id)		//Para mostrar
     {
-    	return view("detalle.turno.show",["turno"=>Turno::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+
+    	return view("detalle.turno.show",["turno"=>Turno::findOrFail($id), "usuarioactual"=>$usuarioactual]);
     }
 
     public function edit($id)
     {
-    	return view("detalle.turno.edit",["turno"=>Turno::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+
+    	return view("detalle.turno.edit",["turno"=>Turno::findOrFail($id), "usuarioactual"=>$usuarioactual]);
     }
 
     public function update(TurnoFormRequest $request, $id)
     {	
+        $usuarioactual=\Auth::user();
+
     	$turno = Turno::findOrFail($id);
     	$turno -> nombre = $request -> get('nombre');
     	$turno -> estado = 'Activo';
@@ -68,6 +80,8 @@ class TurnoController extends Controller
 
     public function destroy($id)
     {
+        $usuarioactual=\Auth::user();
+
     	$turno=Turno::findOrFail($id);
     	$turno -> estado = 'Inactivo';
     	$turno->update();

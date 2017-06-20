@@ -20,24 +20,29 @@ class GradoController extends Controller
 
     public function index(Request $request)
     {
+        $usuarioactual=\Auth::user();
+
     	if($request)
     	{
     		$query = trim($request->get('searchText'));
     		$grados = DB::table('grado')->where('nombre','LIKE','%'.$query.'%')
     		->orderBy('idgrado','desc')
     		->paginate(7);
-    		return view('detalle.grado.index',["grados"=>$grados,"searchText"=>$query]);
+    		return view('detalle.grado.index',["grados"=>$grados,"searchText"=>$query, "usuarioactual"=>$usuarioactual]);
     	}
 
     }
 
     public function create()
     {
-    	return view("detalle.grado.create");
+        $usuarioactual=\Auth::user();
+    	return view("detalle.grado.create",["usuarioactual"=>$usuarioactual]);
     }
 
     public function store( GradoFormRequest $request)		//Para almacenar
     {
+        $usuarioactual=\Auth::user();
+
     	$grado = new Grado;
     	$grado -> nombre = $request -> get('nombre');
     	$grado -> estado = 'Activo';
@@ -48,16 +53,20 @@ class GradoController extends Controller
 
     public function show($id)		//Para mostrar
     {
-    	return view("detalle.grado.show",["grado"=>Grado::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+    	return view("detalle.grado.show",["grado"=>Grado::findOrFail($id), "usuarioactual"=>$usuarioactual]);
     }
 
     public function edit($id)
     {
-    	return view("detalle.grado.edit",["grado"=>Grado::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+    	return view("detalle.grado.edit",["grado"=>Grado::findOrFail($id), "usuarioactual"=>$usuarioactual]);
     }
 
     public function update(GradoFormRequest $request, $id)
     {	
+        $usuarioactual=\Auth::user();
+        
     	$grado = Grado::findOrFail($id);
     	$grado -> nombre = $request -> get('nombre');
     	$grado -> estado = 'Activo';
@@ -68,6 +77,8 @@ class GradoController extends Controller
 
     public function destroy($id)
     {
+        $usuarioactual=\Auth::user();
+
     	$grado=Grado::findOrFail($id);
     	$grado -> estado = 'Inactivo';
     	$grado->update();

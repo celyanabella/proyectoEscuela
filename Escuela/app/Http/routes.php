@@ -74,7 +74,9 @@ Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingre
 Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso
 
 
+Route::get('reporte','ReporteController@index');
 
+Route::post('recuperandoDatos','ReporteController@store');
 
 
 
