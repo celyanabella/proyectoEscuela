@@ -59,9 +59,15 @@ class EstudianteController extends Controller
                ->orderby('estudiante.apellido','asc')
             ->get();
         //catalogos de grados,secciones y turnos
-        $grados = DB::table('grado')->get();
-        $secciones = DB::table('seccion')->get();
-        $turnos = DB::table('turno')->get();
+        $grados = DB::table('grado')
+        ->orderBy('idgrado','asc')
+        ->get();
+        $secciones = DB::table('seccion')
+        ->orderBy('idseccion','asc')
+        ->get();
+        $turnos = DB::table('turno')
+        ->orderBy('idturno','asc')
+        ->get();
 
             //se retorna el array de resultados a la vista en una variable "estudiantes" y ademas los catalogos de turno,seccion y grado
             return view('datos.Estudiante.index',["estudiantes"=>$est,"searchYear"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual

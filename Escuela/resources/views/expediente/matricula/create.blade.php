@@ -89,26 +89,26 @@
 		<legend class="the-legend"><h2>Datos Generales del Estudiante</h2></legend>
 			<div class="form-group col-md-3">
 				<label for="">NIE</label>
-				{!! Form::number('nie', 11100000, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'NIE...']) !!}
+				{!! Form::number('nie', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'NIE...']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Folio partida de nacimiento</label>
-				{!! Form::number('folio', 111, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Folio...', 'autofocus'=>'on']) !!}
+				{!! Form::number('folio', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Folio...', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Libro partida de nacimiento</label>
-				{!! Form::number('libro', 111, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Libro...', 'autofocus'=>'on']) !!}
+				{!! Form::number('libro', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Libro...', 'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
 		<div class="col-md-12 col-md-offset-0">
 			<div class="form-group col-md-3">
 				<label for="">Nombres</label>
-				{!! Form::text('nombre', 111, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduzca los nombre', 'autofocus'=>'on']) !!}
+				{!! Form::text('nombre', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduzca los nombre', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Apellidos</label>
-				{!! Form::text('apellido', 111, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduza los apellidos', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduza los apellidos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Fecha de Nacimiento</label>
@@ -126,15 +126,15 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="form-group col-md-4">
 				<label for="">Domicilio</label>
-				{!! Form::textarea('domicilio', 111, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduza la dirección', 'autofocus'=>'on', 'rows'=>'2']) !!}
+				{!! Form::textarea('domicilio', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduza la dirección', 'autofocus'=>'on', 'rows'=>'2']) !!}
 			</div>
 			<div class="form-group col-md-4">
 				<label for="">Padece de alguna enfermedad</label>
-				{!! Form::textarea('enfermedad', 111, ['class' => 'form-control' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on', 'rows'=>'2']) !!}
+				{!! Form::textarea('enfermedad', null, ['class' => 'form-control' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on', 'rows'=>'2']) !!}
 			</div>
 			<div class="form-group col-md-4">
 				<label>Centro escolar del que procede</label>
-			{!! Form::textarea('cePrevio', 111, ['class' => 'form-control', 'placeholder'=>'Digite el centro escolar de donde procede', 'autofocus'=>'on', 'rows'=>'2']) !!}
+			{!! Form::textarea('cePrevio', null, ['class' => 'form-control', 'placeholder'=>'Digite el centro escolar de donde procede', 'autofocus'=>'on', 'rows'=>'2']) !!}
 			</div>
 		</div>
 
@@ -171,15 +171,15 @@
 		<legend class="the-legend"><h2>Datos de la Madre</h2></legend>
 			<div class="form-group col-md-3">
 				<label>Nombres de la Madre</label>
-				{!! Form::text('nombre2', 111, ['class' => 'form-control' ,'placeholder'=>'Nombres Completos', 'autofocus'=>'on']) !!}
+				{!! Form::text('nombre2', null, ['class' => 'form-control' ,'placeholder'=>'Nombres Completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos de la Madre</label>
-				{!! Form::text('apellido2', 111, ['class' => 'form-control' ,'placeholder'=>'Apellidos Completos', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido2', null, ['class' => 'form-control' ,'placeholder'=>'Apellidos Completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>DUI de la Madre</label>
-				{!! Form::number('dui', 1119122222, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'autofocus'=>'on']) !!}
+				{!! Form::number('dui', null, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
@@ -187,19 +187,19 @@
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Ocupacion de la Madre</label>
-					{!! Form::text('ocupacion', 111, ['class' => 'form-control' ,'placeholder'=>'Ocupacion que ejerce la madre...', 'autofocus'=>'on']) !!}
+					{!! Form::text('ocupacion', null, ['class' => 'form-control' ,'placeholder'=>'Ocupacion que ejerce la madre...', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Lugar de trabajo</label>
-					{!! Form::text('lugardetrabajo', 111, ['class' => 'form-control' ,'placeholder'=>'Nombre de la empresa o sitio donde actualmente trabaja', 'autofocus'=>'on']) !!}
+					{!! Form::text('lugardetrabajo', null, ['class' => 'form-control' ,'placeholder'=>'Nombre de la empresa o sitio donde actualmente trabaja', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Telefono de contacto  Madre</label>
-					{!! Form::number('telefono', 12345678, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 		</div>
@@ -212,15 +212,15 @@
 		<legend class="the-legend"><h2>Datos del Padre</h2></legend>
 			<div class="form-group col-md-3">
 				<label>Nombres del Padre</label>
-				{!! Form::text('nombre3', 111, ['class' => 'form-control' ,'placeholder'=>'Nombres completos', 'autofocus'=>'on']) !!}
+				{!! Form::text('nombre3', null, ['class' => 'form-control' ,'placeholder'=>'Nombres completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos del Padre</label>
-				{!! Form::text('apellido3', 111, ['class' => 'form-control' ,'placeholder'=>'Apellidos Completos', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido3', null, ['class' => 'form-control' ,'placeholder'=>'Apellidos Completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>DUI del Padre</label>
-				{!! Form::number('dui3', 1119122222, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'autofocus'=>'on']) !!}
+				{!! Form::number('dui3', null, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
@@ -228,19 +228,19 @@
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Ocupacion del Padre</label>
-					{!! Form::text('ocupacion3', 111, ['class' => 'form-control' ,'placeholder'=>'Ocupacion que que ejerce el padre', 'autofocus'=>'on']) !!}
+					{!! Form::text('ocupacion3', null, ['class' => 'form-control' ,'placeholder'=>'Ocupacion que que ejerce el padre', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Lugar de trabajo</label>
-					{!! Form::text('lugardetrabajo3', 111, ['class' => 'form-control' ,'placeholder'=>'Nombre de la empresa o sitio donde actualmente trabaja', 'autofocus'=>'on']) !!}
+					{!! Form::text('lugardetrabajo3', null, ['class' => 'form-control' ,'placeholder'=>'Nombre de la empresa o sitio donde actualmente trabaja', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Telefono de contacto del Padre</label>
-					{!! Form::number('telefono3', 12345678, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{!! Form::number('telefono3', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
 				</div>
 			</div>
 		</div>
@@ -253,16 +253,16 @@
 		<legend class="the-legend"><h2>Datos del Contacto de Emergencia</h2></legend>
 			<div class="form-group col-md-3">
 				<label>Nombres del Contacto Emergencia</label>
-				{!! Form::text('nombre4', 111, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Nombres Completos', 'autofocus'=>'on']) !!}
+				{!! Form::text('nombre4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Nombres Completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos del Contacto de Emergencia</label>
-				{!! Form::text('apellido4', 111, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
 					<label>Telefono de Contacto de Emergencia</label>
-					{!! Form::number('telefono4', 12345678, ['class' => 'form-control', 'required' => 'required' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{!! Form::number('telefono4', null, ['class' => 'form-control', 'required' => 'required' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
 				</div>
 			</div>	
 		</div>
