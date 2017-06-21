@@ -28,6 +28,7 @@ class EstudianteController extends Controller
            
             $query3 = trim($request->get('searchYear'));
             if ($query3==null) {
+                //valor por defecto, es el año actual
                 $query3='2017';
             }
             #$query4 = $request->get('fechamatricula');

@@ -15,6 +15,9 @@
 <center><div>
 	<font size=4>Listado de alumnos</font>
 </div></center>
+<center><div>
+	<font size=4>Matricula año: {{$ys}}</font>
+</div></center>
 
 <h1></h1>
 
@@ -28,8 +31,8 @@
 	<tbody>
 		@foreach($data as $result)
 			<tr>
-				<td>{{ $result->nombreestudiante }}</td>
-				<td>{{ $result->apellidoestudiante }}</td>
+				<td>{{ $result->nombreEstudiante }}</td>
+				<td>{{ $result->apellidoEstudiante }}</td>
 			</tr>
 		@endforeach
 
