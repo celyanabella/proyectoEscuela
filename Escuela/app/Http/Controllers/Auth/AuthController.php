@@ -77,12 +77,12 @@ class AuthController extends Controller
     
        $usuarioactual=\Auth::user();
 
-       if($usuarioactual->tipoUsuario==1){// SI EL USUARIO ES ADMIN MUESTRA EL VIEW DE ADMIN
+       //if($usuarioactual->tipoUsuario==1){// SI EL USUARIO ES ADMIN MUESTRA EL VIEW DE ADMIN
       
-       return view('/layouts/admin')->with("usuarioactual",  $usuarioactual);
-       }
-    else
-        return view('layouts/standar')->with("usuarioactual", $usuarioactual);// SI EL USUARIO ES DIFERENTE A 1 MUSTRA POR LE MOMENTO USUARIO STANDAR
+       return view('/inicio/index')->with("usuarioactual",  $usuarioactual);
+       //}
+    //else
+        //return view('layouts/standar')->with("usuarioactual", $usuarioactual);// SI EL USUARIO ES DIFERENTE A 1 MUSTRA POR LE MOMENTO USUARIO STANDAR
        //CAMBIAR RUTA A LA FUNCIONAL
     }
 

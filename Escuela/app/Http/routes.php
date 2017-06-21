@@ -37,8 +37,12 @@ Route::group(['middleware' => 'auth'], function () {
 	  Route::get('/', 'HomeController@index');
     Route::get('home', 'HomeController@index');
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+    Route::resource('datos/Estudiante','EstudianteController');         //Estudiantes
     Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
     Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
+    
+    Route::get('reporte','ReporteController@index');                  //Reportes
+    Route::post('recuperandoDatos','ReporteController@store');        //Reportes
 
 });
 
@@ -68,16 +72,16 @@ Route::group(['middleware' => 'usuarioAdmin'], function () {
 
 Route::resource('datos/tipoResponsable','TipoResponsableController');
 Route::resource('datos/Responsable','ResponsableController');
-Route::resource('datos/Estudiante','EstudianteController');
+#Route::resource('datos/Estudiante','EstudianteController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 
 
 
-Route::get('reporte','ReporteController@index');
+#Route::get('reporte','ReporteController@index');
 
-Route::post('recuperandoDatos','ReporteController@store');
+#Route::post('recuperandoDatos','ReporteController@store');
 
 
 

@@ -27,7 +27,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>JS</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -99,6 +99,7 @@
               </ul>
             </li>
             
+            @if($usuarioactual->tipo($usuarioactual->tipoUsuario)==1)
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-folder-open-o"></i>
@@ -110,6 +111,8 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i>Coordinación </a></li>
               </ul>
             </li>
+            @endif
+
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pencil-square-o"></i>
@@ -121,7 +124,8 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
-                       
+            
+            @if($usuarioactual->tipoUsuario==1) 
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-group"></i> <span>Gestion de Usuarios</span>
@@ -130,9 +134,11 @@
               <ul class="treeview-menu">
               <li><a href="{{ route('form_nuevo_usuario') }}"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
               <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
-
               </ul>
             </li>
+            @endif
+
+            @if($usuarioactual->tipoUsuario==1)
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-gears"></i>
@@ -146,6 +152,7 @@
                 <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
               </ul>
             </li>
+            @endif
             <li>
               <a href="#">
                 <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>
@@ -192,7 +199,7 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Sistema Escolar</h3>
+                  <h3 class="box-title">Centro Escolar Jardines de la Sabana</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     
