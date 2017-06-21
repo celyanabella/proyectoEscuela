@@ -89,8 +89,8 @@
           
          <li class="treeview">
               <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>Matricula</span>
+                <i class="fa fa-book"></i>
+                <span>Matriculas</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -101,30 +101,30 @@
             
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-th"></i>
-                <span>Gestion de Docentes</span>
+                <i class="fa fa-folder-open-o"></i>
+                <span>Docentes</span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Ingresos</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Proveedores</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>Consultar Docentes</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>Coordinación </a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-shopping-cart"></i>
+                <i class="fa fa-pencil-square-o"></i>
                 <span>Calificaciones</span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Ventas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Clientes</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
                        
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-folder"></i> <span>Gestion de Usuarios</span>
+                <i class="fa fa-group"></i> <span>Gestion de Usuarios</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -132,7 +132,20 @@
               <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
 
               </ul>
-            </li>-->
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-gears"></i>
+                <span>Ajustes</span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('TurnoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Turnos</a></li>
+                <li><a href="{{URL::action('GradoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Grados</a></li>
+                <li><a href="{{URL::action('SeccionController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Secciones</a></li>
+                <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
+              </ul>
+            </li>
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>

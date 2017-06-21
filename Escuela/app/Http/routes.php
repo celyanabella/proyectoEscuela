@@ -123,8 +123,8 @@ Route::post('recuperandoDatos','ReporteController@store');
 
 Route::group(['middleware' => 'usuarioStandard'], function () { 
      
- # Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
-  # Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
+  Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
+  Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
 
 });
 

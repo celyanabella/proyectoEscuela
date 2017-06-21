@@ -9,6 +9,7 @@ use Escuela\Http\Requests;
 use Escuela\Turno;
 use Illuminate\Support\Facades\Redirect;
 use Escuela\Http\Requests\TurnoFormRequest;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class TurnoController extends Controller
@@ -26,7 +27,8 @@ class TurnoController extends Controller
     	{
     		$query = trim($request->get('searchText'));
     		$turnos = DB::table('turno')->where('nombre','LIKE','%'.$query.'%')
-    		->orderBy('idturno','desc')
+            ->where('turno.estado','Activo')
+    		->orderBy('idturno','asc')
     		->paginate(7);
     		return view('detalle.turno.index',["turnos"=>$turnos,"searchText"=>$query, "usuarioactual"=>$usuarioactual]);
     	}
@@ -85,6 +87,9 @@ class TurnoController extends Controller
     	$turno=Turno::findOrFail($id);
     	$turno -> estado = 'Inactivo';
     	$turno->update();
+
+        Session::flash('message', '"'.$turno->nombre.'"'.' fue eliminado de nuestros registros');
+
     	return Redirect::to('detalle/turno');
     }
 }

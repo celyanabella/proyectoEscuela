@@ -3,6 +3,9 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h3>Listado de Turnos <a href="turno/create"><button class="btn btn-success">Nuevo</button></a></h3>
+		@if (Session::has('message'))
+			<p class="alert alert-danger">{{ Session::get('message')}}</p>
+		@endif
 		@include('detalle.turno.search')
 	</div>
 </div>

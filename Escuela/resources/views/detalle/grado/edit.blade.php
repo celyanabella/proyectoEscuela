@@ -22,7 +22,7 @@
             
             <div class="form-group">
             	<button class="btn btn-primary" type="submit">Guardar</button>
-            	<button class="btn btn-danger" type="reset">Cancelar</button>
+            	<a href="{{URL::action('GradoController@index')}}" class="btn btn-danger">Cancelar</a>
             </div>
 
 			{!!Form::close()!!}		

@@ -8,6 +8,7 @@ use Escuela\Http\Requests;
 
 use Escuela\Grado;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Escuela\Http\Requests\GradoFormRequest;
 use DB;
 
@@ -26,8 +27,9 @@ class GradoController extends Controller
     	{
     		$query = trim($request->get('searchText'));
     		$grados = DB::table('grado')->where('nombre','LIKE','%'.$query.'%')
-    		->orderBy('idgrado','desc')
-    		->paginate(7);
+            ->where('grado.estado','Activo')
+    		->orderBy('idgrado','asc')
+    		->paginate(9);
     		return view('detalle.grado.index',["grados"=>$grados,"searchText"=>$query, "usuarioactual"=>$usuarioactual]);
     	}
 
@@ -82,6 +84,9 @@ class GradoController extends Controller
     	$grado=Grado::findOrFail($id);
     	$grado -> estado = 'Inactivo';
     	$grado->update();
+
+        Session::flash('message', '"'.$grado->nombre.'"'.' fue eliminado de nuestros registros');
+
     	return Redirect::to('detalle/grado');
     }
 }
