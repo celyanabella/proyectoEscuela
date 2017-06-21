@@ -146,17 +146,30 @@
                 <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
               </ul>
             </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>
+                <small class="label pull-right bg-red">PDF</small>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('EstudianteController@index')}}"><i class="fa fa-circle-o"></i> Consulta de Estudiantes</a></li>
+              </ul>
+            </li>
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
-                <small class="label pull-right bg-red">PDF</small>
               </a>
             </li>
             <li>
               <a href="#">
                 <i class="fa fa-info-circle"></i> <span>Acerca De...</span>
-                <small class="label pull-right bg-yellow">IT</small>
+                <small class="label pull-right bg-yellow">CEJAS</small>
               </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-facebook"></i> FACEBOOK</a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i> TWITTER</a></li>
+                <li><a href="#"><i class="fa fa-instagram"></i> INSTAGRAM</a></li>
+              </ul>
             </li>
                         
           </ul>

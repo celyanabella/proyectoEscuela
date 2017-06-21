@@ -81,14 +81,12 @@ class MatriculaController extends Controller
 
     	$tipos = DB::table('tipo_responsable')->get();
 
-    	#$grados = DB::table('grado')->get();
-        $grados = Grado::all();   
 
-    	#$secciones = DB::table('seccion')->get();
-        $secciones = Seccion::all();
+        $grados = Grado::where('grado.estado','=','Activo')->orderBy('grado.idgrado','asc');   
 
-    	#$turnos = DB::table('turno')->get();
-        $turnos = Turno::all();
+        $secciones = Seccion::where('seccion.estado','=','Activo')->orderBy('seccion.idseccion','asc');
+
+        $turnos = Turno::where('turno.estado','=','Activo')->orderBy('turno.idturno','asc');
 
         $estudiantes = DB::table('estudiante')->get();
         $matriculas = DB::table('matricula')->get();
