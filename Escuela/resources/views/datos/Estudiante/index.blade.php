@@ -7,13 +7,16 @@
 		
 		@include('datos.Estudiante.search')
 		
-		{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
+	
+			{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
 	<input type="text" name="grado" value={{$grado}} placeholder="grado" hidden>
 	<input type="text" name="seccion" value={{$seccion}} placeholder="seccion" hidden>
 	<input type="text" name="turno" value={{$turno}} placeholder="turno" hidden>
     <input type="text" name="anio" value={{$searchYear}} placeholder="turno" hidden>
 	<button type="submit" class="btn btn-primary">Generar PDF</button>
 	{!!Form::close()!!}
+		
+		
 	</div>
 </div>
 

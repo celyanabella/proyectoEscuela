@@ -4,7 +4,7 @@ namespace Escuela\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Escuela\Http\Controllers\PDF;
-
+use Illuminate\Support\Facades\Redirect;
 use Escuela\Http\Requests;
 use DB;
 
@@ -52,6 +52,7 @@ class ReporteController extends Controller
 
     public function store(Request $request)
     {
+
 
    
     /*   $resultado =  DB::select("select turno.nombre as turno,matricula.fechadematricula as anio, grado.nombre as grado,
