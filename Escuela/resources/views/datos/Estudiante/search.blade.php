@@ -1,9 +1,10 @@
 {!! Form::open(array('url'=>'datos/Estudiante','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 	<div class="input-group">
-		<input type="text" class="form-control" name="searchNombre" placeholder="Escriba el Nombre" value="{{$searchNombre}}">
-		<input type="text" class="form-control" name="searchText" placeholder="Escriba el Apellido" value="{{$searchText}}">
-		<input type="text" class="form-control" name="searchNie" placeholder="Escriba el nie" value="{{$searchNie}}">
+		<h4>Año de Matricula</h4>
+		<input type="text" class="form-control" name="searchYear" placeholder="Escriba el Año de matricula" value="{{$searchYear}}">
+		
+
 		
 		<div class="col-md-12">
 			
@@ -48,4 +49,7 @@
 		</span>
 		</div>
 
+
+
 {{Form::close()}}
+
