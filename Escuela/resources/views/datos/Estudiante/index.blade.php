@@ -2,17 +2,18 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Listados de Estudiantes</h3>
 		
-		
+		<blockquote><h1>Listados de Estudiantes</h1></blockquote>
 		@include('datos.Estudiante.search')
 		
 		{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
-	<input type="text" name="grado" value={{$grado}} placeholder="grado" hidden>
-	<input type="text" name="seccion" value={{$seccion}} placeholder="seccion" hidden>
-	<input type="text" name="turno" value={{$turno}} placeholder="turno" hidden>
-    <input type="text" name="anio" value={{$searchYear}} placeholder="turno" hidden>
-	<button type="submit" class="btn btn-primary">Generar PDF</button>
+			<div class="form-group">
+			<input type="text" name="grado" value={{$grado}} placeholder="grado" hidden>
+			<input type="text" name="seccion" value={{$seccion}} placeholder="seccion" hidden>
+			<input type="text" name="turno" value={{$turno}} placeholder="turno" hidden>
+		    <input type="text" name="anio" value={{$searchYear}} placeholder="turno" hidden>
+			<button type="submit" class="btn btn-danger">Generar PDF</button>
+			</div>
 	{!!Form::close()!!}
 	</div>
 </div>

@@ -36,7 +36,9 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	  Route::get('/', 'HomeController@index');
     Route::get('home', 'HomeController@index');
-    Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']); 
+    Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
+    Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
+    Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
 
 });
 
@@ -70,8 +72,7 @@ Route::resource('datos/Estudiante','EstudianteController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
-Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
-Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso
+
 
 
 Route::get('reporte','ReporteController@index');
@@ -123,8 +124,8 @@ Route::post('recuperandoDatos','ReporteController@store');
 
 Route::group(['middleware' => 'usuarioStandard'], function () { 
      
-  Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
-  Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
+  #Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
+  #Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
 
 });
 
