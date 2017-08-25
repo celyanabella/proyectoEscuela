@@ -78,6 +78,10 @@ Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 
 
+//Rutas de Gestion de docentes
+Route::resource('cvitae','HojaVidaController');
+
+
 
 #Route::get('reporte','ReporteController@index');
 
