@@ -115,7 +115,7 @@
 
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-pencil-square-o"></i>
+                <i class="fa fa-pencil-square"></i>
                 <span>Calificaciones</span>
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -124,6 +124,18 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
+
+            @if($usuarioactual->tipoUsuario==1) 
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-folder-open"></i> <span>Gestion de Docentes</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+              <li><a href="{{URL::action('HojaVidaController@index')}}"><i class="fa fa-circle-o"></i> Consultar Docente</a></li>
+              </ul>
+            </li>
+            @endif
             
             @if($usuarioactual->tipoUsuario==1) 
             <li class="treeview">
