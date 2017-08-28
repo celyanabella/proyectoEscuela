@@ -19,7 +19,11 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
  
  /*DESCOMENTAR ESTE GRUPO DE RUTAS CUANDO SE QUIERA AGREAGAR EL PRIMER USUARIO EN LA BASE DE DATOS*/
+<<<<<<< HEAD
   Route::get('register', 'Auth\AuthController@getRegister');
+=======
+Route::get('register', 'Auth\AuthController@getRegister');
+>>>>>>> origin/master
   Route::get('register', 'Auth\AuthController@tregistro'); 
   Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
 
@@ -77,6 +81,7 @@ Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 
+Route::resource('asignacion','AsignacionController');
 
 //Rutas de Gestion de docentes
 Route::resource('cvitae','HojaVidaController');
