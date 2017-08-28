@@ -184,7 +184,7 @@ class Matricula2Controller extends Controller
             }
 
             $matricula2->estado='Activo';
-            $matricula2->cePrevio=$request->get('cePrevio');
+            $matricula2->ceprevio=$request->get('cePrevio');
 
             if(Input::hasFile('fotografia')){
             $file = Input::file('fotografia');

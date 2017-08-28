@@ -19,9 +19,9 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
  
  /*DESCOMENTAR ESTE GRUPO DE RUTAS CUANDO SE QUIERA AGREAGAR EL PRIMER USUARIO EN LA BASE DE DATOS*/
-  //Route::get('register', 'Auth\AuthController@getRegister');
-    //Route::get('register', 'Auth\AuthController@tregistro'); 
-    //Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
+  Route::get('register', 'Auth\AuthController@getRegister');
+  Route::get('register', 'Auth\AuthController@tregistro'); 
+  Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
 
 });
 

@@ -149,7 +149,7 @@ class MatriculaController extends Controller
                 }
 
         		$matricula->estado='Activo';
-        		$matricula->cePrevio=$request->get('cePrevio');
+        		$matricula->ceprevio=$request->get('cePrevio');
 
         		if(Input::hasFile('fotografia')){
         		$file = Input::file('fotografia');
@@ -293,7 +293,7 @@ class MatriculaController extends Controller
 
         } catch(\Exception $e)
         {
-            DB::rollback();
+          DB::rollback();
         }    		
 
     	return Redirect::to('expediente/matricula');
@@ -461,7 +461,7 @@ class MatriculaController extends Controller
             }
 
             $matricula->estado='Activo';
-            $matricula->cePrevio=$request->get('cePrevio');
+            $matricula->ceprevio=$request->get('cePrevio');
 
             if(Input::hasFile('fotografia')){
             $file = Input::file('fotografia');

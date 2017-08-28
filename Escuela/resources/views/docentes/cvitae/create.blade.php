@@ -25,7 +25,7 @@
 
 <fieldset class="well the-fieldset">
 <div class="col-md-12 col-md-offset-0">
-	<legend class="the-legend"><h1 style="text-align: center;">DATOS DE IDENTIFICACION</h1></legend>
+	<legend class="the-legend"><h3 style="text-align: center;">DATOS DE IDENTIFICACION</h3></legend>
 </div>
 	<div class="row">
 
@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="col-md-12">
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-3">
 				<label for="">Dirección</label>
 				{!! Form::textarea('direccion', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduza la dirección', 'autofocus'=>'on', 'rows'=>'2']) !!}
 			</div>
@@ -62,6 +62,10 @@
 			<div class="form-group col-md-3">
 					<label>Estado Civil</label>
 					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+			</div>
+			<div class="form-group col-md-3">
+				<label for="imagen">Fotografia</label>
+	            {!! Form::file('fotografia', ['class' => 'form-control', 'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
@@ -249,22 +253,22 @@
 					<div class="row"> 
 						<div class="form-group col-md-2">
 							<label for="anios">Año</label>
-							<input type="text" name="paniocapacitacion" id="paniocapacitacion" class="form-control" placeholder="Introduzca el año">
+							<input type="number" name="paniocapacitacion" id="paniocapacitacion" class="form-control" placeholder="Introduzca el año">
 						</div>
-						<div class="form-group col-md-8">
+						<div class="form-group col-md-7">
 							<label for="nombrecapacitacion">Nombre de la capacitación recibida</label>
 							<input type="text" name="pnombrecapacitacion" id="pnombrecapacitacion" class="form-control" placeholder="Introduzca el nombre cap. recibida">
 						</div>
 						<div class="form-group col-md-2">
 							<label for="horas">Horas</label>
-							<input type="text" name="phoras" id="phoras" class="form-control" placeholder="Introduzca las horas">
+							<input type="number" name="phoras" id="phoras" class="form-control" placeholder="Introduzca las horas">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="copia1">Copia</label>
-							<input type="file" name="pcopia1" id="pcopia1"  class="form-control" placeholder="Introduzca la copias">
+							<input type="file" name="pcopia1" id="pcopia1"  class="form-control" placeholder="Introduzca la copia">
 						</div>
 						<div class="form-group col-md-5">
 							<label for="acciones">Acciones</label>
@@ -309,7 +313,7 @@
 			<div class="panel-body">
 					<h3>Instituciones donde trabajo anteriormente</h3>
 					<div class="row"> 
-						<div class="form-group col-md-8">
+						<div class="form-group col-md-6">
 							<label for="cargo">Cargo</label>
 							<input type="text" name="pcargo" id="pcargo" class="form-control" placeholder="Cargo...">
 						</div>
@@ -360,6 +364,14 @@
 		</div>
 	</div>
 </fieldset>
+
+		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
+			<div class="form-group">
+			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
+            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
+            	<a href="{{URL::action('HojaVidaController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+        	</div>
+		</div>
 
 
 {!!Form::close()!!}
@@ -413,6 +425,99 @@
 		evaluar();
 	}  
 
+	/*  Funcion Script para el modulo Capacitaciones */
+
+	$(document).ready(function(){
+		$('#bt_del1').click(function(){
+			limpiarCapacitacion();
+		});
+	});
+
+	$(document).ready(function(){
+		$('#bt_add1').click(function(){
+			agregarCapacitacion();
+		});
+	});
+
+	var cont1 = 0;
+
+	function agregarCapacitacion(){
+		aniocapacitacion =$('#paniocapacitacion').val();
+		nombrecapacitacion =$('#pnombrecapacitacion').val();
+		horas =$('#phoras').val();
+		copia1 =$('#pcopia1').val();
+
+		if(aniocapacitacion!="" && nombrecapacitacion!="" && horas!="" && copia1!=""){
+
+			var filaCapacitacion='<tr class="selected" id="filaCapacitacion'+cont1+'"><td><button type="button" class="btn btn-warning" onclick="eliminarCapacitacion('+cont1+');">X</button></td><td><input type="number" name="aniocapacitacion[]" value="'+aniocapacitacion+'"></td><td><input type="text" name="nombrecapacitacion[]" value="'+nombrecapacitacion+'"></td><td><input type="number" name="horas[]" value="'+horas+'"></td><td><input type="text" name="copia1[]" value="'+copia1+'"></td></tr>';
+			cont1++;
+			limpiarCapacitacion();
+			$('#detalles1').append(filaCapacitacion);
+		}
+		else{
+			alert("Por favor, ingrese los datos de la capacitacion correctamente");
+		}
+	}
+
+	
+	function limpiarCapacitacion(){
+		$("#paniocapacitacion").val("");
+		$("#pnombrecapacitacion").val("");
+		$("#phoras").val("");
+		$("#pcopia1").val("");
+	}
+
+	function eliminarCapacitacion(index){
+		$("#filaCapacitacion"+index).remove();
+	}
+
+
+
+	/*  Funcion Script para el modulo Record Laboral */
+
+	$(document).ready(function(){
+		$('#bt_del2').click(function(){
+			limpiarRecord();
+		});
+	});
+
+	$(document).ready(function(){
+		$('#bt_add2').click(function(){
+			agregarRecord();
+		});
+	});
+
+	var cont2 = 0;
+
+	function agregarRecord(){
+		cargo =$('#pcargo').val();
+		lugarrecordlaboral =$('#plugarrecordlaboral').val();
+		tiempo =$('#ptiempo').val();
+		copia2 =$('#pcopia2').val();
+
+		if(cargo!="" && lugarrecordlaboral!="" && tiempo!="" && copia2!=""){
+
+			var filaRecord='<tr class="selected" id="filaRecord'+cont2+'"><td><button type="button" class="btn btn-warning" onclick="eliminarRecord('+cont2+');">X</button></td><td><input type="text" name="cargo[]" value="'+cargo+'"></td><td><input type="text" name="lugarrecordlaboral[]" value="'+lugarrecordlaboral+'"></td><td><input type="text" name="tiempo[]" value="'+tiempo+'"></td><td><input type="text" name="copia2[]" value="'+copia2+'"></td></tr>';
+			cont2++;
+			limpiarRecord();
+			$('#detalles2').append(filaRecord);
+		}
+		else{
+			alert("Por favor, ingrese los datos del record laboral correctamente");
+		}
+	}
+
+	
+	function limpiarRecord(){
+		$("#pcargo").val("");
+		$("#plugarrecordlaboral").val("");
+		$("#ptiempo").val("");
+		$("#pcopia2").val("");
+	}
+
+	function eliminarRecord(index){
+		$("#filaRecord"+index).remove();
+	}
 
 </script>
 @endpush

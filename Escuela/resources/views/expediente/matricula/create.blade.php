@@ -257,7 +257,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos del Contacto de Emergencia</label>
-				{!! Form::text('apellido4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Apellidos completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
