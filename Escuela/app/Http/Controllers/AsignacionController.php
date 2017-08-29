@@ -22,7 +22,7 @@ class AsignacionController extends Controller
     {
         $usuarioactual=\Auth::user();
         
-
+/*
         $consulta=DB::table('asignacion')
         ->select('asignacion.id_asignacion','asignacion.id_detalleasignacion','asignacion.id_materia','asignacion.id_maestro','asignacion.anioasignacion'
         ,'maestro.nombremaestro','maestro.apellidomaestro','materia.nombremateria')
@@ -31,8 +31,8 @@ class AsignacionController extends Controller
         ->join('materia as materia','asignacion.id_materia','=','materia.id_materia','full outer')
         ->get();
 
-
-        return view('asignacion.index',['usuarioactual'=>$usuarioactual,"asgs"=>$consulta]);
+*/
+    return view('asignacion.index',['usuarioactual'=>$usuarioactual/*,"asgs"=>$consulta*/]);
 
     }
 

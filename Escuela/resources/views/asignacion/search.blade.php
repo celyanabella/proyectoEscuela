@@ -25,3 +25,9 @@
 
 {{Form::close()}}
 
+{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
+			<div class="form-group">
+		    //
+			<button type="submit" class="btn btn-danger">Generar PDF</button>
+			</div>
+	{!!Form::close()!!}

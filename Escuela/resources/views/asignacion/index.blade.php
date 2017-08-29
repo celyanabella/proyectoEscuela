@@ -5,9 +5,10 @@
 		
 		<blockquote><h1>Gestion de Asignacion</h1></blockquote>
 		
-		
+		@include('asignacion.search')
 		
 	</div>
+
 </div>
 
 <div class="row">
