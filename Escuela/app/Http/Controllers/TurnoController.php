@@ -51,7 +51,7 @@ class TurnoController extends Controller
     	$turno -> estado = 'Activo';
     	$turno -> save();
 
-    	return Redirect::to('detalle/turno',["usuarioactual"=>$usuarioactual]);
+    	return Redirect::to('detalle/turno');
     }
 
     public function show($id)		//Para mostrar

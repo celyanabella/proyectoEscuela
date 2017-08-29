@@ -195,7 +195,7 @@
 				<div class="form-group">
 					<div class="form-group col-md-4">
 						<label>Centro escolar del que procede</label>
-						{!! Form::textarea('cePrevio', $matricula->cePrevio, ['class' => 'form-control', 'placeholder'=>'Digite el centro escolar de donde procede', 'autofocus'=>'on', 'rows'=>'2']) !!}
+						{!! Form::textarea('cePrevio', $matricula->ceprevio, ['class' => 'form-control', 'placeholder'=>'Digite el centro escolar de donde procede', 'autofocus'=>'on', 'rows'=>'2']) !!}
 					</div>
 				</div>
 			</div>

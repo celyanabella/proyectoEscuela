@@ -51,7 +51,7 @@ class Matricula3FormRequest extends Request
             'apellido2'=>'max:50',
             'ocupacion'=>'max:50',
             'lugardetrabajo'=>'max:50',
-            'dui'=>'min:10|max:10',            //Unique
+            'dui'=>'min:9|max:9',            //Unique
             'telefono'=>'min:8|max:8',
 
             //Padre
@@ -59,7 +59,7 @@ class Matricula3FormRequest extends Request
             'apellido3'=>'max:50',
             'ocupacion3'=>'max:50',
             'lugardetrabajo3'=>'max:50',
-            'dui3'=>'min:10|max:10',            //Unique
+            'dui3'=>'min:9|max:9',            //Unique
             'telefono3'=>'min:8|max:8',
 
             //Contacto de Emergencia
