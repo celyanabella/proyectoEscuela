@@ -20,7 +20,7 @@
 
 
 
-{!!Form::open(array('url'=>'docentes/cvitae','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
+{!!Form::open(array('url'=>'docente/cvitae','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
             {{Form::token()}}
 
 <fieldset class="well the-fieldset">
@@ -40,14 +40,14 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Fecha de Nacimiento</label>
-				{!! Form::date('fechadenacimiento', null, ['class' => 'form-control' , 'required' => 'required',
+				{!! Form::date('fechanacimiento', null, ['class' => 'form-control' , 'required' => 'required',
 				'placeholder'=>'AAAA-MM-DD', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label>Sexo</label></br>
 				<label>{!! Form::radio('sexo',0) !!} Femenino</label>
 				<label>{!! Form::radio('sexo',1) !!} Masculino</label>
-			</div>
+			</div> 
 		</div>
 
 		<div class="col-md-12">
@@ -61,7 +61,7 @@
 			</div>
 			<div class="form-group col-md-3">
 					<label>Estado Civil</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_estado', $tipos->pluck('tipo','id_estado'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="imagen">Fotografia</label>
@@ -72,11 +72,11 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 					<label>Departamento de Nacimiento</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_departamento', $departamentos->pluck('nombre','id_departamento'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-3">
 					<label>Municipio de Nacimiento</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_municipio', $municipios->pluck('nombre','id_municipio'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-6">
 					<label>Otro </label>
@@ -87,19 +87,19 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 					<label>Nivel Docente</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_nivel', $niveles->pluck('nivel','id_nivel'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-3">
 					<label>Categoría</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_categoria', $categorias->pluck('categoria','id_categoria'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-3">
 					<label>Clase</label>
-					{!! Form::number('telefono', null, ['class' => 'form-control' , 'placeholder'=>'Introduza el telefono de contacto', 'autofocus'=>'on']) !!}
+					{{ Form::select('id_clase', $clases->pluck('clase','id_clase'), null, ['class'=>'form-control']) }}
 			</div>
 			<div class="form-group col-md-3">
 				<label>DUI</label>
-				{!! Form::number('dui', null, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'required' => 'required',  'autofocus'=>'on']) !!}
+				{!! Form::number('mdui', null, ['class' => 'form-control' ,'placeholder'=>'DUI sin guiones', 'required' => 'required',  'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
