@@ -25,23 +25,26 @@
                     <th>Materia</th>
                     <th>Opciones</th>
 				</thead>
-               :@foreach($asgs as $asg)
-				<tr>
-					<td>{{$asg->}}</td>
-					<td></td>
-					<td></td>
-					<td></td>
+              @foreach($consulta as $cnst)
+				  <tr>
+					<td>{{$cnst->nombremaestro}}</td>
+					<td>{{$cnst->apellidomaestro}}</td>
+					<td>{{$cnst->nombremaestro}}</td>
+					<td>{{$cnst->nombremaestro}}</td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td>
+					<!-- consultar el index de tiporesponsable   -->
 						<a href=""><button class="btn btn-info">Editar</button></a>
                         <a href="" data-target="" data-toggle="modal"><button class="btn btn-warning">Asignar/Editar Materia</button></a>
 						<a href="" data-target="" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 					
 				</tr>
-			   @endforeach			
+			  @endforeach
+				
+						
 			</table>
 		</div>
 	
