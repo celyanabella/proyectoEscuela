@@ -83,6 +83,7 @@ Route::resource('docente/cvitae','HojaVidaController');
 
 
 Route::resource('asignacion', 'AsignacionController');
+Route::get('asignacion/{valor}','AsignacionController@show');
 
 
 

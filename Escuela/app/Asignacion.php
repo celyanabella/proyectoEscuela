@@ -15,8 +15,9 @@ class Asignacion extends Model
     protected $fillable = [
     	'id_detalleasignacion',
     	'id_materia',
-        'id_maestro',
+        'mdui',
         'anioasignacion'
+
     ];
 
     protected $guarded = [

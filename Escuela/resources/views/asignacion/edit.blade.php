@@ -1,22 +1,14 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-create">
-	{!!Form::open(array('url'=>'asignacion','method'=>'POST','autocomplete'=>'off'))!!}
+@extends ('layouts.admin')
+@section('contenido')
+	
+	
+    {!!Form::model($asignacion,['method'=>'PATCH','route'=>['asignacion.update',$asignacion->id_asignacion]])!!}
 	{{Form::token()}}
 
 
-
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" 
-				aria-label="Close">
-                     <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Nueva Asignacion</h4>
-				<h4>Seleccione los parametros de la asignacion de maestros</h4>
-			</div>
-			<div class="modal-body">
-				
+                <h4 class="modal-title">Edicion Asignacion</h4>
+	
+				<h4>Seleccione los parametros de Actualizacion para la asignacion de maestros</h4>
 
 	<div class="form-group col-md-4">
 		<div class="form-group">
@@ -36,9 +28,9 @@ role="dialog" tabindex="-1" id="modal-create">
 						<div class="form-group">
 						<label>Maestro</label>
 						<select name="idmaestro" class="form-control">
-							@foreach ($maestros as $maestro)
+							
 							<option value="{{$maestro->mdui}}">{{$maestro->nombre}} {{$maestro->apellido}}</option>
-							@endforeach
+						
 						</select>
 						</div>
 				</div>
@@ -79,18 +71,16 @@ role="dialog" tabindex="-1" id="modal-create">
 
                 
 
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Guardar</button>
-			</div>
+			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
+			<div class="form-group">
+			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
+            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
+            	<a href="{{URL::action('AsignacionController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+        	</div>
 		</div>
 	</div>
 	{{Form::Close()}}
 
 </div>
 
-
-
-
-
-
+@endsection

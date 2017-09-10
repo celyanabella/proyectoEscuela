@@ -162,6 +162,7 @@
                 <li><a href="{{URL::action('GradoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Grados</a></li>
                 <li><a href="{{URL::action('SeccionController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Secciones</a></li>
                 <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
+                 <li><a href="{{URL::action('AsignacionController@index')}}"><i class="fa fa-circle-o"></i> Asignacion Maestro-Materia </a></li>
               </ul>
             </li>
             @endif

@@ -4,7 +4,7 @@ namespace Escuela\Http\Requests;
 
 use Escuela\Http\Requests\Request;
 
-class AsignacionFormRequest extends Request
+class AsignacionMateriaFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class AsignacionFormRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
