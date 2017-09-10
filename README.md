@@ -10,7 +10,11 @@ al descargar el repositorio debera realizar los siguientes pasos para el funcion
 
 ### Paso 1
 
-en el directorio raiz del proyecto ejecutar la siguiente instruccion:  composer install
+en el directorio raiz del proyecto ejecutar la siguiente instruccion:  
+```php
+composer install
+```
+
 
 esto descargara todos los archivos necesarios para que el proyecto se ejeecute, alrededor de 20MB
 
