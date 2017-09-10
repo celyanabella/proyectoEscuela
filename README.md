@@ -28,11 +28,17 @@ debera crear el archivo ".env" en la carpeta raiz
 
 ### Paso 3
 
-debera generar una llave para el proyecto use el siguiente comando: php artisan key:generate
+debera generar una llave para el proyecto use el siguiente comando
+```php
+php artisan key:generate
+```
 
 ### Paso 4
 
-si todo se  hizo correctamente debera correr el proyecto en el servidor, use el comando: php artisan serve
+si todo se  hizo correctamente debera correr el proyecto en el servidor, use el comando
+```php
+php artisan serve
+```
 
 ## RAMAS
  La rama por defecto a utilizar es la Master aqui debera hacer sus commits y push
