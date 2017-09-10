@@ -1,10 +1,6 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-create">
-	{!!Form::open(array('url'=>'asignacion','method'=>'POST','autocomplete'=>'off'))!!}
-	{{Form::token()}}
-
-
-
+role="dialog" tabindex="-1" id="modal-delete-{{$est->nie}}">
+	{{Form::Open(array('action'=>array('AsignacionController@create'),'method'=>'create'))}}
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -13,31 +9,17 @@ role="dialog" tabindex="-1" id="modal-create">
                      <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title">Nueva Asignacion</h4>
-				<h4>Seleccione los parametros de la asignacion de maestros</h4>
 			</div>
 			<div class="modal-body">
-				
+				<p>Seleccione los parametros de la asignacion de maestros</p>
 
-	<div class="form-group col-md-4">
-		<div class="form-group">
-				
-						<label>Año de Asignacion</label>
-						<select name="idanio" class="form-control">
-							@foreach ($anios as $anio)
-							<option value="{{$anio->valor}}">{{$anio->valor}}</option>
-							@endforeach
-						</select>
-						
-					
-		</div>
-</div>
 
                 <div class="form-group col-md-4">
 						<div class="form-group">
 						<label>Maestro</label>
 						<select name="idmaestro" class="form-control">
 							@foreach ($maestros as $maestro)
-							<option value="{{$maestro->mdui}}">{{$maestro->nombre}} {{$maestro->apellido}}</option>
+							<option value="{{$maestro->id_maestro}}">{{$maestro->nombremaestro}}</option>
 							@endforeach
 						</select>
 						</div>
@@ -48,7 +30,7 @@ role="dialog" tabindex="-1" id="modal-create">
 						<label>Grado</label>
 						<select name="idgrado" class="form-control">
 							@foreach ($grados as $grado)
-							<option value="{{$grado->idgrado}}">{{$grado->nombre}}</option>
+							<option value="{{$grado->idgrado}}">{{$grado->nombregrado}}</option>
 							@endforeach
 						</select>
 						</div>
@@ -59,7 +41,7 @@ role="dialog" tabindex="-1" id="modal-create">
 						<label>Seccion</label>
 						<select name="idseccion" class="form-control">
 							@foreach ($secciones as $seccion)
-							<option value="{{$seccion->idseccion}}">{{$seccion->nombre}}</option>
+							<option value="{{$seccion->id_seccion}}">{{$seccion->nombreseccion}}</option>
 							@endforeach
 						</select>
 						</div>
@@ -71,7 +53,7 @@ role="dialog" tabindex="-1" id="modal-create">
 						<label>Turno</label>
 						<select name="idturno" class="form-control">
 							@foreach ($turnos as $turno)
-							<option value="{{$turno->idturno}}">{{$turno->nombre}}</option>
+							<option value="{{$turno->id_turno}}">{{$turno->nombreturno}}</option>
 							@endforeach
 						</select>
 						</div>
@@ -81,16 +63,10 @@ role="dialog" tabindex="-1" id="modal-create">
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-primary">Guardar</button>
+				<button type="submit" class="btn btn-primary">Confirmar</button>
 			</div>
 		</div>
 	</div>
 	{{Form::Close()}}
 
 </div>
-
-
-
-
-
-
