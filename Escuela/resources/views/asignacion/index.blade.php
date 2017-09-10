@@ -51,7 +51,7 @@
 					<td>
 					<!-- consultar el index de asignacion   -->
 						<a href="{{URL::action('AsignacionController@edit',$cnst->id_asignacion)}}"><button class="btn btn-info">Editar</button></a>
-                        <a href="" data-target="" data-toggle="modal"><button class="btn btn-warning">Asignar/Editar Materia</button></a>
+                        <a href="{{URL::action('AsignacionMateriaController@edit',$cnst->id_asignacion)}}"><button class="btn btn-warning">Asignar/Editar Materia</button></a>
 						<a href="" data-target="" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 					
