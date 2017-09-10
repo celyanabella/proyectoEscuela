@@ -70,6 +70,22 @@ class AsignacionMateriaController extends Controller
 
     public function update(AsignacionFormRequest $resquest ,$id)
     {
+        $usuarioactual=\Auth::user();
 
+        $asignacion = Asignacion::findOrFail($id);
+        if ($asignacion==null) {
+            $ban="err";
+            return Redirect::to('asignacion/'.$ban);
+        }
+
+        $a = new Asignacion;
+        $a->id_asignacion=$id;
+        $a->id_detalleasignacion=$asignacion->id_detalleasignacion;
+        $a->mdui=$asignacion->mdui;
+        $a->id_materia=$resquest->get('idmateria');
+        $a->anioasignacion=$asignacion->anioasignacion;
+        $a->update();
+        $ban="si";
+        return Redirect::to('asignacion/'.$ban);
     }
 }
