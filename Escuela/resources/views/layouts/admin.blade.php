@@ -149,6 +149,19 @@
               </ul>
             </li>
             @endif
+             @if($usuarioactual->tipoUsuario==1)
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-gears"></i>
+                <span>Gestion de Cupos</span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('CupoController@create')}}"><i class="fa fa-circle-o"></i> Generar Cupos</a></li>
+                <li><a href="{{URL::action('CupoController@index')}}"><i class="fa fa-circle-o"></i> Consultar Cupos</a></li>
+              </ul>
+            </li>
+            @endif
 
             @if($usuarioactual->tipoUsuario==1)
             <li class="treeview">
@@ -162,10 +175,10 @@
                 <li><a href="{{URL::action('GradoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Grados</a></li>
                 <li><a href="{{URL::action('SeccionController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Secciones</a></li>
                 <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
-                 <li><a href="{{URL::action('AsignacionController@index')}}"><i class="fa fa-circle-o"></i> Asignacion Maestro-Materia </a></li>
               </ul>
             </li>
             @endif
+            
             <li>
               <a href="#">
                 <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>

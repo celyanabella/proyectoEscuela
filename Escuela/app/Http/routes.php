@@ -19,7 +19,7 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
  
  /*DESCOMENTAR ESTE GRUPO DE RUTAS CUANDO SE QUIERA AGREAGAR EL PRIMER USUARIO EN LA BASE DE DATOS*/
-  Route::get('register', 'Auth\AuthController@getRegister');
+    Route::get('register', 'Auth\AuthController@getRegister');
     Route::get('register', 'Auth\AuthController@tregistro'); 
     Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
 
@@ -84,27 +84,7 @@ Route::resource('docente/cvitae','HojaVidaController');
 
 Route::resource('asignacion', 'AsignacionController');
 
-Route::resource('asignacion/materia', 'AsignacionMateriaController');
-
-Route::get('asignacion/{valor}','AsignacionController@show');
-
-
-
-#Route::get('reporte','ReporteController@index');
-
-#Route::post('recuperandoDatos','ReporteController@store');
-
-
-
-
-
-
-
-
-
-
-
-
+Route::resource('asignacion_cupos', 'CupoController');
 
 
       //CREACION DE BOTON ELIMINAR MEDIANTE RUTA 
@@ -126,12 +106,6 @@ Route::get('asignacion/{valor}','AsignacionController@show');
       });
       
 });
-
-
-
-
-
-
 
 
 

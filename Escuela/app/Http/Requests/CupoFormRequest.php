@@ -4,7 +4,7 @@ namespace Escuela\Http\Requests;
 
 use Escuela\Http\Requests\Request;
 
-class AsignacionFormRequest extends Request
+class CupoFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class AsignacionFormRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class AsignacionFormRequest extends Request
     public function rules()
     {
         return [
-            //
+            'cupo'=>'requiered'|max:2,
         ];
     }
 }
