@@ -86,6 +86,12 @@ Route::resource('asignacion', 'AsignacionController');
 
 Route::resource('asignacion_cupos', 'CupoController');
 
+Route::resource('asignacion', 'AsignacionController');
+
+Route::resource('asignacion/materia', 'AsignacionMateriaController');
+
+Route::get('asignacion/{valor}','AsignacionController@show');
+
 
       //CREACION DE BOTON ELIMINAR MEDIANTE RUTA 
       Route::delete('eliminar/{id}',  function ($id){

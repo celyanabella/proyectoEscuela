@@ -1,9 +1,6 @@
 <?php
-
 namespace Escuela;
-
 use Illuminate\Database\Eloquent\Model;
-
 class DetalleAsignacion extends Model
 {
     protected $table = 'detallle_asignacion';

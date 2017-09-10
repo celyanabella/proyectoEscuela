@@ -1,7 +1,5 @@
 <?php
-
 namespace Escuela\Http\Controllers;
-
 use Escuela\Grado;
 use Escuela\Seccion;
 use Escuela\Turno;
@@ -10,26 +8,19 @@ use Escuela\DetalleAsignacion;
 use Escuela\Maestro;
 use Escuela\Asignacion;
 use Escuela\Materia;
-
 use Illuminate\Http\Request;
-
 use Escuela\Http\Requests;
-
 use Illuminate\Support\Facades\Redirect;
 use Escuela\Http\Requests\AsignacionFormRequest;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Connection;
-
 use Log;
-
 use DB;
-
 class AsignacionMateriaController extends Controller
 {
     public function edit($id)
     {
-
         $usuarioactual=\Auth::user();
         
         $asignacion = Asignacion::findOrFail($id);
@@ -53,7 +44,6 @@ class AsignacionMateriaController extends Controller
         $grado=Grado::where('idgrado',$detalleGrado->idgrado)->first();
         $seccion=Seccion::where('idseccion',$detalleGrado->idseccion)->first();
         $turno=Turno::where('idturno',$detalleGrado->idturno)->first();
-
         //catalogo de materias
         $materias=Materia::all();
         
@@ -66,18 +56,14 @@ class AsignacionMateriaController extends Controller
                 "seccion"=>$seccion,"turno"=>$turno,"materias"=>$materias,"anio"=>$asignacion->anioasignacion,
                 'usuarioactual'=>$usuarioactual,"maestro"=>$maestro]);
     }
-
-
     public function update(AsignacionFormRequest $resquest ,$id)
     {
         $usuarioactual=\Auth::user();
-
         $asignacion = Asignacion::findOrFail($id);
         if ($asignacion==null) {
             $ban="err";
             return Redirect::to('asignacion/'.$ban);
         }
-
         $a = new Asignacion;
         $a->id_asignacion=$id;
         $a->id_detalleasignacion=$asignacion->id_detalleasignacion;
