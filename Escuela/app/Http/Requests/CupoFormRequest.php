@@ -24,7 +24,7 @@ class CupoFormRequest extends Request
     public function rules()
     {
         return [
-            'cupo'=>'requiered'|max:2,
+            'cupo'=>'required|max:2',
         ];
     }
 }

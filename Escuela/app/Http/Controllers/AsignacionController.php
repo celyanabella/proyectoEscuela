@@ -180,7 +180,7 @@ class AsignacionController extends Controller
         ->get();
         
        //comprueba si existe un profesor ya asignado
-        if ($consulta4!=null) {
+        if ($consulta4==null) {
             $ban="no";
         } else {
             $asignacion = Asignacion::findOrFail($id);
@@ -188,7 +188,7 @@ class AsignacionController extends Controller
             $asignacion->id_detalleasignacion=$consulta3->id_detalleasignacion;
             $asignacion->mdui=$maestroR;
             $asignacion->anioasignacion=$request->get('idanio');
-            $asignacion->save();
+            $asignacion->update();
             $ban="si";
         }
           

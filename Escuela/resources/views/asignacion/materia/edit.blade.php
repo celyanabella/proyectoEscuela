@@ -53,9 +53,9 @@
                 <div class="form-group col-md-4">
 						<div class="form-group">
 						<label>Materias</label>
-						<select name="idmateria" class="form-control">
+						<select name="idm" class="form-control">
 							@foreach ($materias as $materia)
-							<option value="{{$materia->idmateria}}">{{$materia->nombre}}</option>
+							<option value="{{$materia->id_materia}}">{{$materia->nombre}}</option>
 							@endforeach
 						</select>
 						</div>
