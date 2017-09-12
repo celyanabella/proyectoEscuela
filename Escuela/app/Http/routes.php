@@ -77,6 +77,10 @@ Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 
+//rutas materia
+Route::resource('detalle/materia','MateriaController');
+Route::resource('detalle/actividad','ActividadController'); //Ruta de gestion de actividades 
+
 
 //Rutas de Gestion de docentes
 Route::resource('docente/cvitae','HojaVidaController');

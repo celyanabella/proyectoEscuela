@@ -4,18 +4,18 @@ namespace Escuela;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Materia extends Model
+class Actividad extends Model
 {
-    protected $table = 'materia';
+    //
+    protected $table = 'actividad';
 
-    protected $primaryKey = 'id_materia';
+    protected $primaryKey = 'id_actividad';
 
     public $timestamps = false;
 
     protected $fillable = [
-         'codigo',
-    	'nombre',
-    	'estado'
+         'periodo',
+    	'porcentaje'
     ];
 
     protected $guarded = [
