@@ -190,6 +190,15 @@
               <ul class="treeview-menu">
                 <li><a href="{{URL::action('EstudianteController@index')}}"><i class="fa fa-circle-o"></i> Consulta de Estudiantes</a></li>
               </ul>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Consultar Matricula</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('HojaVidaController@index')}}"><i class="fa fa-circle-o"></i> Consultar Docentes</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li><a href=""><i class="fa fa-circle-o"></i> Libreta de Notas</a></li>
+              </ul>
             </li>
              <li>
               <a href="#">

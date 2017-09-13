@@ -5,8 +5,6 @@
 
 
 
-
-
 <fieldset class="well the-fieldset">
 
 <div class="col-md-12 col-md-offset-0">
@@ -69,5 +67,8 @@
 
 </div>
 </fieldset>
+
+
+
 
 @endsection

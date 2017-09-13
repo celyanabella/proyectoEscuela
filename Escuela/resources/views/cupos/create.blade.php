@@ -36,11 +36,14 @@
     <div class="form-group col-md-3">
         <div class="form-group">
           <label>Cupos</label>
-          {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on']) !!}
+          {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on','max'=>99]) !!}
         </div>
       </div>
       </div>
     </div>
+
+
+
   <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
       <div class="form-group">
       <input name="_token" value="{{csrf_token()}}" type="hidden"></input>

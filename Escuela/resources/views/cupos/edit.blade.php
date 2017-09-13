@@ -19,7 +19,7 @@
         <div class="form-group col-md-3">
         <div class="form-group">
           <label>Cupos</label>
-          {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on']) !!}
+          {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on','max'=>99]) !!}
         </div>
       </div>
          <div class="form-group col-md-3">    

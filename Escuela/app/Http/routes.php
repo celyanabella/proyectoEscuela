@@ -96,6 +96,27 @@ Route::resource('asignacion/materia', 'AsignacionMateriaController');
 
 Route::get('asignacion/{valor}','AsignacionController@show');
 
+Route::get('matripdf', function() {
+  $pdf = PDF::loadView('matricul');
+  return $pdf->download('MatriculaInscrpcion.pdf');
+});
+
+Route::get('hojavidapdf', function(){
+  $pdf = PDF::loadView('hojavid');
+  return $pdf->download('HojaVida.pdf');
+});
+
+Route::get('libretapdf', function(){
+  $pdf = PDF::loadView('libreta')->setPaper('Letter', 'landscape')->setWarnings(false)->save('LibretaNotas.pdf');
+  return $pdf->download('LibretaNotas.pdf');
+});
+
+
+
+
+
+
+
 
       //CREACION DE BOTON ELIMINAR MEDIANTE RUTA 
       Route::delete('eliminar/{id}',  function ($id){

@@ -10,6 +10,7 @@ use Escuela;
 use Storage;
 use Escuela\Turno;
 use Escuela\Seccion;
+
 use Escuela\Grado;
 use Escuela\DetalleGrado;
 use Escuela\Http\Controllers\Controller;
@@ -42,7 +43,7 @@ class CupoController extends Controller
         ->with("seccion", $seccion )
         ->with("turno", $turno)
         ->with("detalle", $detalle)
-
+       
         ->with("usuarioactual", $usuarioactual);
 
          
@@ -71,17 +72,29 @@ class CupoController extends Controller
 
      public function store(Request $request)		//Para almacenar
     {
+        $grado=Grado::all();
+         $seccion=Seccion::all();
+         $turno=Turno::all();
         $usuarioactual=\Auth::user();
         $num=DetalleGrado::all();
 
 
-        $detalle= new DetalleGrado;
-        $detalle-> idgrado = $request->get('idgrado');
+    $detalle= new DetalleGrado;
+    $detalle-> idgrado = $request->get('idgrado');
 		$detalle-> idseccion = $request->get('idseccion');
 		$detalle-> idturno = $request->get('idturno');
 		$detalle-> cupo= $request->get('cupo');
 
 
+   /* foreach ($num as $num ) {
+      if($num->grado->idgrado!=$detalle-> idgrado){
+          if($num->seccion!=$detalle-> idseccion){
+             if($num->turno!=$detalle-> idturno){
+
+             }}}
+
+             $detalle->save();
+    }*/
 	    $detalle->save();
 
 
