@@ -69,6 +69,17 @@
 						</div>
 				</div>
 
+				<div class="form-group col-md-4" hidden>
+						<div class="form-group" hidden>
+						<label>Materias</label hidden>
+						<select name="idm" class="form-control" hidden>
+							@foreach ($materias as $materia)
+							<option value="{{$materia->id_materia}}" hidden>{{$materia->nombre}}</option>
+							@endforeach
+						</select>
+						</div>
+				</div>
+
                 
 
 			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
