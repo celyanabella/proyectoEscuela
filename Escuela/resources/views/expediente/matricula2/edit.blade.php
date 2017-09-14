@@ -25,7 +25,7 @@
 
 <fieldset class="well the-fieldset">
 	<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
-		<legend class="the-legend"><h1>FORMULARIO DE MATRICULA</h1></legend>
+		<legend class="the-legend"><h1 style="text-align: center;">FORMULARIO DE MATRICULA</h1></legend>
 	</div>
 
 	<div class="row">
@@ -421,8 +421,8 @@
 		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
 			<div class="form-group">
 			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
-            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
             	<a href="{{URL::action('Matricula2Controller@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
         	</div>
 		</div>
 		

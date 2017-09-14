@@ -421,8 +421,8 @@
 		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
 			<div class="form-group">
 			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
-            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
             	<a href="{{URL::action('MatriculaController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
         	</div>
 		</div>
 		
