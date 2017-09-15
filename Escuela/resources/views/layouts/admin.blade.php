@@ -199,6 +199,9 @@
               <ul class="treeview-menu">
                 <li><a href=""><i class="fa fa-circle-o"></i> Libreta de Notas</a></li>
               </ul>
+                <ul class="treeview-menu">
+                <li><a href="{{URL::action('ImprimirController@index')}}"><i class="fa fa-circle-o"></i> Imprimir</a></li>
+              </ul>
             </li>
              <li>
               <a href="#">

@@ -85,17 +85,18 @@ class CupoController extends Controller
 		$detalle-> idturno = $request->get('idturno');
 		$detalle-> cupo= $request->get('cupo');
 
+  
+ foreach ($num as $num ) {
+ if($num->idgrado != '2' && $num->idseccion != '2' && $num->idturno != 2){
+          /*if($num->idseccion != $detalle-> idseccion){
+             if($num->idturno !=  $detalle-> idturno){*/
+                $detalle->save();
+             }/*}}*/
 
-   /* foreach ($num as $num ) {
-      if($num->grado->idgrado!=$detalle-> idgrado){
-          if($num->seccion!=$detalle-> idseccion){
-             if($num->turno!=$detalle-> idturno){
-
-             }}}
-
-             $detalle->save();
-    }*/
-	    $detalle->save();
+       
+             }
+    
+	    /*$detalle->save();*/
 
 
     	return Redirect::to('asignacion_cupos');
@@ -123,3 +124,13 @@ class CupoController extends Controller
     }
 
 }
+ /*
+ foreach ($num as $num ) {
+ if($num->grado->idgrado!=$detalle-> idgrado){
+          if($num->seccion!=$detalle-> idseccion){
+             if($num->turno!=$detalle-> idturno){
+
+             }}}
+
+             $detalle->save();
+             }*/

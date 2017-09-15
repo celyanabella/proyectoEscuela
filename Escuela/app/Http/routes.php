@@ -97,6 +97,9 @@ Route::resource('asignacion', 'AsignacionController');
 
 Route::resource('asignacion/materia', 'AsignacionMateriaController');
 
+
+Route::resource('imprimir','ImprimirController');
+
 Route::get('asignacion/{valor}','AsignacionController@show');
 
 Route::get('matripdf', function() {
