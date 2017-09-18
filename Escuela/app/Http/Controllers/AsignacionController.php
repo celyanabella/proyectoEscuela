@@ -125,9 +125,14 @@ class AsignacionController extends Controller
             "anios"=>$anioDefecto,"searchYear"=>$query3,"maestros"=>$consulta1,"grados"=>$grados,
             "secciones"=>$secciones,"turnos"=>$turnos,"exito"=>$ban]);
     }
+
+    
     public function create()
     {
     }
+
+
+
     public function store(AsignacionFormRequest $request)
     {
         //parametros de busqueda para el detalle_asignacion
@@ -148,12 +153,14 @@ class AsignacionController extends Controller
 
         //se verifica el tipo de maestro
         $tm=Maestro::where('mdui',$maestroR)->first();
-
+       
         //el maestro es de primer y segundo ciclo
-        if ($tm->tipoMaestro='1') {
+        if ($tm->tipom==1) {
+            $detalleAsignacion = DetalleAsignacion::where('aniodetalleasignacion',$request->get('idanio'))->where('iddetallegrado',$iddg)->where('coordinador',$tm->tipom)->first();
+            $asignacion=Asignacion::where('mdui',$maestroR)->first();
             //se verifica si existe un registro en detalleasignacion
-            $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
-            if($detalleAsignacion==null)
+           
+            if(is_null($detalleAsignacion)&&is_null($asignacion))
             {   //no existe el valor en detalle asignacion
 
                 //se guarda una tupla en detalle asignacion
@@ -164,9 +171,6 @@ class AsignacionController extends Controller
                 $detalleAsignacion->save();
 
                 //se guarda una tupla en asignacion
-                
-               $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
-                
                 $asignacion = new Asignacion;
                 $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
                 $asignacion->mdui=$maestroR;
@@ -176,44 +180,41 @@ class AsignacionController extends Controller
                 
         
             } else {
-                //si existe se creara una tupla en detalle asignacion y tambien en asignacion
 
-                //se comprueba que sea el mismo maestro al asignarse 
-                /* $asignacion = Asignacion::where('mdui',$maestroR)->first(); */
-                $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
+                //$existe=Asignacion::where('id_detalleasignacion',$detalleAsignacion->id_detalleasignacion)->where('mdui',$tm->mdui)->first();
+                //$existe2=DetalleAsignacion::where('id_detalleasignacion',$existe->id_detalleasignacion)->first();
+                $existe=Asignacion::where('mdui',$maestroR)->first();
 
-                if(!is_null($detalleAsignacion))
+
+                if(is_null($existe))
                 {
-                    $ban="no";
+                    $asignacion = new Asignacion;
+                    $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
+                    $asignacion->mdui=$maestroR;
+                    $asignacion->anioasignacion=$request->get('idanio');
+                    $asignacion->save();
+                    $ban="si";
                 }
-                else
-                {
-               
-                //se guarda una tupla en asignacion con una referencia existente al detalle_asignacion
-                
-                $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
-                
-                $asignacion = new Asignacion;
-                $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
-                $asignacion->mdui=$maestroR;
-                $asignacion->anioasignacion=$request->get('idanio');
-                $asignacion->save();
-                $ban="si";
-                    
+                else{
+                    $ban="err3";
                 }
-
-                
+                return Redirect::to('asignacion/'.$ban);
             }
 
             return Redirect::to('asignacion/'.$ban);
 
         } else {
+            
             //si el maestro es de tercer ciclo
-
+            $detalle1 = DetalleAsignacion::where('aniodetalleasignacion',$request->get('idanio'))->where('iddetallegrado',$iddg)->where('coordinador','2')->first();
+            $detalle2 = DetalleAsignacion::where('aniodetalleasignacion',$request->get('idanio'))->where('iddetallegrado',$iddg)->where('coordinador','1')->first();
             //se verifica si existe un registro en detalle asignacion
-            $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
-            if (is_null($detalleAsignacion)) {
+          
+            
+            if (is_null($detalle1)&&is_null($detalle2)) {
                 //si no existe en la tabla detalle asignacion
+                
+
 
                 //se guarda una tupla en detalle asignacion
                 $detalleAsignacion = new DetalleAsignacion;
@@ -224,7 +225,7 @@ class AsignacionController extends Controller
 
                 //se guarda una tupla en asignacion
                 
-                $detalleAsignacion = DetalleAsignacion::where('iddetallegrado',$iddg)->first();
+            
                 
                 $asignacion = new Asignacion;
                 $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
@@ -234,7 +235,8 @@ class AsignacionController extends Controller
                 $ban="si";
 
             } else {
-                    $ban="err";
+                $ban="no";
+                                
             }
             
          
@@ -256,35 +258,102 @@ class AsignacionController extends Controller
         $seccionR=$request->get('idseccion');
         $gradoR=$request->get('idgrado');
         $maestroR=$request->get('idmaestro');
-        $consulta2=DetalleGrado::where('idgrado', $gradoR)->where('idseccion', $seccionR)->where('idturno', $turnoR)->first();
-      //verifica si la combinacion de grado, turno y seccion existen
-        if ($consulta2==null) {
-            $ban="err";
-            return Redirect::to('asignacion/'.$ban);
-        }
+
+  //verifica si la combinacion de grado, turno y seccion existen
+  $consulta2=DetalleGrado::where('idgrado', $gradoR)->where('idseccion', $seccionR)->where('idturno', $turnoR)->first();
+  if ($consulta2==null) {
+      $ban="err2";
+      return Redirect::to('asignacion/'.$ban);
+  }
+
         $iddg=$consulta2->iddetallegrado;
-        $consulta3=DetalleAsignacion::where('iddetallegrado', $iddg)->first();
-        $consulta4=DB::table('asignacion')
-        ->select('id_detalleasignacion')
-        ->where('asignacion.id_detalleasignacion', '=', $consulta3->id_detalleasignacion)
-        ->get();
-        
-       //comprueba si existe un profesor ya asignado
-        if ($consulta4==null) {
-            $ban="no";
-        } else {
-            $asignacion = Asignacion::findOrFail($id);
-            $asignacion->id_asignacion=$id;
-            $asignacion->id_detalleasignacion=$consulta3->id_detalleasignacion;
+     //se verifica el tipo de maestro
+     $tm=Maestro::where('mdui',$maestroR)->first();
+     $detalleAsignacion = DetalleAsignacion::where('aniodetalleasignacion',$request->get('idanio'))->where('iddetallegrado',$iddg)->where('coordinador',$tm->tipom)->first();
+     
+     if ($tm->tipoMaestro=1) {
+        //se verifica si existe un registro en detalleasignacion
+       
+        if(is_null($detalleAsignacion))
+        {   //no existe el valor en detalle asignacion
+
+            //se guarda una tupla en detalle asignacion
+            $detalleA= new DetalleAsignacion;
+            $detalleA->iddetallegrado=$iddg;
+            $detalleA->aniodetalleasignacion=$request->get('idanio');
+            $detalleA->coordinador='1';
+            $detalleA->save();
+
+            //se guarda una tupla en asignacion
+            
+            $detalleAs= DetalleAsignacion::where('aniodetalleasignacion',$request->get('idanio'))->where('iddetallegrado',$iddg)->first();
+            $asignacion=Asignacion::where('id_asignacion',$id)->first();
+            $asignacion->id_detalleasignacion=$detalleAs->id_detalleasignacion;
             $asignacion->mdui=$maestroR;
             $asignacion->anioasignacion=$request->get('idanio');
             $asignacion->update();
             $ban="si";
+            
+    
+        } else {
+            //si se quiere actualizar pero ya existe un un cupo asignado 
+            $ban="no";           
         }
+
+        return Redirect::to('asignacion/'.$ban);
+
+    } else {
+        //si el maestro es de tercer ciclo
+
+        //se verifica si existe un registro en detalle asignacion
+       
+        /* if (is_null($detalleAsignacion)) {
+            //si no existe en la tabla detalle asignacion
+
+            //se guarda una tupla en detalle asignacion
+            $detalleAsignacion = new DetalleAsignacion;
+            $detalleAsignacion->iddetallegrado=$iddg;
+            $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
+            $detalleAsignacion->coordinador='2';
+            $detalleAsignacion->update();
+
+            //se guarda una tupla en asignacion
+            
+            
+            $asignacion=Asignacion::where('id_asignacion',$id)->first();
+            $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
+            $asignacion->mdui=$maestroR;
+            $asignacion->anioasignacion=$request->get('idanio');
+            $asignacion->update();
+            $ban="si";
+
+        } else {
+
+            $detalleAsignacion->iddetallegrado=$iddg;
+            $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
+            $detalleAsignacion->coordinador='2';
+            $detalleAsignacion->update();
+
+            $asignacion=Asignacion::where('id_asignacion',$id)->first();
+            $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
+            $asignacion->mdui=$maestroR;
+            $asignacion->anioasignacion=$request->get('idanio');
+            $asignacion->update();
+            $ban="si";
+        } */
+        
+     
+    }
+
           
        
         return Redirect::to('asignacion/'.$ban);
     }
+
+
+
+
+
     public function edit($id)
     {
         
@@ -307,8 +376,7 @@ class AsignacionController extends Controller
         ->orderBy('valor', 'desc')
         ->get();
 
-        //catalogo de materias
- $materias=Materia::all();
+       
 
 
         $asignacion = Asignacion::findOrFail($id);
@@ -316,6 +384,12 @@ class AsignacionController extends Controller
             $ban="err";
             return Redirect::to('asignacion/'.$ban);
         }
+
+        $dasg=DetalleAsignacion::findOrFail($asignacion->id_detalleasignacion);
+
+        $ddtgr=DetalleGrado::findOrFail($dasg->iddetallegrado);
+        
+
         $m=$asignacion->mdui;
        
         $maestro=Maestro::where('mdui', $m)->first();
@@ -325,6 +399,6 @@ class AsignacionController extends Controller
         }
         return view ("asignacion.edit", ["asignacion"=>$asignacion,"grados"=>$grados,
         "secciones"=>$secciones,"turnos"=>$turnos,"maestro"=>$maestro,"anios"=>$anioDefecto,
-        'usuarioactual'=>$usuarioactual,"materias"=>$materias]);
+        'usuarioactual'=>$usuarioactual,'ddtgr'=>$ddtgr]);
     }
 }
