@@ -31,7 +31,7 @@
             @foreach ($hojas as $ho)
                 <tr>
                     <td>
-                        <a href="#"><i class="fa fa-chevron-right fa-3x fa-fw"></i></a>
+                        <a href="#"><i class="fa fa-chevron-right  fa-3x fa-fw"></i></a>
                     </td>
                     <td>
                         <h4>

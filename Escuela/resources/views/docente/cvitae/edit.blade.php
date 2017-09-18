@@ -24,7 +24,7 @@
 
 <fieldset class="well the-fieldset">
 	<div class="col-md-12 col-md-offset-0">
-		<legend class="the-legend"><h1>HOJA DE VIDA</h1></legend>
+		<legend class="the-legend"><h1 style="text-align: center;">HOJA DE VIDA</h1></legend>
 	</div>
 	<div class="row">
 		<aside class="col-md-9">

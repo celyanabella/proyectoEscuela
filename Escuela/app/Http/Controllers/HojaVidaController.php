@@ -274,8 +274,12 @@ class HojaVidaController extends Controller
         //Se Busca el record laboral del docente
         $trabajos = MaestroTrabajo::where('id_hoja', $id_hoja)->get();
 
+        //Se busca el Depto. y Municipio de Nacimiento
+        $depto = Departamento::findOrFail($hoja->id_departamento);
+        $mun = Municipio::findOrFail($depto->id_departamento);
+
         return view("docente.cvitae.show",["hoja"=>$hoja, "maestro"=>$maestro, "estado"=>$estado, "clase"=>$clase, 
-            "categoria"=>$categoria, "nivel"=>$nivel, "estudios"=>$estudios, "capacitaciones"=>$capacitaciones, "trabajos"=>$trabajos, "usuarioactual"=>$usuarioactual]);
+            "categoria"=>$categoria, "nivel"=>$nivel, "estudios"=>$estudios, "capacitaciones"=>$capacitaciones, "trabajos"=>$trabajos, "mun"=>$mun, "depto"=>$depto, "usuarioactual"=>$usuarioactual]);
     }
 
 

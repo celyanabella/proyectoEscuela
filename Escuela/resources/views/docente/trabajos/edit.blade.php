@@ -37,7 +37,7 @@
 							<label for="cargo">Cargo</label>
 							{!! Form::text('cargo', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Cargo que ocupaba...', 'autofocus'=>'on']) !!}
 						</div>
-						<div class="form-group col-md-2">
+						<div class="form-group col-md-3">
 							<label for="lugar">Lugar de trabajo</label>
 							{!! Form::text('lugar', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Lugar de trabajo...', 'autofocus'=>'on']) !!}
 						</div>

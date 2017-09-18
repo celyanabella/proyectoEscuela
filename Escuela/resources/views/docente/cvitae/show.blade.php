@@ -52,10 +52,10 @@
                                 </div>
                                 <div class="col-sm-6 col-md-9">
                                     <aside class="col-md-3">
-                                        <b>Depto. de Nac.</b><h5></h5>
+                                        <b>Depto. de Nac.</b><h5>{{ $depto->nombre }}</h5>
                                     </aside>
                                     <aside class="col-md-3">
-                                        <b>Municipio de Nac.</b><h5></h5>
+                                        <b>Municipio de Nac.</b><h5>{{ $mun->nombre }}</h5>
                                     </aside>
                                     <aside class="col-md-3">
                                         <b>Nac. extranjero</b><h5>{{ $hoja->nacimientoextranjero }}</h5>

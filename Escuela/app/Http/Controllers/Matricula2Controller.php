@@ -18,6 +18,7 @@ use Escuela\DetalleGrado;
 use Escuela\DetallePariente;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 
 
@@ -192,43 +193,46 @@ class Matricula2Controller extends Controller
             $matricula2->fotografia = $file->getClientOriginalName();
             }
 
-            //Ahora se procede al tratamiento de DetalleGrado
+           //Ahora se procede al tratamiento de DetalleGrado
 
-            $detalleGrado = new DetalleGrado();                   //Nuevo detalleGrado
-            $detalleGrado->idgrado = $request->get('idgrado');
-            $detalleGrado->idseccion = $request->get('idseccion');
-            $detalleGrado->idturno = $request->get('idturno');
-            $detalleGrado -> save();
-        
+            $idgrado = $request->get('idgrado');
+            $idseccion = $request->get('idseccion');
+            $idturno = $request->get('idturno');
+
+            $detalleGrado = DetalleGrado::where('idgrado','=',$idgrado)->where('idseccion','=',$idseccion)
+            ->where('idturno','=',$idturno)->first();
+
+            $ban = 0;
+
+
             //Se hace la fk a la tabla matricula.
 
-            $matricula2->iddetallegrado = $detalleGrado->iddetallegrado;
+            if(!is_null($detalleGrado)){
+                $matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+                $ban = 1;
+            }
+
+            //Validacion de combinacion Grado, Seccion, Turno
+
+            $grado = Grado::where('idgrado','=',$idgrado)->first();
+            $seccion = Seccion::where('idseccion','=',$idseccion)->first();
+            $turno = Turno::where('idturno','=',$idturno)->first();
+
+            if($ban == 0) {
+                Session::flash('message', '"'.$grado->nombre.'"'.'"'.$seccion->nombre.'"'.'"'.$turno->nombre.'"'.' Esa Asignación no exite, Por favor configure esa combinación');
+                return Redirect::to('expediente/matricula');
+            }else{
+                Session::flash('create', ''.' Matricula Guardada Correctamente');
+                 }
 
             //Ahora de procede al tratamiento de Estudiante.
             $nie = $matricula->nie;
 
-            /*$partida = PartidaNacimiento::where('nie',$nie)->first();
-            $partida->folio = $request -> get('folio');
-            $partida->libro = $request -> get('libro');
-            $partida -> update();*/
 
             //Se hace la fk a la tabla estudiante, una vez creada la partida.
 
             $estudiante = Estudiante::where('nie',$nie)->first();        //Obtengo el estudiante
-            //$estudiante->nie = $request -> get('nie');
-            //$estudiante->id_partida = $partida->id_partida;
-            //$estudiante->nombre = $request -> get('nombre');
-            //$estudiante->apellido = $request -> get('apellido');
-            //$estudiante->fechadenacimiento = $request -> get('fechadenacimiento');
-
-            //Sexo del estudiante
-            /*  $vt1 = $request->get('sexo');
-            if ($vt1==0) {
-                $estudiante->sexo = 'F';
-            }
-            else{
-                $estudiante->sexo = 'M';
-            }  */
+            
             
             //discapacidad  del estudiante
             $vt2 = $request->get('discapacidad');
@@ -257,12 +261,9 @@ class Matricula2Controller extends Controller
             else{
                 $estudiante->autorizavacuna = 'SI';
             }
-            ######$estudiante ->estado = 'Activo';
+
             $estudiante -> update();
 
-            //Se procede a guardar el nie
-            //$partida->nie = $estudiante->nie;
-            //$partida->update();
 
             //Se procede a guardar datos de la Madre
 

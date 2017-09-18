@@ -4,6 +4,18 @@
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 	<blockquote><h2>Nuevo Ingreso</h2><a href="matricula/create"><button class="btn btn-success">Nueva Matricula</button></a></blockquote> 
 	
+		@if (Session::has('message'))
+			<p class="alert alert-danger">{{ Session::get('message')}}</p>
+		@endif
+
+		@if (Session::has('update'))
+			<p class="alert alert-info">{{ Session::get('update')}}</p>
+		@endif	
+
+		@if (Session::has('create'))
+			<p class="alert alert-success">{{ Session::get('create')}}</p>
+		@endif	
+
 		@include('expediente.matricula.search')
 	</div>
 </div>

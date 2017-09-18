@@ -19,7 +19,6 @@
 </div>
 
 
-
 {!!Form::open(array('url'=>'expediente/matricula','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
             {{Form::token()}}
 
