@@ -77,6 +77,7 @@ class CupoController extends Controller
         $usuarioactual=\Auth::user();
 
 
+<<<<<<< HEAD
         $idgrado = $request->get('idgrado');
         $idseccion = $request->get('idseccion');
         $idturno = $request->get('idturno');
@@ -84,6 +85,26 @@ class CupoController extends Controller
         $detalleGrado = DetalleGrado::where('idgrado','=',$idgrado)->where('idseccion','=',$idseccion)
         ->where('idturno','=',$idturno)->first();
 
+=======
+    $detalle= new DetalleGrado;
+    $detalle-> idgrado = $request->get('idgrado');
+		$detalle-> idseccion = $request->get('idseccion');
+		$detalle-> idturno = $request->get('idturno');
+		$detalle-> cupo= $request->get('cupo');
+        $detalle->save();
+ /*  
+ foreach ($num as $num ) {
+ if($num->idgrado != '2' && $num->idseccion != '2' && $num->idturno != 2){
+          /*if($num->idseccion != $detalle-> idseccion){
+             if($num->idturno !=  $detalle-> idturno){*/
+               // $detalle->save();
+           //  }/*}}*/
+
+       
+           //  } */
+    
+	    /*$detalle->save();*/
+>>>>>>> origin/master
 
         //Si no se encuentra la consulta se agrega
 
