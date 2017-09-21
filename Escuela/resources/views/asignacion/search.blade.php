@@ -3,7 +3,7 @@
 		<div class="input-group">
 				<div class="form-group col-md-8">
 						<div class="form-group">
-						<label>Año de Inscripcion</label>
+						<h5>Año de Inscripcion </h5>
 						<select name="idanio" class="form-control">
 							@foreach ($anios as $anio)
 							<option value="{{$anio->valor}}">{{$anio->valor}}</option>
@@ -13,13 +13,15 @@
 						</div>
 				</div>
 		</div>
-</div>
 
-<div class="form-group col-md-10">
-	<div class="input-group">
-		<span class="input-group-btn"><button type="submit" class="btn btn-primary">Buscar</button></span>
-	</div>
-</div>	
+		<div class="input-group">
+				<div class="form-group col-md-8">
+						<div class="form-group">
+							<a><button type="submit" class="btn btn-primary">Buscar</button></a>
+						</div>
+				</div>
+		</div>
+
 		
-
+</div>
 {{Form::close()}}
