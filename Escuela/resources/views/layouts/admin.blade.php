@@ -283,8 +283,9 @@
     <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
-    
-    <script src="{{asset('js/sistemalaravel.js')}}"></script>
+
+    <!-- AdminLTE App -->
+    <script src="{{asset('js/dropdown.js')}}"></script>
     
   </body>
 </html>

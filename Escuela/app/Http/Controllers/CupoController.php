@@ -11,6 +11,8 @@ use Storage;
 use Escuela\Turno;
 use Escuela\Seccion;
 
+use Illuminate\Support\Facades\Session;
+
 use Escuela\Grado;
 use Escuela\DetalleGrado;
 use Escuela\Http\Controllers\Controller;
@@ -72,34 +74,40 @@ class CupoController extends Controller
 
      public function store(Request $request)		//Para almacenar
     {
-        $grado=Grado::all();
-         $seccion=Seccion::all();
-         $turno=Turno::all();
         $usuarioactual=\Auth::user();
-        $num=DetalleGrado::all();
 
 
-    $detalle= new DetalleGrado;
-    $detalle-> idgrado = $request->get('idgrado');
-		$detalle-> idseccion = $request->get('idseccion');
-		$detalle-> idturno = $request->get('idturno');
-		$detalle-> cupo= $request->get('cupo');
+        $idgrado = $request->get('idgrado');
+        $idseccion = $request->get('idseccion');
+        $idturno = $request->get('idturno');
 
-  
- foreach ($num as $num ) {
- if($num->idgrado != '2' && $num->idseccion != '2' && $num->idturno != 2){
-          /*if($num->idseccion != $detalle-> idseccion){
-             if($num->idturno !=  $detalle-> idturno){*/
-                $detalle->save();
-             }/*}}*/
-
-       
-             }
-    
-	    /*$detalle->save();*/
+        $detalleGrado = DetalleGrado::where('idgrado','=',$idgrado)->where('idseccion','=',$idseccion)
+        ->where('idturno','=',$idturno)->first();
 
 
-    	return Redirect::to('asignacion_cupos');
+        //Si no se encuentra la consulta se agrega
+
+        if(is_null($detalleGrado)){
+            $detalle= new DetalleGrado;
+            $detalle-> idgrado = $request->get('idgrado');
+            $detalle-> idseccion = $request->get('idseccion');
+            $detalle-> idturno = $request->get('idturno');
+            $detalle-> cupo= $request->get('cupo');
+            $detalle->save();
+
+            Session::flash('create', ''.' Asignacion de cupos guardada Correctamente');
+
+            return Redirect::to('asignacion_cupos');
+        }else{
+
+            $grado = Grado::where('idgrado','=',$idgrado)->first();
+            $seccion = Seccion::where('idseccion','=',$idseccion)->first();
+            $turno = Turno::where('idturno','=',$idturno)->first();
+
+            Session::flash('message', '"'.$grado->nombre.'"'.'"'.$seccion->nombre.'"'.'"'.$turno->nombre.'"'.' Esa Asignación ya existe, Por favor verifique esa combinación');
+
+            return Redirect::to('asignacion_cupos');
+        }	
             
     }
 
@@ -124,13 +132,3 @@ class CupoController extends Controller
     }
 
 }
- /*
- foreach ($num as $num ) {
- if($num->grado->idgrado!=$detalle-> idgrado){
-          if($num->seccion!=$detalle-> idseccion){
-             if($num->turno!=$detalle-> idturno){
-
-             }}}
-
-             $detalle->save();
-             }*/

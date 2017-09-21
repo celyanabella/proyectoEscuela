@@ -7,11 +7,18 @@
 
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-            @if (Session::has('message'))
-            <div class="alert alert-success">
-                 {{ Session::get('message')}}
-            </div>
-             @endif
+        @if (Session::has('message'))
+            <p class="alert alert-danger">{{ Session::get('message')}}</p>
+        @endif
+
+        @if (Session::has('update'))
+            <p class="alert alert-info">{{ Session::get('update')}}</p>
+        @endif  
+
+        @if (Session::has('create'))
+            <p class="alert alert-success">{{ Session::get('create')}}</p>
+        @endif
+
             @include('docente.cvitae.search')
         </div>
     </div>

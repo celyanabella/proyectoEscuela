@@ -96,29 +96,13 @@
 					<div class="form-group">
 						<div class="form-group col-md-4">
 							<label>Depto. Nacimiento</label>
-							<select name="id_departamento" class="form-control">
-								@foreach ($departamentos as $dep)
-									@if ($dep->id_departamento == $hoja->id_departamento)
-									<option value="{{$dep->id_departamento}}" selected>{{$dep->nombre}}</option>
-									@else
-									<option value="{{$dep->id_departamento}}">{{$dep->nombre}}</option>
-									@endif
-								@endforeach
-							</select>
+							{!! Form::select('id_departamento',$deptos,null,['id'=>'departamento', 'class'=>'form-control']) !!}
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-group col-md-4">
 							<label>Municipio de Nacimiento</label>
-							<select name="id_municipio" class="form-control">
-								@foreach ($municipios as $mun)
-									@if ($mun->id_departamento == $hoja->id_departamento)
-									<option value="{{$mun->id_municipio}}" selected>{{$mun->nombre}}</option>
-									@else
-									<option value="{{$mun->id_municipio}}">{{$mun->nombre}}</option>
-									@endif
-								@endforeach
-							</select>
+							{!! Form::select('id_municipio',['placeholder'=>'Selecciona un depto'],null,['id'=>'municipio','class'=>'form-control']) !!}
 						</div>
 					</div>
 			</div>
@@ -184,22 +168,22 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">NIT</label>
-				{!! Form::text('nit', $maestro->nit, ['class' => 'form-control', 'placeholder'=>'NIT sin guiones', 'autofocus'=>'on']) !!}
+				{!! Form::number('nit', $maestro->nit, ['class' => 'form-control', 'placeholder'=>'NIT sin guiones', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">NIP</label>
-				{!! Form::text('nip', $maestro->nip, ['class' => 'form-control', 'placeholder'=>'NIP...', 'autofocus'=>'on']) !!}
+				{!! Form::number('nip', $maestro->nip, ['class' => 'form-control', 'placeholder'=>'NIP...', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">AFP</label>
-				{!! Form::text('afp', $maestro->afp, ['class' => 'form-control', 'placeholder'=>'AFP...', 'autofocus'=>'on']) !!}
+				{!! Form::number('afp', $maestro->afp, ['class' => 'form-control', 'placeholder'=>'AFP...', 'autofocus'=>'on']) !!}
 			</div>
 		</div>
 
 		<div class="col-md-12 ">
 			<div class="form-group col-md-3">
 				<label for="">INPEP</label>
-				{!! Form::text('inpep', $maestro->inpep, ['class' => 'form-control', 'placeholder'=>'INPEP...', 'autofocus'=>'on']) !!}
+				{!! Form::number('inpep', $maestro->inpep, ['class' => 'form-control', 'placeholder'=>'INPEP...', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Extendido</label>
@@ -258,7 +242,7 @@
 		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
 			<div class="form-group">
 			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
-            	<a href="{{URL::action('HojaVidaController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+            	<a href="{{URL::action('HojaVidaController@index')}}" class="btn btn-danger col-md-4 col-md-offset-1">Cancelar</a>
             	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
         	</div>
 		</div>

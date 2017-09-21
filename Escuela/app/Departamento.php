@@ -13,7 +13,6 @@ class Departamento extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'id_hoja',
     	'nombre',
     	'codigo'
     ];

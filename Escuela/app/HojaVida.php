@@ -11,7 +11,7 @@ class HojaVida extends Model
     public $timestamps = false;
 
     protected $fillable= [
-    	'id_departamento',
+    	'id_municipio',
     	'mdui',
     	'id_clase',
     	'id_categoria',
