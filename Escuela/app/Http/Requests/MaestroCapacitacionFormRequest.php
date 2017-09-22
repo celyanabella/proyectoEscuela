@@ -25,8 +25,8 @@ class MaestroCapacitacionFormRequest extends Request
     {
         return [
             'nombre'=>'required|max:45',
-            'horas'=>'required',
-            'anio'=>'required',
+            'horas'=>'required|max:4',
+            'anio'=>'required|max:4',
             'copia'=>'mimes:jpeg,bmp,png,jpg',
         ];
     }

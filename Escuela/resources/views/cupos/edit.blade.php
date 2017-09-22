@@ -16,20 +16,21 @@
 
       {!!Form::model($detalle,['method'=>'PATCH','route'=>['asignacion_cupos.update',$detalle->iddetallegrado]])!!}
             {{Form::token()}}
-        <div class="form-group col-md-3">
-        <div class="form-group">
-          <label>Cupos</label>
-          {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on','max'=>99]) !!}
-        </div>
-      </div>
-         <div class="form-group col-md-3">    
-            <div class="form-group">
-              <button class="btn btn-primary" type="submit">Guardar</button>
-              <a href="{{URL::action('CupoController@index')}}" class="btn btn-danger">Cancelar</a>
-            </div>
+           <div class="form-group col-md-8">
+              <label for="acciones">Cupos</label>
+              <div class="input-group">
+                {!! Form::number('cupo', null, ['class' => 'form-control' , 'placeholder'=>'Introduza la cantidad de cupos', 'autofocus'=>'on','max'=>99]) !!}<span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a href="{{URL::action('CupoController@index')}}" class="btn btn-danger">Cancelar</a>
+                </span>
+              </div>
             </div>
 
       {!!Form::close()!!}   
+
+
+
+            
             
     </div>
   </div>

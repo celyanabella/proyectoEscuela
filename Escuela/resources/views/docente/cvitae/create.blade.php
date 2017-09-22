@@ -27,7 +27,7 @@
 <div class="col-md-12 col-md-offset-0">
 	<legend class="the-legend"><h1 style="text-align: center;">HOJA DE VIDA</h1></legend>
 </div>
-	<div class="row">
+	<div class="row">	
 
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
@@ -72,11 +72,11 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 					<label>Departamento de Nacimiento</label>
-					{{ Form::select('id_departamento', $departamentos->pluck('nombre','id_departamento'), null, ['class'=>'form-control']) }}
+					{!! Form::select('id_departamento',$deptos,null,['id'=>'departamento', 'class'=>'form-control']) !!}
 			</div>
 			<div class="form-group col-md-3">
 					<label>Municipio de Nacimiento</label>
-					{{ Form::select('id_municipio', $municipios->pluck('nombre','id_municipio'), null, ['class'=>'form-control']) }}
+					{!! Form::select('id_municipio',['placeholder'=>'Selecciona un depto'],null,['id'=>'municipio','class'=>'form-control']) !!}
 			</div>
 			<div class="form-group col-md-6">
 					<label>Otro </label>
@@ -183,12 +183,13 @@
 		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
 			<div class="form-group">
 			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
-            	<a href="{{URL::action('HojaVidaController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+            	<a href="{{URL::action('HojaVidaController@index')}}" class="btn btn-danger col-md-4 col-md-offset-1">Cancelar</a>
             	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
         	</div>
 		</div>
 
 
 {!!Form::close()!!}
+
 
 @endsection

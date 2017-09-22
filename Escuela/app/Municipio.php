@@ -13,10 +13,15 @@ class Municipio extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'id_departamento',
-    	'nombre',
-    	'codigo'
+        'id_hoja',
+        'id_departamento',
+        'nombre',
+        'codigo'
     ];
+
+    public static function municipios($id){
+        return Municipio::where('id_departamento','=',$id)->get();
+    }
 
     protected $guarded = [
     ];

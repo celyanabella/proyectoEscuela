@@ -2,10 +2,20 @@
 @section ('contenido')
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		<h3>Información de Grados <a href="asignacion_cupos/create"><button class="btn btn-success">Nuevo</button></a></h3>
-		
+		<h3> Información de Grados 
+		</h3>
+		<a href="asignacion_cupos/create"><button class="btn btn-success col-md-offset-0"><i class="fa fa-fw -square -circle fa-plus-square"></i> Nueva Asignación</button></a>
+		<br><br>
 		@if (Session::has('message'))
 			<p class="alert alert-danger">{{ Session::get('message')}}</p>
+		@endif
+
+		@if (Session::has('update'))
+			<p class="alert alert-info">{{ Session::get('update')}}</p>
+		@endif	
+
+		@if (Session::has('create'))
+			<p class="alert alert-success">{{ Session::get('create')}}</p>
 		@endif
 
 		@include('cupos.search')

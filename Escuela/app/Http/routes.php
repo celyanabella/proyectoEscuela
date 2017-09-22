@@ -84,6 +84,7 @@ Route::resource('detalle/actividad','ActividadController'); //Ruta de gestion de
 
 //Rutas de Gestion de docentes
 Route::resource('docente/cvitae','HojaVidaController');
+Route::get('municipios/{id}','HojaVidaController@getMunicipios');
 Route::resource('docente/estudios','MaestroEstudiosController');
 Route::resource('docente/capacitaciones','MaestroCapacitacionController');
 Route::resource('docente/trabajos','MaestroTrabajoController');
@@ -96,9 +97,6 @@ Route::resource('asignacion_cupos', 'CupoController');
 Route::resource('asignacion', 'AsignacionController');
 
 Route::resource('asignacion/materia', 'AsignacionMateriaController');
-
-
-Route::resource('imprimir','ImprimirController');
 
 Route::get('asignacion/{valor}','AsignacionController@show');
 

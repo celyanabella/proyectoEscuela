@@ -39,7 +39,7 @@ use Illuminate\Database\Connection;
 class HojaVidaController extends Controller
 {
     
-     public function __construct()	//para validar
+     public function __construct()  //para validar
     {
     }
 
@@ -62,8 +62,8 @@ class HojaVidaController extends Controller
     {
         $usuarioactual=\Auth::user();
 
-    	if($request)
-    	{
+        if($request)
+        {
             $query = trim($request->get('searchText'));
             $hojas = DB::table('hojadevida as ho')
             ->join('maestro as ma','ho.mdui','=','ma.mdui')
@@ -73,8 +73,8 @@ class HojaVidaController extends Controller
             ->where('ho.estado','Activo')
             ->orderBy('ma.id','desc')
             ->paginate(9);
-    		return view('docente.cvitae.index',["hojas"=>$hojas,"searchText"=>$query,"usuarioactual"=>$usuarioactual]); 
-    	}
+            return view('docente.cvitae.index',["hojas"=>$hojas,"searchText"=>$query,"usuarioactual"=>$usuarioactual]); 
+        }
 
     }
 
@@ -102,11 +102,36 @@ class HojaVidaController extends Controller
         $niveles = Nivel::orderBy('nivel.id_nivel','asc');
         $categorias = Categoria::orderBy('categoria.id_categoria','asc');
         $clases = Clase::orderBy('clase.id_clase','asc');
-        $municipios = Municipio::orderBy('municipio.id_municipio','asc');
-        $departamentos = Departamento::orderBy('departamento.id_departamento','asc');
 
-    	return view("docente.cvitae.create",["tipos"=>$tipos, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "municipios"=>$municipios, "departamentos"=>$departamentos, "usuarioactual"=>$usuarioactual]);   
+        $deptos = Departamento::lists('nombre','id_departamento');
+
+
+        return view("docente.cvitae.create",["tipos"=>$tipos, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "deptos"=>$deptos, "usuarioactual"=>$usuarioactual]);   
     }
+
+
+    /*
+        Nombre Funcion: getMunicipio
+
+        Objetivo: Obtiene los municipios del departamento seleccionado
+
+        Fecha de creación:
+        20/09/2017
+
+        Autor: SM11077
+
+        Fecha de última modificación:
+        21/09/2017
+    */
+
+
+    public function getMunicipios(Request $request, $id){
+        if($request->ajax()){
+            $municipios = Municipio::municipios($id);
+            return response()->json($municipios);
+        }
+    }
+
 
 
 
@@ -172,7 +197,12 @@ class HojaVidaController extends Controller
 
 
                 $hoja = new HojaVida;
-                $hoja->id_departamento=$request->get('id_departamento');
+
+                $id_mun=$request->get('id_municipio');
+                if ($id_mun !="placeholder") {
+                    $hoja->id_municipio=$id_mun;
+                }
+
                 $hoja->id_clase=$request->get('id_clase');
                 $hoja->id_categoria=$request->get('id_categoria');
                 $hoja->id_nivel=$request->get('id_nivel');
@@ -211,6 +241,8 @@ class HojaVidaController extends Controller
                 $hoja->nacimientoextranjero=$request->get('nacimientoextranjero');
                 $hoja->estado='Activo';
                 $hoja->save();
+
+                Session::flash('create', ''.' Hoja de Vida guardada con éxito');
 
                
       //      DB::commit();
@@ -274,9 +306,24 @@ class HojaVidaController extends Controller
         //Se Busca el record laboral del docente
         $trabajos = MaestroTrabajo::where('id_hoja', $id_hoja)->get();
 
+
         //Se busca el Depto. y Municipio de Nacimiento
-        $depto = Departamento::findOrFail($hoja->id_departamento);
-        $mun = Municipio::findOrFail($depto->id_departamento);
+        $mun = Municipio::where('id_municipio', $hoja->id_municipio)->first();
+        $flag = 0;
+        
+        if(!is_null($mun)){
+                $depto = Departamento::where('id_departamento', $mun->id_departamento)->first();
+                $flag = 1;
+            }
+
+        if($flag == 0){
+                $mun = new Municipio;
+                $mun->nombre ="No posee";
+
+                $depto = new Departamento;
+                $depto->nombre ="No posee";
+            }
+        
 
         return view("docente.cvitae.show",["hoja"=>$hoja, "maestro"=>$maestro, "estado"=>$estado, "clase"=>$clase, 
             "categoria"=>$categoria, "nivel"=>$nivel, "estudios"=>$estudios, "capacitaciones"=>$capacitaciones, "trabajos"=>$trabajos, "mun"=>$mun, "depto"=>$depto, "usuarioactual"=>$usuarioactual]);
@@ -340,11 +387,13 @@ class HojaVidaController extends Controller
         $niveles = DB::table('nivel')->get();
         $categorias = DB::table('categoria')->get();
         $clases = DB::table('clase')->get();
-        $municipios = DB::table('municipio')->get();
-        $departamentos = DB::table('departamento')->get();
+        $mun = DB::table('municipio')->get();
+        
+
+        $deptos = Departamento::lists('nombre','id_departamento');
 
         return view("docente.cvitae.edit",["hoja"=>$hoja, "maestro"=>$maestro, "estado"=>$estado, "clase"=>$clase, 
-            "categoria"=>$categoria, "nivel"=>$nivel, "estados"=>$estados, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "municipios"=>$municipios, "departamentos"=>$departamentos, "usuarioactual"=>$usuarioactual]);
+            "categoria"=>$categoria, "nivel"=>$nivel, "estados"=>$estados, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "mun"=>$mun, "deptos"=>$deptos, "usuarioactual"=>$usuarioactual]);
     }
 
 
@@ -413,8 +462,13 @@ class HojaVidaController extends Controller
 
 
 
-                //Se procede a actualizar los datos de la hoja                
-                $hoja->id_departamento=$request->get('id_departamento');
+                //Se procede a actualizar los datos de la hoja
+
+                $id_mun=$request->get('id_municipio');
+                if ($id_mun !="placeholder") {
+                    $hoja->id_municipio=$id_mun;
+                }
+
                 $hoja->id_clase=$request->get('id_clase');
                 $hoja->id_categoria=$request->get('id_categoria');
                 $hoja->id_nivel=$request->get('id_nivel');
@@ -453,6 +507,8 @@ class HojaVidaController extends Controller
                 $hoja->nacimientoextranjero=$request->get('nacimientoextranjero');
                 $hoja->estado='Activo';
                 $hoja->update();
+
+                Session::flash('update', '"'.$maestro->nombre.' '.$maestro->apellido.'"'.' ha sido actualizado');
 
             
         
