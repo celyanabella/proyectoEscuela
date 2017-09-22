@@ -11,22 +11,22 @@ class HojaVida extends Model
     public $timestamps = false;
 
     protected $fillable= [
-    	'id_municipio',
-    	'mdui',
-    	'id_clase',
-    	'id_categoria',
-    	'id_nivel',
-    	'cenombrado',
-    	'codigoinstitucion',
-    	'fechaingresopublico',
-    	'fechalaboral',
-    	'ultimoascenso',
-    	'aniosservicio',
-    	'proximoascenso',
+        'id_municipio',
+        'mdui',
+        'id_clase',
+        'id_categoria',
+        'id_nivel',
+        'cenombrado',
+        'codigoinstitucion',
+        'fechaingresopublico',
+        'fechalaboral',
+        'ultimoascenso',
+        'aniosservicio',
+        'proximoascenso',
         'cargo',
         'funciones',
-    	'nacimientoextranjero',
-    	'estado'
+        'nacimientoextranjero',
+        'estado'
     ];
 
     protected $guarded = [

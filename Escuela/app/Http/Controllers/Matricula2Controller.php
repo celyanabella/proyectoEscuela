@@ -208,7 +208,7 @@ class Matricula2Controller extends Controller
             //Se hace la fk a la tabla matricula.
 
             if(!is_null($detalleGrado)){
-                $matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+                $matricula2->iddetallegrado = $detalleGrado->iddetallegrado;
                 $ban = 1;
             }
 
@@ -334,7 +334,7 @@ class Matricula2Controller extends Controller
             DB::rollback();
         }
 
-    	return Redirect::to('expediente/matricula');
+    	return Redirect::to('expediente/matricula2');
     }
 
 

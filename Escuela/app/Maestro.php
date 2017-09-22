@@ -26,8 +26,7 @@ class Maestro extends Model
     	'inpep',
         'extendido',
     	'fotografia',
-		'estado',
-		'tipom'
+    	'estado'
     ];
 
     protected $guarded = [

@@ -15,10 +15,9 @@
 			<button type="submit" class="btn btn-danger">Generar PDF</button>
 			</div>
 	{!!Form::close()!!}
-  <div class="form-group">
+
 	<a href="" data-target="#modal-create" data-toggle="modal"><button class="btn btn-danger">Nueva Asignacion</button></a>
 		@include('asignacion.modal')
-	</div>
 	</div>
 
 </div>

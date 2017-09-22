@@ -39,7 +39,7 @@ use Illuminate\Database\Connection;
 class HojaVidaController extends Controller
 {
     
-     public function __construct()	//para validar
+     public function __construct()  //para validar
     {
     }
 
@@ -62,8 +62,8 @@ class HojaVidaController extends Controller
     {
         $usuarioactual=\Auth::user();
 
-    	if($request)
-    	{
+        if($request)
+        {
             $query = trim($request->get('searchText'));
             $hojas = DB::table('hojadevida as ho')
             ->join('maestro as ma','ho.mdui','=','ma.mdui')
@@ -73,8 +73,8 @@ class HojaVidaController extends Controller
             ->where('ho.estado','Activo')
             ->orderBy('ma.id','desc')
             ->paginate(9);
-    		return view('docente.cvitae.index',["hojas"=>$hojas,"searchText"=>$query,"usuarioactual"=>$usuarioactual]); 
-    	}
+            return view('docente.cvitae.index',["hojas"=>$hojas,"searchText"=>$query,"usuarioactual"=>$usuarioactual]); 
+        }
 
     }
 
@@ -106,7 +106,7 @@ class HojaVidaController extends Controller
         $deptos = Departamento::lists('nombre','id_departamento');
 
 
-    	return view("docente.cvitae.create",["tipos"=>$tipos, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "deptos"=>$deptos, "usuarioactual"=>$usuarioactual]);   
+        return view("docente.cvitae.create",["tipos"=>$tipos, "niveles"=>$niveles, "categorias"=>$categorias, "clases"=>$clases, "deptos"=>$deptos, "usuarioactual"=>$usuarioactual]);   
     }
 
 

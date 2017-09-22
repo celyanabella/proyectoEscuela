@@ -14,9 +14,9 @@ class Municipio extends Model
 
     protected $fillable = [
         'id_hoja',
-    	'id_departamento',
-    	'nombre',
-    	'codigo'
+        'id_departamento',
+        'nombre',
+        'codigo'
     ];
 
     public static function municipios($id){

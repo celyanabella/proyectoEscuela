@@ -13,8 +13,8 @@ class Departamento extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'nombre',
-    	'codigo'
+        'nombre',
+        'codigo'
     ];
 
     protected $guarded = [
