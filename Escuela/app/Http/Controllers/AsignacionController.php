@@ -16,6 +16,7 @@ use Escuela\Http\Requests\AsignacionFormRequest;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Connection;
+use Illuminate\Support\Str;
 use Log;
 use DB;
 
@@ -176,15 +177,19 @@ class AsignacionController extends Controller
                 $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
                 $detalleAsignacion->coordinador='1';
                 
-              
+              $string=Str::lower($ngrado->nombre);
                 
-                if($ngrado->nombre=='Primero'||'Segundo'||'Tercero')
+                if($string=='primero'or $string=='segundo'or$string=='tercero')
                 {
                     $detalleAsignacion->ciclo='1';
-                }elseif($ngrado->nombre=='Cuarto'||'Quinto'||'Sexto')
+                }
+                
+                if($string=='cuarto'or $string=='quinto'or$string=='sexto')
                     {
                         $detalleAsignacion->ciclo='2';
-                    }elseif($ngrado->nombre=='Septimo'||'Octavo'||'Noveno')
+                    }
+                    
+                    if($string=='septimo'or $string=='octavo'or$string=='noveno')
                         {
                             $detalleAsignacion->ciclo='3';
                        
@@ -215,16 +220,16 @@ class AsignacionController extends Controller
                     break;
 
                     case '2':
-                    foreach ($materias as $materia) {
+                
                         $asignacion = new Asignacion;
                         $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
                         $asignacion->mdui=$maestroR;
                         $asignacion->anioasignacion=$request->get('idanio');
-                        $asignacion->id_materia=$materia->id_materia;
+                       // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
                        
                         
-                    }
+
 
                     break;    
 

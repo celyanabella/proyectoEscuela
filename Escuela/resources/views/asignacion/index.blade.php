@@ -1,26 +1,43 @@
 @extends ('layouts.admin')
 @section('contenido')
+
+<div class="row" >
+	<blockquote><h1>Gestion de Asignacion</h1></blockquote>		
+</div>
+
+<div class="container" >
+	<div class="row" >
+		<div class="col-md-3">
+				<label>Año de Inscripcion </label>
+		</div>
+	</div>
+</div>
+
+
 <div class="row">
-	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-		
-		<blockquote><h1>Gestion de Asignacion</h1></blockquote>
-		
-		@include('asignacion.search')
+	<div class="col-md-12">
 
-	
-
-	{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
+		<div class="col-md-3">
 			<div class="form-group">
-		    
-			<button type="submit" class="btn btn-danger">Generar PDF</button>
+			@include('asignacion.search')
 			</div>
-	{!!Form::close()!!}
-  <div class="form-group">
-	<a href="" data-target="#modal-create" data-toggle="modal"><button class="btn btn-danger">Nueva Asignacion</button></a>
-		@include('asignacion.modal')
-	</div>
-	</div>
+		</div>
 
+		<div class="col-md-2">
+			<div class="form-group">
+			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal"><i class="fa fa-fw -square -circle fa-plus-square"></i> Asignar</a>
+				@include('asignacion.modal')
+			</div>
+		</div>
+
+		<div class="col-md-2">
+			<div class="form-group">
+			{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
+			<button type="submit" class="btn form-control btn-danger"><i class="fa fa-file"></i> Generar PDF</button>
+			{!!Form::close()!!}
+			</div>
+		</div>
+	</div>
 </div>
 
 @if($asgs==null)
@@ -52,7 +69,12 @@
 					<td>
 					<!-- consultar el index de asignacion   -->
 						<a href="{{URL::action('AsignacionController@edit',$cnst->id_asignacion)}}"><button class="btn btn-info">Editar</button></a>
-                        <a href="{{URL::action('AsignacionMateriaController@edit',$cnst->id_asignacion)}}"><button class="btn btn-warning">Asignar/Editar Materia</button></a>
+						@if($cnst->nombremateria==null)
+							 <a href="{{URL::action('AsignacionMateriaController@edit',$cnst->id_asignacion)}}"><button class="btn btn-warning">Asignar/Editar Materia</button></a>
+						@else
+							
+						@endif
+                       
 						<a href="" data-target="" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
 					</td>
 					

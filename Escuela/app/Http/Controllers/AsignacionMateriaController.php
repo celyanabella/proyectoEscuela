@@ -59,13 +59,13 @@ class AsignacionMateriaController extends Controller
         $usuarioactual=\Auth::user();
         $asignacion = Asignacion::findOrFail($id);
       
-        $a = new Asignacion;
-        $a->id_asignacion=$id;
-        $a->id_detalleasignacion=$asignacion->id_detalleasignacion;
-        $a->mdui=$asignacion->mdui;
-        $a->id_materia=$resquest->get('idm');
-        $a->anioasignacion=$asignacion->anioasignacion;
-        $a->update();;
+        //$a = new Asignacion;
+        //$a->id_asignacion=$id;
+        //$a->id_detalleasignacion=$asignacion->id_detalleasignacion;
+        //$a->mdui=$asignacion->mdui;
+        $asignacion->id_materia=$resquest->get('idm');
+        //$a->anioasignacion=$asignacion->anioasignacion;
+        $asignacion->update();
         $ban="si";
         return Redirect::to('asignacion/'.$ban);
     }
