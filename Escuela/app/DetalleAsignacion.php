@@ -3,7 +3,7 @@ namespace Escuela;
 use Illuminate\Database\Eloquent\Model;
 class DetalleAsignacion extends Model
 {
-    protected $table = 'detallle_asignacion';
+    protected $table = 'detalle_asignacion';
     
         protected $primaryKey = 'id_detalleasignacion';
     

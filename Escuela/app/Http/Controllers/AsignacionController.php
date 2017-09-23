@@ -40,11 +40,11 @@ class AsignacionController extends Controller
         
         //consulta que envia datos a la vista index en el directorio asignacion como un objeto "asgs"
         $consulta=DB::table('asignacion')
-        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre', 'maestro.apellido', 'materia.nombre as nombremateria', 'detallle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion', 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
+        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre', 'maestro.apellido', 'materia.nombre as nombremateria', 'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion', 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
         ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
-        ->join('detallle_asignacion as detallle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detallle_asignacion.id_detalleasignacion', 'full outer')
+        ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
         ->join('materia as materia', 'asignacion.id_materia', '=', 'materia.id_materia', 'full outer')
-        ->join('detalle_grado as detalle_grado', 'detallle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
+        ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
         ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
         ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
         ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
@@ -90,12 +90,12 @@ class AsignacionController extends Controller
                 //consulta que envia datos a la vista index en el directorio asignacion como un objeto "asgs"
                 $consulta=DB::table('asignacion')
                 ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre',
-                'maestro.apellido', 'materia.nombre as nombremateria', 'detallle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion',
+                'maestro.apellido', 'materia.nombre as nombremateria', 'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion',
                 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
                 ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
-                ->join('detallle_asignacion as detallle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detallle_asignacion.id_detalleasignacion', 'full outer')
+                ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
                 ->join('materia as materia', 'asignacion.id_materia', '=', 'materia.id_materia', 'full outer')
-                ->join('detalle_grado as detalle_grado', 'detallle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
+                ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
                 ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
                 ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
                 ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
