@@ -179,17 +179,17 @@ class AsignacionController extends Controller
                 
               $string=Str::lower($ngrado->nombre);
                 
-                if($string=='primero'or $string=='segundo'or$string=='tercero')
+                if($string=='primero'or $string=='segundo'or $string=='tercero')
                 {
                     $detalleAsignacion->ciclo='1';
                 }
                 
-                if($string=='cuarto'or $string=='quinto'or$string=='sexto')
+                if($string=='cuarto'or $string=='quinto'or $string=='sexto')
                     {
                         $detalleAsignacion->ciclo='2';
                     }
                     
-                    if($string=='septimo'or $string=='octavo'or$string=='noveno')
+                    if($string=='septimo'or $string=='octavo'or $string=='noveno')
                         {
                             $detalleAsignacion->ciclo='3';
                        
