@@ -100,6 +100,8 @@ Route::resource('asignacion/materia', 'AsignacionMateriaController');
 
 Route::get('asignacion/{valor}','AsignacionController@show');
 
+Route::resource('imprimir','ImprimirController');
+
 Route::get('matripdf', function() {
   $pdf = PDF::loadView('matricul');
   return $pdf->download('MatriculaInscrpcion.pdf');

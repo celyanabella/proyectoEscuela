@@ -15,8 +15,14 @@
 				
 						<label>Año de Asignacion</label>
 						<select name="idanio" class="form-control">
+
+						
 							@foreach ($anios as $anio)
+							@if($asignacion->anioasignacion==$anio->valor)
+							<option value="{{$anio->valor}}" selected>{{$anio->valor}}</option>
+							@else
 							<option value="{{$anio->valor}}">{{$anio->valor}}</option>
+							@endif
 							@endforeach
 						</select>
 						
@@ -40,7 +46,11 @@
 						<label>Grado</label>
 						<select name="idgrado" class="form-control">
 							@foreach ($grados as $grado)
+							@if($ddtgr->idgrado==$grado->idgrado)
+								<option value="{{$grado->idgrado}}" selected>{{$grado->nombre}}</option>
+							@else
 							<option value="{{$grado->idgrado}}">{{$grado->nombre}}</option>
+							@endif
 							@endforeach
 						</select>
 						</div>
@@ -51,7 +61,11 @@
 						<label>Seccion</label>
 						<select name="idseccion" class="form-control">
 							@foreach ($secciones as $seccion)
+							@if($ddtgr->idseccion==$seccion->idseccion)
+								<option value="{{$seccion->idseccion}}" selected>{{$seccion->nombre}}</option>
+							@else
 							<option value="{{$seccion->idseccion}}">{{$seccion->nombre}}</option>
+							@endif
 							@endforeach
 						</select>
 						</div>
@@ -63,22 +77,17 @@
 						<label>Turno</label>
 						<select name="idturno" class="form-control">
 							@foreach ($turnos as $turno)
+							@if($ddtgr->idturno==$turno->idturno)
+							<option value="{{$turno->idturno}}" selected>{{$turno->nombre}}</option>	
+							@else
 							<option value="{{$turno->idturno}}">{{$turno->nombre}}</option>
+							@endif
 							@endforeach
 						</select>
 						</div>
 				</div>
 
-				<div class="form-group col-md-4" hidden>
-						<div class="form-group" hidden>
-						<label>Materias</label hidden>
-						<select name="idm" class="form-control" hidden>
-							@foreach ($materias as $materia)
-							<option value="{{$materia->id_materia}}" hidden>{{$materia->nombre}}</option>
-							@endforeach
-						</select>
-						</div>
-				</div>
+				
 
                 
 

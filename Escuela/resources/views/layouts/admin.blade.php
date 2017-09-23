@@ -183,7 +183,7 @@
             @endif
             
             <li>
-              <a href="#">
+     <a href="#">
                 <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>
                 <small class="label pull-right bg-red">PDF</small>
               </a>
@@ -198,6 +198,9 @@
               </ul>
               <ul class="treeview-menu">
                 <li><a href=""><i class="fa fa-circle-o"></i> Libreta de Notas</a></li>
+              </ul>
+                <ul class="treeview-menu">
+                <li><a href="{{URL::action('ImprimirController@index')}}"><i class="fa fa-circle-o"></i> Imprimir</a></li>
               </ul>
             </li>
              <li>

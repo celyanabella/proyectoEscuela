@@ -41,6 +41,22 @@
 		</div>
 			
 		@endif
+
+		@if($exito=='err2')
+		<div class="alert alert-warning">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close"> x</a>
+		<strong>Error en la actualizacion</strong>
+		</div>
+			
+		@endif
+
+		@if($exito=='err3')
+		<div class="alert alert-warning">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close"> x</a>
+		<strong>El profesor ya esta asignado o no le corresponde el grado al que quiere inscribirlo</strong>
+		</div>
+			
+		@endif
 </div>
 	
 

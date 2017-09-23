@@ -12,7 +12,9 @@ class DetalleAsignacion extends Model
         protected $fillable = [
             'iddetallegrado',
             'aniodetalleasignacion',
-            'coordinador'
+            'coordinador',
+            'ciclo',
+            'mdui'
         ];
     
         protected $guarded = [
