@@ -10,7 +10,7 @@
 	
 				<h4>Seleccione una materia para el siguiente docente</h4>
 
-	<div class="form-group col-md-4">
+	<div class="form-group col-md-3">
 		<div class="form-group">
 				
 						<label>Año de Asignacion</label>
@@ -20,14 +20,14 @@
 		</div>
 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Maestro</label>
                         <a>{{$maestro->nombre}} {{$maestro->apellido}}</a>
 						</div>
 				</div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Grado</label>
                         <a>{{$grado->nombre}}</a>
@@ -35,7 +35,7 @@
 						</div>
 				</div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Seccion</label>
                         <a>{{$seccion->nombre}}</a>
@@ -43,14 +43,14 @@
 				</div>
 			</div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Turno</label>
                         <a>{{$turno->nombre}}</a>
 						</div>
 				</div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Materias</label>
 						<select name="idm" class="form-control">

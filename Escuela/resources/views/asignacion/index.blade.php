@@ -2,13 +2,35 @@
 @section('contenido')
 
 <div class="row" >
-	<blockquote><h1>Gestion de Asignacion</h1></blockquote>		
+	<blockquote><h1>Gestion de Asignacion        <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne maestros a un grado especifico"></i></h1></blockquote>	
+		
 </div>
 
 <div class="container" >
 	<div class="row" >
 		<div class="col-md-3">
 				<label>Año de Inscripcion </label>
+		</div>
+	</div>
+</div>
+<div class="container" >
+	<div class="row" >
+		<div class="col-md-3">
+			@if (Session::has('message'))
+			<p class="alert alert-danger">{{ Session::get('message')}}</p>
+			@endif
+
+			@if (Session::has('si'))
+			<p class="alert alert-success">{{ Session::get('si')}}</p>
+			@endif
+
+			@if (Session::has('no'))
+			<p class="alert alert-danger">{{ Session::get('no')}}</p>
+			@endif
+
+			@if (Session::has('error1'))
+			<p class="alert alert-warning">{{ Session::get('error1')}}</p>
+			@endif
 		</div>
 	</div>
 </div>
@@ -25,7 +47,8 @@
 
 		<div class="col-md-2">
 			<div class="form-group">
-			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal"><i class="fa fa-fw -square -circle fa-plus-square"></i> Asignar</a>
+			
+			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Asigne un docente a un grado en especifico" ></i> Asignar</a>
 				@include('asignacion.modal')
 			</div>
 		</div>
@@ -41,6 +64,13 @@
 </div>
 
 @if($asgs==null)
+@if(Session::has('M1'))
+<div class="alert alert-warning alert-dismissable">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+  {{Session::get('M1')}}
+</div>
+
+@endif
 	<h1><i class="fa fa-exclamation-circle"></i> No hay resultados </h1>
 @else
 	<h4>Mostrando resultados del año: {{$searchYear}}</h4>

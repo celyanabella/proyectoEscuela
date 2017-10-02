@@ -1,7 +1,17 @@
 {!! Form::open(array('url'=>'datos/Estudiante','method'=>'GET','autocomplete'=>'off','role'=>'search')) !!}
 <div class="form-group">
 		<div class="input-group">
-				<div class="form-group col-md-4">
+		<div class="form-group col-md-3">
+						<div class="form-group">
+						<label>Año</label>
+						<select name="idanio" class="form-control">
+							@foreach ($anios as $anio)
+							<option value="{{$anio->valor}}">{{$anio->valor}}</option>
+							@endforeach
+						</select>
+						</div>
+				</div>
+				<div class="form-group col-md-3">
 					<div class="form-group">
 						<label>Grado</label>
 						<select name="idgrado" class="form-control">
@@ -11,7 +21,7 @@
 						</select>
 						</div>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Seccion</label>
 						<select name="idseccion" class="form-control">
@@ -21,7 +31,7 @@
 						</select>
 						</div>
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Turno</label>
 						<select name="idturno" class="form-control">
@@ -35,9 +45,9 @@
 </div>
 		
 
-<div class="form-group col-md-10">
+<div class="form-group col-md-2">
 	<div class="input-group">
-		<input type="number" class="form-control" name="searchYear" placeholder="Escriba el Año de matricula" value="{{$searchYear}}"><span class="input-group-btn"><button type="submit" class="btn btn-primary">Buscar</button></span>
+		<span class="input-group-btn"><button type="submit" class="btn btn-primary">Buscar</button></span>
 	</div>
 </div>	
 

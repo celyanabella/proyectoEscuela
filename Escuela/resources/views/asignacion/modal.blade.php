@@ -13,7 +13,7 @@ role="dialog" tabindex="-1" id="modal-create">
                      <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title">Nueva Asignacion</h4>
-				<h4>Seleccione los parametros de la asignacion de maestros</h4>
+				<h4>Seleccione los parametros de la asignacion de maestros <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne un Maestro a un Grado en especifico, asegurece que la matricula exista"></i></h4>
 			</div>
 			<div class="modal-body">
 				

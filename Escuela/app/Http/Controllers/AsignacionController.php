@@ -17,6 +17,7 @@ use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 use Log;
 use DB;
 
@@ -146,8 +147,14 @@ class AsignacionController extends Controller
         //verifica si la combinacion de grado, turno y seccion existen
         $consulta2=DetalleGrado::where('idgrado', $gradoR)->where('idseccion', $seccionR)->where('idturno', $turnoR)->first();
         if ($consulta2==null) {
-            $ban="err";
-            return Redirect::to('asignacion/'.$ban);
+            
+            $nGrado=Grado::where('idgrado','=',$gradoR)->first();
+            $nTurno=Turno::where('idturno','=',$turnoR)->first();
+            $nSeccion=Seccion::where('idseccion','=',$seccionR)->first();
+            Session::flash('M1',"opss! no tenemos resultados con el grado ".$nGrado->nombre."  ".$nSeccion->nombre."  ".$nTurno->nombre);
+            return Redirect::to('asignacion');
+
+           
         }
 
         //id detalle_grado
@@ -248,7 +255,7 @@ class AsignacionController extends Controller
                         # code...
                         break;                        
                 }//fin switch
-                $ban="si";
+               // $ban="si";
         
             } else {
                 //se comprueba si el maestro es de tercer ciclo 
@@ -273,22 +280,32 @@ class AsignacionController extends Controller
                         $asignacion->anioasignacion=$request->get('idanio');
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                        $ban="si";
+                        //$ban="si";
                     }else
                     {
-                        $ban="no";
+                        //$ban="no";
+                        Session::flash('no','Error: Esa asignacion ya existe. Intente con una nueva');
+                        return Redirect::to('asignacion');
                     }
 
-                    return Redirect::to('asignacion/'.$ban);
+                    //return Redirect::to('asignacion/'.$ban);
+                    Session::flash('si','Asignacion Guardada Con Exito');
+                    return Redirect::to('asignacion');
                 }
                 else{
                    
-                    $ban="no";
+                    //$ban="no";
+                    Session::flash('no','Error: Esa asignacion ya existe. Intente con una nueva');
+                    return Redirect::to('asignacion');
                 }
-                return Redirect::to('asignacion/'.$ban);
+                //return Redirect::to('asignacion/'.$ban);
+                Session::flash('si','Asignacion Guardada Con Exito');
+                return Redirect::to('asignacion');
             }
 
-            return Redirect::to('asignacion/'.$ban);
+           // return Redirect::to('asignacion/'.$ban);
+           Session::flash('si','Asignacion Guardada Con Exito');
+           return Redirect::to('asignacion');
 
         
        
@@ -311,8 +328,10 @@ class AsignacionController extends Controller
   //verifica si la combinacion de grado, turno y seccion existen
   $consulta2=DetalleGrado::where('idgrado', $gradoR)->where('idseccion', $seccionR)->where('idturno', $turnoR)->first();
   if ($consulta2==null) {
-      $ban="err2";
-      return Redirect::to('asignacion/'.$ban);
+      //$ban="err2";
+      //return Redirect::to('asignacion/'.$ban);
+      Session::flash('error1','Error en la actualizacion');
+      return Redirect::to('asignacion');
   }
 
         $iddg=$consulta2->iddetallegrado;
@@ -341,15 +360,19 @@ class AsignacionController extends Controller
             $asignacion->mdui=$maestroR;
             $asignacion->anioasignacion=$request->get('idanio');
             $asignacion->update();
-            $ban="si";
+            //$ban="si";
             
     
         } else {
             //si se quiere actualizar pero ya existe un un cupo asignado 
-            $ban="no";           
+            //$ban="no";           
+            Session::flash('no','Error: Esa asignacion ya existe. Intente con una nueva');
+            return Redirect::to('asignacion');
         }
 
-        return Redirect::to('asignacion/'.$ban);
+        //return Redirect::to('asignacion/'.$ban);
+        Session::flash('si','Asignacion Guardada Con Exito');
+        return Redirect::to('asignacion');
 
     } else {
         //si el maestro es de tercer ciclo
@@ -373,7 +396,7 @@ class AsignacionController extends Controller
             $asignacion->mdui=$maestroR;
             $asignacion->anioasignacion=$request->get('idanio');
             $asignacion->update();
-            $ban="si";
+           // $ban="si";
 
         } else {
 
@@ -387,10 +410,12 @@ class AsignacionController extends Controller
             $asignacion->mdui=$maestroR;
             $asignacion->anioasignacion=$request->get('idanio');
             $asignacion->update();
-            $ban="si";
+            //$ban="si";
         } 
     }
-        return Redirect::to('asignacion/'.$ban);
+       // return Redirect::to('asignacion/'.$ban);
+       Session::flash('si','Asignacion Guardada Con Exito');
+       return Redirect::to('asignacion');
     }
 
 
