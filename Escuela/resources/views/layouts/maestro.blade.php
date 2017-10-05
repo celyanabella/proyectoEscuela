@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilosMaestro.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -26,7 +28,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="{{ route('login')}}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>JS</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -126,23 +128,17 @@
         <!-- /.sidebar -->
       </aside>
 
-
-
-
-
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        
         <!-- Main content -->
         <section class="content">
-          
+          @yield('contentMaestro')
           <div class="row">
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Sistema Escolar</h3>
-                  
+                  <h3 class="box-title">Centro Escolar Jardines de la Sabana</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     
@@ -187,6 +183,11 @@
     <script src="{{asset('js/app.min.js')}}"></script>
     
     <script src="{{asset('js/sistemalaravel.js')}}"></script>
-    
+    <script src="{{asset('js/morris/morris.js')}}"></script>
+    <script src="{{asset('js/morris/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{asset('js/donut.js')}}"></script>
+
+
+
   </body>
 </html>

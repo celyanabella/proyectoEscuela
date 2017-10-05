@@ -1,0 +1,25 @@
+/* back colors */
+.blue {
+    background-color:rgb(113, 159, 241);
+}
+ .green {
+    background-color:rgb(144, 236, 192);
+}
+  .red {
+    background-color:rgb(255, 102, 133);
+}
+.yellow {
+    background-color:rgb(237, 253, 46);
+}
+
+
+#page-wrapper {
+    padding: 0 15px;
+    min-height: 568px;
+     background-color:rgb(209, 212, 216);
+}
+
+
+.morris-hover{position:absolute;z-index:1000}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255,255,255,0.8);border:solid 2px rgba(230,230,230,0.8);font-family:sans-serif;font-size:12px;text-align:center}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0}
+.morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0}
+

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilosAdmin.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
@@ -27,7 +28,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="{{ route('login')}}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>JS</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -96,32 +97,6 @@
               <ul class="treeview-menu">
                 <li><a href="{{URL::action('MatriculaController@index')}}"><i class="fa fa-circle-o"></i> Nuevo Ingreso</a></li>
                 <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
-              </ul>
-            </li>
-            
-            @if($usuarioactual->tipo($usuarioactual->tipoUsuario)==1)
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder-open-o"></i>
-                <span>Docentes</span>
-                 <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i>Consultar Docentes</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Coordinación </a></li>
-              </ul>
-            </li>
-            @endif
-
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-pencil-square"></i>
-                <span>Calificaciones</span>
-                 <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
 
@@ -235,7 +210,7 @@
         
         <!-- Main content -->
         <section class="content">
-          
+          @yield('contenidoAdmin')
           <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -288,6 +263,11 @@
 
     <!-- AdminLTE App -->
     <script src="{{asset('js/dropdown.js')}}"></script>
+
+    <!-- Gráfico -->
+    <script src="{{asset('js/morris/morris.js')}}"></script>
+    <script src="{{asset('js/morris/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{asset('js/chart.js')}}"></script>
     
   </body>
 </html>
