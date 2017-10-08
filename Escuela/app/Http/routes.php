@@ -96,6 +96,10 @@ Route::resource('asignacion_cupos', 'CupoController');
 
 Route::resource('asignacion', 'AsignacionController');
 
+
+Route::resource('evaluacion', 'EvaluacionController');
+
+
 Route::resource('asignacion/materia', 'AsignacionMateriaController');
 
 Route::get('asignacion/{valor}','AsignacionController@show');

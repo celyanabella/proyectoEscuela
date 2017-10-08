@@ -14,7 +14,8 @@ class Actividad extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'periodo',
+        'id_trimestre',
+        'nombre',
     	'porcentaje'
     ];
 

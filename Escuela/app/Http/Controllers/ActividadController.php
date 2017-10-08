@@ -26,7 +26,7 @@ class ActividadController extends Controller
     	if($request)
     	{
     		$query = trim($request->get('searchText'));
-    		$actividad = DB::table('actividad')->where('periodo','LIKE','%'.$query.'%')
+    		$actividad = DB::table('actividad')->where('trimestre','LIKE','%'.$query.'%')
            // ->where('grado.estado','Activo')
     		->orderBy('id_actividad','asc')
     		->paginate(9);

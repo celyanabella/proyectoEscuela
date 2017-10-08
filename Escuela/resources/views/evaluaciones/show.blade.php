@@ -2,14 +2,22 @@
 @section('contenido')
 
 <div class="row" >
-	<blockquote><h1>Gestion de Asignacion        <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne maestros a un grado especifico"></i></h1></blockquote>	
+	<blockquote><h1>Evaluaciones <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne evaluaciones a una materia"></i></h1></blockquote>	
 		
 </div>
 
 <div class="container" >
 	<div class="row" >
 		<div class="col-md-3">
-				<label>Año de Inscripcion </label>
+				<label>Trimestre</label>
+		</div>
+	</div>
+</div>
+
+<div class="container" >
+	<div class="row" >
+		<div class="col-md-3">
+				<label>Actividad</label>
 		</div>
 	</div>
 </div>
@@ -41,25 +49,19 @@
 
 		<div class="col-md-3">
 			<div class="form-group">
-			@include('asignacion.search')
+			@include('evaluaciones.search')
 			</div>
 		</div>
 
 		<div class="col-md-2">
 			<div class="form-group">
 			
-			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Asigne un docente a un grado en especifico" ></i> Asignar</a>
-				@include('asignacion.modal')
+			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Crea una nueva evaluacion para la actual materia" ></i>Nueva Evaluacion</a>
+				@include('evaluaciones.modal')
 			</div>
 		</div>
 
-		<div class="col-md-2">
-			<div class="form-group">
-			{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
-			<button type="submit" class="btn form-control btn-danger"><i class="fa fa-file"></i> Generar PDF</button>
-			{!!Form::close()!!}
-			</div>
-		</div>
+		
 	</div>
 </div>
 
@@ -74,25 +76,35 @@
 @endif
 	<h1><i class="fa fa-exclamation-circle"></i> No hay resultados </h1>
 @else
-	<h4>Mostrando resultados del año: {{$searchYear}}</h4>
+	<h4>Mostrando resultados del año:</h4>
 	<div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="table-responsive">
 			<table class="table table-striped table-bordered table-condensed table-hover">
 				<thead>
 					<th>Nombre</th>
-					<th>Apellido</th>
+					<th>Actividad</th>
+                    <th>Periodo</th>
+                    <th>Porcentaje</th>
                     <th>Opciones</th>
 				</thead>
-              @foreach($asgs as $cnst)
+              @foreach($evals as $eval)
 				  <tr>
-					<td>{{$cnst->nombre}}</td>
-					<td>{{$cnst->apellido}}</td>
+					<td>{{$eval->nombre}}</td>
+					<td>{{$eval->nombreactividad}}</td>
+					
 					<td>
-						<a href=""><button class="btn btn-info">Ver Mas</button></a>
+						<a href=""><button class="btn btn-info">Editar</button></a>
 					</td>
+                    <td>
+						<a href=""><button class="btn btn-danger">Eliminar</button></a>
+					</td>
+					
 				</tr>
+				
 			  @endforeach
+				
+						
 			</table>
 		</div>
 

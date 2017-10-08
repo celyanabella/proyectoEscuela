@@ -12,7 +12,7 @@ role="dialog" tabindex="-1" id="modal-create">
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Nueva Asignacion</h4>
+                <h2 class="modal-title">Nueva Asignacion</h2 >
 				<h4>Seleccione los parametros de la asignacion de maestros <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne un Maestro a un Grado en especifico, asegurece que la matricula exista"></i></h4>
 			</div>
 			<div class="modal-body">
@@ -32,9 +32,9 @@ role="dialog" tabindex="-1" id="modal-create">
 		</div>
 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-8">
 						<div class="form-group">
-						<label>Maestro</label>
+						<label>Docente</label>
 						<select name="idmaestro" class="form-control">
 							@foreach ($maestros as $maestro)
 							<option value="{{$maestro->mdui}}">{{$maestro->nombre}} {{$maestro->apellido}}</option>

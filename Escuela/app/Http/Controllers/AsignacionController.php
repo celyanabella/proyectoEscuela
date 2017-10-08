@@ -41,18 +41,32 @@ class AsignacionController extends Controller
         ->get();
         
         //consulta que envia datos a la vista index en el directorio asignacion como un objeto "asgs"
-        $consulta=DB::table('asignacion')
-        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre', 'maestro.apellido', 'materia.nombre as nombremateria', 'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion', 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
+       /*  $consulta=DB::table('asignacion')
+        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.mdui',
+         'asignacion.anioasignacion', 'maestro.nombre', 'maestro.apellido', 
+         'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 
+         'detalle_grado.idseccion', 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 
+         'grado.nombre as nombregrado')
         ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
         ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
-        ->join('materia as materia', 'asignacion.id_materia', '=', 'materia.id_materia', 'full outer')
+        
         ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
         ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
         ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
         ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
         ->Where('asignacion.anioasignacion', '=', $query3)
         ->orderBy('maestro.apellido', 'asc')
+        ->get(); */
+
+        $consulta=DB::table('detalle_asignacion')
+        ->select('detalle_asignacion.mdui','detalle_asignacion.aniodetalleasignacion',
+        'detalle_asignacion.coordinador','maestro.nombre', 'maestro.apellido','detalle_asignacion.ciclo')
+        ->join('maestro as maestro','detalle_asignacion.mdui','=','maestro.mdui','full outer')
+        
+        ->Where('detalle_asignacion.aniodetalleasignacion', '=', $query3)
+        ->orderBy('maestro.apellido', 'asc')
         ->get();
+       
         //datos para el modal
         //informacion de maestros
         $consulta1=DB::table('maestro')
@@ -151,7 +165,7 @@ class AsignacionController extends Controller
             $nGrado=Grado::where('idgrado','=',$gradoR)->first();
             $nTurno=Turno::where('idturno','=',$turnoR)->first();
             $nSeccion=Seccion::where('idseccion','=',$seccionR)->first();
-            Session::flash('M1',"opss! no tenemos resultados con el grado ".$nGrado->nombre."  ".$nSeccion->nombre."  ".$nTurno->nombre);
+            Session::flash('M1',$nGrado->nombre."  '".$nSeccion->nombre."' ".$nTurno->nombre." ");
             return Redirect::to('asignacion');
 
            
