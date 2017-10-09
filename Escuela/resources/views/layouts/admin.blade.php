@@ -100,6 +100,21 @@
               </ul>
             </li>
 
+
+            @if($usuarioactual->tipoUsuario==2) 
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pencil-square-o"></i>
+                <span>Calificaciones</span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
+              </ul>
+            </li>
+            @endif
+
             @if($usuarioactual->tipoUsuario==1) 
             <li class="treeview">
               <a href="#">
@@ -156,9 +171,11 @@
               </ul>
             </li>
             @endif
-            
+
+
+            @if($usuarioactual->tipoUsuario==1) 
             <li>
-     <a href="#">
+              <a href="#">
                 <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>
                 <small class="label pull-right bg-red">PDF</small>
               </a>
@@ -178,6 +195,7 @@
                 <li><a href="{{URL::action('ImprimirController@index')}}"><i class="fa fa-circle-o"></i> Imprimir</a></li>
               </ul>
             </li>
+            @endif 
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
