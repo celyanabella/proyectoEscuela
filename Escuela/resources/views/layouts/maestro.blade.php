@@ -64,7 +64,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="logout" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                      <a href="{{ route('logout')}}" class="btn btn-default btn-flat">Cerrar Sesión</a>
                     </div>
                   </li>
                 </ul>
@@ -99,6 +99,8 @@
                 <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
               </ul>
             </li>
+
+            @if($usuarioactual->tipoUsuario==2) 
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pencil-square-o"></i>
@@ -106,10 +108,12 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
+            @endif 
+            
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>

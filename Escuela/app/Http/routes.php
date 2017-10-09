@@ -155,7 +155,12 @@ Route::get('libretapdf', function(){
 Route::group(['middleware' => 'usuarioStandard'], function () { 
      
   #Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
-  #Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
+  #Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso
+
+  //RUTAS DE USUARIO DOCENTE
+  Route::get('userDocente/lista/estudiante/{a1}/{a2}', ['as' => 'lista', 'uses' => 'MaestroUserController@getLista']);
+  Route::get('userDocente/trim/notas/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'MaestroUserController@edit']);
+  Route::resource('userDocente/materia','MaestroUserController');  //Materias del docente
 
 });
 
