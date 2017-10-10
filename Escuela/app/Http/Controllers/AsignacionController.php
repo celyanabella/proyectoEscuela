@@ -59,10 +59,14 @@ class AsignacionController extends Controller
         ->get(); */
 
         $consulta=DB::table('detalle_asignacion')
-        ->select('detalle_asignacion.mdui','detalle_asignacion.aniodetalleasignacion',
-        'detalle_asignacion.coordinador','maestro.nombre', 'maestro.apellido','detalle_asignacion.ciclo')
+        ->select('detalle_asignacion.mdui','detalle_asignacion.aniodetalleasignacion','detalle_asignacion.id_detalleasignacion',
+        'detalle_asignacion.coordinador','maestro.nombre', 'maestro.apellido','detalle_asignacion.ciclo','detalle_grado.idgrado',
+        'detalle_grado.idturno','detalle_grado.idseccion','grado.nombre as nombreGrado','turno.nombre as nombreTurno','seccion.nombre as nombreSeccion')
         ->join('maestro as maestro','detalle_asignacion.mdui','=','maestro.mdui','full outer')
-        
+        ->join('detalle_grado as detalle_grado','detalle_asignacion.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
+        ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado')
+        ->join('turno as turno','detalle_grado.idturno','=','turno.idturno')
+        ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion')
         ->Where('detalle_asignacion.aniodetalleasignacion', '=', $query3)
         ->orderBy('maestro.apellido', 'asc')
         ->get();

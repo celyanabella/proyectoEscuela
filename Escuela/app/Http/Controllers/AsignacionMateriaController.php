@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 use Escuela\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 use Escuela\Http\Requests\AsignacionFormRequest;
+use Illuminate\Support\Facades\Session;
 use Response;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Connection;
+use Illuminate\Support\Facades\Input;
 use Log;
 use DB;
 
@@ -25,8 +27,8 @@ class AsignacionMateriaController extends Controller
     {
         $usuarioactual=\Auth::user();
         
-        $asignacion = Asignacion::findOrFail($id);
-        if ($asignacion==null) {
+        $detalleAsignacion = DetalleAsignacion::findOrFail($id);
+       /*  if ($asignacion==null) {
             $ban="err";
             return Redirect::to('asignacion/'.$ban);
         }
@@ -34,15 +36,15 @@ class AsignacionMateriaController extends Controller
         $idasignacion = $asignacion->id_asignacion;
         $iddetalleasignacion = $asignacion->id_detalleasignacion;
         $idmaestro=$asignacion->mdui;
-       // $idmateria=$asignacion->id_materia;
+       // $idmateria=$asignacion->id_materia; */
         
         //buscando maestro
-        $maestro=Maestro::where('mdui', $idmaestro)->first();
+        $maestro=Maestro::where('mdui', $detalleAsignacion->mdui)->first();
         
         //buscando turno,grado,seccion con el detalle de la asignacion
-        $detalle=DetalleAsignacion::where('id_detalleasignacion', $iddetalleasignacion)->first();
-        $idDetGrado=$detalle->iddetallegrado;
-        $detalleGrado=DetalleGrado::where('iddetallegrado', $idDetGrado)->first();
+        /* $detalle=DetalleAsignacion::where('id_detalleasignacion', $iddetalleasignacion)->first();
+        $idDetGrado=$detalle->iddetallegrado; */
+        $detalleGrado=DetalleGrado::where('iddetallegrado', $detalleAsignacion->iddetallegrado)->first();
         $grado=Grado::where('idgrado', $detalleGrado->idgrado)->first();
         $seccion=Seccion::where('idseccion', $detalleGrado->idseccion)->first();
         $turno=Turno::where('idturno', $detalleGrado->idturno)->first();
@@ -50,23 +52,35 @@ class AsignacionMateriaController extends Controller
         $materias=Materia::all();
 
                   
-                return view ("asignacion.materia.edit", ["asignacion"=>$asignacion,"grado"=>$grado,
-                "seccion"=>$seccion,"turno"=>$turno,"materias"=>$materias,"anio"=>$asignacion->anioasignacion,
+                return view ("asignacion.materia.edit", ["asignacion"=>$detalleAsignacion,"grado"=>$grado,
+                "seccion"=>$seccion,"turno"=>$turno,"materias"=>$materias,"anio"=>$detalleAsignacion->aniodetalleasignacion,
                 'usuarioactual'=>$usuarioactual,"maestro"=>$maestro]);
     }
     public function update(AsignacionFormRequest $resquest, $id)
     {
         $usuarioactual=\Auth::user();
-        $asignacion = Asignacion::findOrFail($id);
-      
+        $detalleAsignacion = DetalleAsignacion::findOrFail($id);
+        if (Input::get('coordina')) {
+            $detalleAsignacion->coordinador=1;       // El usuario marcó el checkbox 
+        } else {
+            $detalleAsignacion->coordinador=2;     // El usuario NO marcó el chechbox
+        } 
+        $detalleAsignacion->update();
+
+
+
+        $a=Asignacion::where('id_detalleasignacion',$detalleAsignacion->id_detalleasignacion)->first();
         //$a = new Asignacion;
         //$a->id_asignacion=$id;
         //$a->id_detalleasignacion=$asignacion->id_detalleasignacion;
-        //$a->mdui=$asignacion->mdui;
-        $asignacion->id_materia=$resquest->get('idm');
+        $a->id_materia=$resquest->get('idm');
+        $a->update();
+        //$asignacion->id_materia=$resquest->get('idm');
         //$a->anioasignacion=$asignacion->anioasignacion;
-        $asignacion->update();
+       /*  $asignacion->update();
         $ban="si";
-        return Redirect::to('asignacion/'.$ban);
+        return Redirect::to('asignacion/'.$ban); */
+        Session::flash('si','Asignacion Actualizada Con Exito');
+        return Redirect::to('asignacion');
     }
 }

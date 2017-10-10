@@ -2,7 +2,7 @@
 @section('contenido')
 	
 	
-    {!!Form::model($asignacion,['method'=>'PATCH','route'=>['asignacion.materia.update',$asignacion->id_asignacion]])!!}
+    {!!Form::model($asignacion,['method'=>'PATCH','route'=>['asignacion.materia.update',$asignacion->id_detalleasignacion]])!!}
 	{{Form::token()}}
 
 
@@ -23,14 +23,14 @@
                 <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Maestro</label>
-                        <a>{{$maestro->nombre}} {{$maestro->apellido}}</a>
+                        <p>{{$maestro->nombre}} {{$maestro->apellido}}</p>
 						</div>
 				</div>
 
                 <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Grado</label>
-                        <a>{{$grado->nombre}}</a>
+                        <p>{{$grado->nombre}}</p>
 
 						</div>
 				</div>
@@ -38,15 +38,15 @@
                 <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Seccion</label>
-                        <a>{{$seccion->nombre}}</a>
+                        <p>{{$seccion->nombre}}</p>
 						</div>
 				</div>
-			</div>
+			
 
                 <div class="form-group col-md-3">
 						<div class="form-group">
 						<label>Turno</label>
-                        <a>{{$turno->nombre}}</a>
+                        <p>{{$turno->nombre}}</p>
 						</div>
 				</div>
 
@@ -61,6 +61,12 @@
 						</div>
 				</div>
 
+				<div class="form-group col-md-3">
+						<div class="form-group">
+						<label>Es coordinador <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Haga CHECK si el docente sera el coordinador del grado actual"></i></label>
+                        <button class="checkbox " ><label>{!! Form::checkbox('coordina') !!} </label></button>
+						</div>
+				</div>
                 
 
 			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">

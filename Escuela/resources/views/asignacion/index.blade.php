@@ -82,14 +82,32 @@
 				<thead>
 					<th>Nombre</th>
 					<th>Apellido</th>
-                    <th>Opciones</th>
+					<th>Grado</th>
+                    <th>Seccion</th>
+					<th>Turno</th>
+					<th>Es Coordinador</th>
+					<th>Opciones</th>
+
 				</thead>
               @foreach($asgs as $cnst)
 				  <tr>
 					<td>{{$cnst->nombre}}</td>
 					<td>{{$cnst->apellido}}</td>
+					<td>{{$cnst->nombreGrado}}</td>
+					<td>{{$cnst->nombreSeccion}}</td>
+					<td>{{$cnst->nombreTurno}}</td>
 					<td>
-						<a href=""><button class="btn btn-info">Ver Mas</button></a>
+					@if($cnst->coordinador==1)SI
+					@endif
+					@if($cnst->coordinador==2)NO
+					@endif
+					</td>
+					<td>
+					@if($cnst->coordinador==0)
+						<a href="{{URL::action('AsignacionMateriaController@edit',$cnst->id_detalleasignacion)}}"><button class="btn btn-warning">Asignar Materia</button></a>
+					@endif
+				
+						
 					</td>
 				</tr>
 			  @endforeach
