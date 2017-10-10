@@ -64,10 +64,15 @@
 			<div class="panel with-nav-tabs panel-primary">
 				<div class="panel-heading">
 					<ul class="nav nav-tabs">
-						
+						<?php $a = 0; ?>
 						@foreach($materias as $item)
 						@if($item->estado=='Activo')
+							@if($a == 0)
+							<li class="active"><a href="#{{$item->nombre}}" data-toggle="tab">{{$item->nombre}}</a></li>
+							@else
 							<li><a href="#{{$item->nombre}}" data-toggle="tab">{{$item->nombre}}</a></li>
+							@endif
+							<?php $a=$a+1; ?>
 						@else
 							
 						@endif
@@ -79,9 +84,15 @@
 				</div>
 				<div class="panel-body">
 					<div class="tab-content">
+					<?php $b = 0; ?>
 						@foreach($materias as $item)
 						@if($item->estado=='Activo')
+						@if($b == 0)
+						<div class="tab-pane fade in active" id="{{$item->nombre}}">
+						@else
 						<div class="tab-pane fade" id="{{$item->nombre}}">
+						@endif
+						<?php $b=$b+1; ?>
 							<div class="row">
 								<div class="col-md-12">
 									

@@ -196,25 +196,23 @@ class AsignacionController extends Controller
                 $detalleAsignacion = new DetalleAsignacion;
                 $detalleAsignacion->iddetallegrado=$iddg;
                 $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
-                $detalleAsignacion->coordinador='1';
+                $detalleAsignacion->coordinador='0';
                 
               $string=Str::lower($ngrado->nombre);
                 
                 if($string=='primero'or $string=='segundo'or $string=='tercero')
                 {
-                    $detalleAsignacion->ciclo='1';
+                    $detalleAsignacion->ciclo=1;
                 }
                 
                 if($string=='cuarto'or $string=='quinto'or $string=='sexto')
                     {
-                        $detalleAsignacion->ciclo='2';
+                        $detalleAsignacion->ciclo=2;
                     }
                     
                     if($string=='septimo'or $string=='octavo'or $string=='noveno')
                         {
-                            $detalleAsignacion->ciclo='3';
-                       
-                    
+                            $detalleAsignacion->ciclo=3;
                 } 
                 
               
@@ -225,7 +223,7 @@ class AsignacionController extends Controller
 
                 //se asignan materias automaticamente si es un profesor de primer, segundo ciclo o tercer ciclo
                 switch ($detalleAsignacion->ciclo) {
-                    case '1':
+                    case 1:
 
                     foreach ($materias as $materia) {
                         $asignacion = new Asignacion;
@@ -235,13 +233,15 @@ class AsignacionController extends Controller
                         $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
                        
+                        $detalleAsignacion->coordinador='1';
+                        $detalleAsignacion->update();
                         
                     }
 
                     break;
 
-                    case '2':
-                
+                    case 2:
+                    //si es un profesor de segundo ciclo se crea sin una materia asignada
                         $asignacion = new Asignacion;
                         $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
                         $asignacion->mdui=$maestroR;
@@ -254,7 +254,7 @@ class AsignacionController extends Controller
 
                     break;    
 
-                    case '3':
+                    case 3:
                     //si es un profesor de tercer ciclo se crea sin una materia asignada
                         $asignacion = new Asignacion;
                         $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
@@ -275,16 +275,39 @@ class AsignacionController extends Controller
                 //se comprueba si el maestro es de tercer ciclo 
                 if(!is_null($asignacion))
                 {
-                    $resultado=DetalleAsignacion::where('mdui',$maestroR)->where('iddetallegrado',$iddg)->first();
-
-                    if(is_null($resultado))
+                    $string=Str::lower($ngrado->nombre);
+                    
+                    if($string=='primero'or $string=='segundo'or $string=='tercero')
                     {
+                        $ciclo=1;
+                    }
+                    if($string=='cuarto'or $string=='quinto'or $string=='sexto')
+                    {
+                        $ciclo=2;
+                    }
+                    
+                    if($string=='septimo'or $string=='octavo'or $string=='noveno')
+                        {
+                            $ciclo=3;
+                        } 
+
+
+                   
+                    $resultado=DetalleAsignacion::where('mdui',$maestroR)->first();
+
+                    if($resultado->ciclo==2 or $resultado->ciclo==3)
+                    {
+                       if($ciclo==2 or $ciclo==3){
+
+                        $resul=DetalleAsignacion::where('iddetallegrado',$iddg)->first();
+                        if(is_null($resul)){
+
                         $detalleAsignacion = new DetalleAsignacion;
                         $detalleAsignacion->iddetallegrado=$iddg;
                         $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
-                        $detalleAsignacion->coordinador='1';
+                        $detalleAsignacion->coordinador='0';
                         $detalleAsignacion->mdui=$maestroR;
-                        $detalleAsignacion->ciclo='3';
+                        $detalleAsignacion->ciclo=$ciclo;
                         $detalleAsignacion->save();
 
 
@@ -295,10 +318,21 @@ class AsignacionController extends Controller
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
                         //$ban="si";
+                        }else{
+                            Session::flash('no','Error: El Grado ya fue asignado, intente nuevamente');
+                            return Redirect::to('asignacion');
+                        }
+                       }else{
+                        Session::flash('no','Error: El docente debe ser de segundo o tercer ciclo');
+                        return Redirect::to('asignacion');
+
+                       }
+
+
                     }else
                     {
                         //$ban="no";
-                        Session::flash('no','Error: Esa asignacion ya existe. Intente con una nueva');
+                        Session::flash('no','Error: El docente ya fue asignado');
                         return Redirect::to('asignacion');
                     }
 

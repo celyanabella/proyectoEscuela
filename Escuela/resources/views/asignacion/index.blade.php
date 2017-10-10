@@ -68,11 +68,11 @@
   <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
  opss! La combinacion <strong>{{Session::get('M1')}}</strong> no esta definida. Puede agregarla <a href="{{URL::action('CupoController@index')}}">aqui</a>
 </div>
+@endif
+	
 @if($asgs==null)
 
-
-@endif
-	<h1><i class="fa fa-exclamation-circle"></i> No hay resultados </h1>
+<h1><i class="fa fa-exclamation-circle"></i> No hay resultados </h1>
 @else
 	<h4>Mostrando resultados del año: {{$searchYear}}</h4>
 	<div class="row">
