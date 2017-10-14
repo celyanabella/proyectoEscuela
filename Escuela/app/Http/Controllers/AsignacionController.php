@@ -333,11 +333,51 @@ class AsignacionController extends Controller
                        }
 
 
-                    }else
+                    }else 
                     {
-                        //$ban="no";
+                        /* //$ban="no";
                         Session::flash('no','Error: El docente ya fue asignado');
-                        return Redirect::to('asignacion');
+                        return Redirect::to('asignacion'); */
+                     
+                            
+                                $grado=DetalleGrado::where('iddetallegrado',$resultado->iddetallegrado)->first();
+                                $turno=Turno::where('idturno',$grado->idturno);
+    
+                                $turno2=Turno::where('idturno',$consulta2->idturno);
+
+                                if($turno!=$turno2){
+                                
+                                    $detaAsignacion = new DetalleAsignacion;
+                                    $detaAsignacion->iddetallegrado=$iddg;
+                                    $detaAsignacion->aniodetalleasignacion=$request->get('idanio');
+                                    $detaAsignacion->coordinador='0';
+                                    $detaAsignacion->mdui=$maestroR;
+                                    $detaAsignacion->ciclo=$ciclo;
+                                    $detaAsignacion->save();
+    
+                                    //AQUI VA LA LOGICA
+    
+                                    
+                        foreach ($materias as $materia) {
+                            $asignacion = new Asignacion;
+                            $asignacion->id_detalleasignacion=$detaAsignacion->id_detalleasignacion;
+                            $asignacion->mdui=$maestroR;
+                            $asignacion->anioasignacion=$request->get('idanio');
+                            $asignacion->id_materia=$materia->id_materia;
+                            $asignacion->save();
+                           
+                            $detaAsignacion->coordinador='1';
+                            $detaAsignacion->update();
+    
+                        
+    
+                        }
+
+                        
+                    }
+                        
+
+                        
                     }
 
                     //return Redirect::to('asignacion/'.$ban);
