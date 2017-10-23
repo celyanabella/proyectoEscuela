@@ -97,7 +97,6 @@ Route::resource('asignacion_cupos', 'CupoController');
 Route::resource('asignacion', 'AsignacionController');
 
 
-Route::resource('evaluacion', 'EvaluacionController');
 
 
 Route::resource('asignacion/materia', 'AsignacionMateriaController');
@@ -161,6 +160,7 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
   Route::get('userDocente/lista/estudiante/{a1}/{a2}', ['as' => 'lista', 'uses' => 'MaestroUserController@getLista']);
   Route::get('userDocente/trim/notas/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'MaestroUserController@edit']);
   Route::resource('userDocente/materia','MaestroUserController');  //Materias del docente
+Route::resource('evaluacion', 'EvaluacionController');
 
 });
 

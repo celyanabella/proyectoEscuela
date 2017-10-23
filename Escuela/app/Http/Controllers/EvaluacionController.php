@@ -30,7 +30,7 @@ class EvaluacionController extends Controller
         ->orderby('materia.nombre','asc')
         ->get();
 
-        return view('evaluaciones.index',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres,"materias"=>$materias]);
+        return view('userDocente.evaluaciones.index',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres,"materias"=>$materias]);
     }
 
 
@@ -49,7 +49,7 @@ class EvaluacionController extends Controller
         $trimestres=DB::table('trimestre')->get();
         $actividades=DB::table('actividad')->get();
 
-        return view('evaluaciones.index',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres]);
+        return view('userDocente.evaluaciones.index',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres]);
     }
 
     public function store(Request $request)

@@ -15,7 +15,7 @@
                         <th class="text-center">Eval. 3 (%)</th>
                         <th class="text-center">Eval. 4 (%)</th>
                         <th class="text-center">Eval. 5 (%)</th>
-                        <th class="text-center">Prom.</th>
+                        <th style="color: red;" class="text-center">Promedio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                         {!! Form::number('n5', null, ['class' => 'form-control' , 'placeholder'=>'...']) !!}
                         </td>
                         <td>
-                        {!! Form::number('p1', null, ['class' => 'form-control' ,'disabled'=>'true']) !!}
+                        {!! Form::text('p1', null, ['class' => 'form-control' ,'disabled'=>'true']) !!}
                         </td>
                     </tr>
                 </tbody>
@@ -60,7 +60,7 @@
                         <th class="text-center">Eval. 3 (%)</th>
                         <th class="text-center">Eval. 4 (%)</th>
                         <th class="text-center">Eval. 5 (%)</th>
-                        <th class="text-center">Prom.</th>
+                        <th style="color: red;" class="text-center">Promedio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,7 +103,8 @@
                     <tr>
                         <th class="text-center">Eval. 1 (%)</th>
                         <th class="text-center">Eval. 2 (%)</th>
-                        <th class="text-center">Eval. 3 (%)</th>                        <th class="text-center">Prom.</th>
+                        <th class="text-center">Eval. 3 (%)</th>                        
+                        <th style="color: red;" class="text-center">Promedio</th>
                     </tr>
                 </thead>
                 <tbody>
