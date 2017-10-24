@@ -1,64 +1,85 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-<title>Ingreso al Sistema</title>
-<!-- metatags-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Magnificent login form a Flat Responsive Widget,Login form widgets, Sign up Web  forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- Meta tag Keywords -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sistema | Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- iCheck -->
-<link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-<link href="css/estiloLogin.css" rel="stylesheet" type="text/css" media="all"/><!--stylesheet-css-->
-<link rel="stylesheet" href="css/font-awesomeLogin.css"><!--fontawesome-->
-<link href="//fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"><!--online fonts-->
-<link href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet"><!--online fonts-->
-</head>
-<body>
-  <div class="w3ls-main">
-    <div class="wthree-heading">
-      <h1>Sistema de Matriculas</h1>
-    </div>
-      <div class="wthree-container">
-        <div class="wthree-form">
-          <div class="agileits-2">
-            <h2>login</h2>
-          </div>
-          <form action="login" method="post">
-             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
-            <div class="">
-              <span><i class="fa fa-user" aria-hidden="true"></i></span>
-              <input type="text" name="name" placeholder="Usuario" required="">
-            </div>
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
-            <div class="clear"></div>
-            <div class="w3-psw">
-              <span><i class="fa fa-key" aria-hidden="true"></i></span>
-              <input type="password" name="password" placeholder="Contraseña" required="">
-            </div>
-            <div class="clear"></div>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif] probando push-->
+  </head>
+  <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="#"><b>Bienvenido</b> al Sistema</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Ingrese sus credenciales</p>
+        
+        <form action="login" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">   
+
+          <div class="form-group has-feedback">
+
+                <input type="text" class="form-control" name="name" placeholder="Usuario">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" name="password" placeholder="Contraseña">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+         
+          <div class="row">
             
-            <div class="clear"></div>
-            <div class="w3l-submit">
-              <input type="submit" value="Entrar">
-            </div>
-            <div class="clear"></div>
-          </form>
-        </div>
-      </div>
-  </div>
-    <div class="agileits-footer">
-      <p>&copy; Centro Escolar Jardines de La Sabana | Todos los derechos reservados </p>
-    </div>
-</body>
+
+            
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+     
+       
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../plugins/iCheck/icheck.min.js"></script>
+   
+
+    <script>
+      
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+
+
+  </body>
 </html>
