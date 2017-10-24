@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Escuela\TipoUsuario;
 use Escuela\Http\Requests\UsuarioRequest;
 use Illuminate\Http\JsonResponse;
+use Escuela\MaestroUser;
+use Escuela\Maestro;
 
 
 
@@ -42,7 +44,8 @@ class UsuariosController extends Controller {
         
         $usuarioactual=\Auth::user();
         $tiposusuario=TipoUsuario::all();
-		return view('formularios.form_nuevo_usuario')->with("tiposusuario",$tiposusuario)->with("usuarioactual", $usuarioactual );  
+        $maestros=Maestro::all();
+		return view('formularios.form_nuevo_usuario')->with("maestros",$maestros)->with("tiposusuario",$tiposusuario)->with("usuarioactual", $usuarioactual );  
 		
 	}
 
@@ -102,7 +105,14 @@ class UsuariosController extends Controller {
 
 		if($resul){
             
-            return view("mensajes.msj_correcto")->with("msj","Usuario Registrado Correctamente");   
+            
+            $detalleuser=new MaestroUser;
+            $idUsuario=$this->$usuario->id;
+            $this->detalleuser->setid($idUsuario);
+            $detalleuser->mdui=$data['mdui'];
+            $detalleuser->save();
+            return view("mensajes.msj_correcto")->with("msj","Usuario Registrado Correctamente"); 
+
 		}
 		else
 		{
@@ -133,7 +143,81 @@ class UsuariosController extends Controller {
 		}
 	}
 
-   
+    public function asignar_usuario($id)
+    {
+       $usuarioactual=\Auth::user();
+		$usuario=User::find($id);
+		$contador=count($usuario);
+		$tiposusuario=TipoUsuario::all();
+
+		if($contador>0){          
+            return view("formularios.asignarUsuario.create")
+                   ->with("usuarioactual", $usuarioactual )
+                   ->with("usuario",$usuario)
+                   ->with("tiposusuario",$tiposusuario);   
+		}
+		else
+		{            
+            return view("mensajes.msj_rechazado")->with("msj","el usuario con ese id no existe o fue borrado");  
+		}
+
+
+
+    }
+
+    public function agregar_detalle(Request $request)
+	{
+        
+        $data=$request->all();
+
+
+       /* $reglas = array(
+        	             'name' => 'required|Unique:users',
+        	             'email' => 'required|Email|Unique:users',
+        	             'tipoUsuario' => 'required|Numeric|min:1|max:2',
+        	            );
+        $mensajes= array(
+        	             'name.required' =>  'Ingresar Nombres es obligatorio',
+        	             'name.unique' =>  'Ya existe el Usuario, favor ingresar otro nombre',
+        	             'email.required' =>  'Ingresar un email es obligatorio',
+        	             'email.email' =>  'el email debe tener un formato valido',
+        	             'email.unique' =>  'el email debe ser unico en la base de datos',
+        	             
+        	             'tipoUsuario.numeric' =>  'Ingresar un tipo de usuario valido',
+        	             );
+        
+
+        $validacion = Validator::make($data, $reglas, $mensajes);
+        if ($validacion->fails())
+        {
+			 $errores = $validacion->errors(); 
+			 return new JsonResponse($errores, 422); 
+	         /*return view("mensajes.msj_rechazado")->with("msj","Existen errores de validación")
+			                                      ->with("errors",$errores);			          
+        }*/
+
+
+
+      	$detalleuser= new MaestroUser;
+		$detalleuser->id_detalleuser  =  $data['id'];
+		$detalleuser->maestro=$data['maestro'];
+       
+		
+		$resul= $usuario->save();
+
+		if($resul){
+            
+            return view("mensajes.msj_correcto")->with("msj","Usuario Registrado Correctamente");   
+		}
+		else
+		{
+             
+            return view("mensajes.msj_rechazado")->with("msj","hubo un error vuelva a intentarlo");  
+
+		}
+	}
+
+
 
 		/*public function editar_usuario(Request $request)
 	{

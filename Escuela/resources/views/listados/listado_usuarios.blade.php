@@ -47,8 +47,8 @@ if( count($usuarios) >0){
                 <td><span class="label label-primary "><?= $usuario->tipo($usuario->tipoUsuario);   ?></span></td>
                 <td><?= $usuario->created_at;  ?></td>
                  <td>
-                 <a  href="form_editar_usuario/{{$usuario->id}}" class="btn btn-primary"><i class="fa fa-edit"> Editar</i></a>&nbsp;
-                 <form action="{{ url('eliminar')}}/{{$usuario->id}}" method="post">
+                 <a  href="form_editar_usuario/{{$usuario->id}}" class="btn btn-primary"><i class="fa fa-edit"> Editar </i></a></td>
+                 <td><form action="{{ url('eliminar')}}/{{$usuario->id}}" method="post">
                  {{ csrf_field() }}{{ method_field('DELETE') }}
                  <button type="submit" action="" class="btn btn-primary label-danger"><i class="fa fa-trash"> Eliminar</i></button></form></td>            
             </tr>

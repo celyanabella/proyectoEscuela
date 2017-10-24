@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'usuarioAdmin'], function () {
       
       Route::get('form_nuevo_usuario', ['as' => 'form_nuevo_usuario', 'uses' => 'UsuariosController@form_nuevo_usuario']);
-      Route::post('agregar_nuevo_usuario', 'UsuariosController@agregar_nuevo_usuario');
+      Route::post('agregar_nuevo_usuario', 'UsuariosController@agregar_nuevo_usuario','UsuariosController@agregar_detalle');
       Route::get('listado_usuarios/{page?}', ['as' => 'listado_usuarios/{page?}', 'uses' => 'UsuariosController@listado_usuarios']);
       Route::get('form_editar_usuario/{id}', 'UsuariosController@form_editar_usuario');
     /*Route::post('editar_usuario', 'UsuariosController@editar_usuario');*/
@@ -93,6 +93,7 @@ Route::resource('docente/trabajos','MaestroTrabajoController');
 Route::resource('asignacion', 'AsignacionController');
 
 Route::resource('asignacion_cupos', 'CupoController');
+Route::resource('asignacion_Usuarios', 'AsignacionUserController');
 
 Route::resource('asignacion', 'AsignacionController');
 
