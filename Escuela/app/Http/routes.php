@@ -161,8 +161,11 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
   Route::get('userDocente/lista/estudiante/{a1}/{a2}', ['as' => 'lista', 'uses' => 'MaestroUserController@getLista']);
   Route::get('userDocente/trim/notas/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'MaestroUserController@edit']);
   Route::resource('userDocente/materia','MaestroUserController');  //Materias del docente
-Route::resource('evaluacion', 'EvaluacionController');
+  Route::resource('evaluacion', 'EvaluacionController');
 
+  //{id_asignacion}{id_asignacion}{nombreGrado}{nombreSeccion}{nombreTurno}{nombreMateria}
+  Route::get('userDocente/lista1/estudiante/{a1}/{a2}/{nG}/{nS}/{nT}/{nM}', ['as' => 'lista1', 'uses' => 'EvaluacionController@getLista']);
+ // Route::get('userDocente/trim/notas1/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'EvaluacionController@edit']);
 });
 
 

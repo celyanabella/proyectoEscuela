@@ -346,6 +346,15 @@ $(document).on("change",".email_archivo",function(e){
 
 })
 
+$(document).ready(function(){
+  // Show the Modal on load
+  $("#modal-createEval").modal("show");
+  
+ 
+});
+
+
+
 
 
 

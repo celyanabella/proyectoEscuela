@@ -8,6 +8,7 @@ use Escuela\DetalleGrado;
 use Escuela\DetalleAsignacion;
 use Escuela\Maestro;
 use Escuela\Materia;
+use Escuela\DetalleEvaluacion;
 use Illuminate\Http\Request;
 use Escuela\Http\Requests;
 use Escuela\Asignacion;
@@ -20,6 +21,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Log;
 use DB;
+use Carbon\Carbon; //Para la zona fecha horaria
 
 class AsignacionController extends Controller
 {
@@ -40,23 +42,6 @@ class AsignacionController extends Controller
         ->orderBy('valor', 'desc')
         ->get();
         
-        //consulta que envia datos a la vista index en el directorio asignacion como un objeto "asgs"
-       /*  $consulta=DB::table('asignacion')
-        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.mdui',
-         'asignacion.anioasignacion', 'maestro.nombre', 'maestro.apellido', 
-         'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 
-         'detalle_grado.idseccion', 'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 
-         'grado.nombre as nombregrado')
-        ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
-        ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
-        
-        ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
-        ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
-        ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
-        ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
-        ->Where('asignacion.anioasignacion', '=', $query3)
-        ->orderBy('maestro.apellido', 'asc')
-        ->get(); */
 
         $consulta=DB::table('detalle_asignacion')
         ->select('detalle_asignacion.mdui','detalle_asignacion.aniodetalleasignacion','detalle_asignacion.id_detalleasignacion',
@@ -98,7 +83,8 @@ class AsignacionController extends Controller
         
                 
              
-                $query3='2017';
+        $query3 = Carbon::now();
+        $query3 = $query3->format('Y');
                     
         
                 //catalogo de años
@@ -225,7 +211,7 @@ class AsignacionController extends Controller
                 $detalleAsignacion->mdui=$maestroR;
                 $detalleAsignacion->save();
 
-                //se asignan materias automaticamente si es un profesor de primer, segundo ciclo o tercer ciclo
+                //se asignan materias automaticamente si es un profesor de primer ciclo
                 switch ($detalleAsignacion->ciclo) {
                     case 1:
 
@@ -239,6 +225,12 @@ class AsignacionController extends Controller
                        
                         $detalleAsignacion->coordinador='1';
                         $detalleAsignacion->update();
+
+                        //se guardan los detalles evaluacion por cada asignacion creada
+                        $detEvaluacion= new DetalleEvaluacion;
+                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                        $detEvaluacion->save();
+
                         
                     }
 
@@ -252,8 +244,10 @@ class AsignacionController extends Controller
                         $asignacion->anioasignacion=$request->get('idanio');
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                       
-                        
+                       //se  crea el detalle asignacion
+                        $detEvaluacion= new DetalleEvaluacion;
+                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                        $detEvaluacion->save();
 
 
                     break;    
@@ -266,17 +260,20 @@ class AsignacionController extends Controller
                         $asignacion->anioasignacion=$request->get('idanio');
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                       
+                       //se crea el detalle asignacion
+                        $detEvaluacion= new DetalleEvaluacion;
+                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                        $detEvaluacion->save();
                     break; 
                     
                     default:
                         # code...
                         break;                        
                 }//fin switch
-               // $ban="si";
+               
         
             } else {
-                //se comprueba si el maestro es de tercer ciclo 
+                //se comprueba si el maestro  ya fue asignado
                 if(!is_null($asignacion))
                 {
                     $string=Str::lower($ngrado->nombre);
@@ -305,7 +302,7 @@ class AsignacionController extends Controller
 
                         $resul=DetalleAsignacion::where('iddetallegrado',$iddg)->first();
                         if(is_null($resul)){
-
+                            //se crea un detalle asignacion
                         $detalleAsignacion = new DetalleAsignacion;
                         $detalleAsignacion->iddetallegrado=$iddg;
                         $detalleAsignacion->aniodetalleasignacion=$request->get('idanio');
@@ -313,15 +310,16 @@ class AsignacionController extends Controller
                         $detalleAsignacion->mdui=$maestroR;
                         $detalleAsignacion->ciclo=$ciclo;
                         $detalleAsignacion->save();
-
-
+                            //se crea una nueva asignacion
                         $asignacion = new Asignacion;
                         $asignacion->id_detalleasignacion=$detalleAsignacion->id_detalleasignacion;
                         $asignacion->mdui=$maestroR;
                         $asignacion->anioasignacion=$request->get('idanio');
-                       // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                        //$ban="si";
+                        //se guarda en un nuevo detalle evaluacion
+                        $detEvaluacion= new DetalleEvaluacion;
+                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                        $detEvaluacion->save();
                         }else{
                             Session::flash('no','Error: El Grado ya fue asignado, intente nuevamente');
                             return Redirect::to('asignacion');
@@ -334,12 +332,7 @@ class AsignacionController extends Controller
 
 
                     }else 
-                    {
-                        /* //$ban="no";
-                        Session::flash('no','Error: El docente ya fue asignado');
-                        return Redirect::to('asignacion'); */
-                     
-                            
+                    {                    
                                 $grado=DetalleGrado::where('iddetallegrado',$resultado->iddetallegrado)->first();
                                 $turno=Turno::where('idturno',$grado->idturno);
     
@@ -369,7 +362,10 @@ class AsignacionController extends Controller
                             $detaAsignacion->coordinador='1';
                             $detaAsignacion->update();
     
-                        
+                        //se guarda en un nuevo detalle evaluacion
+                        $detEvaluacion= new DetalleEvaluacion;
+                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                        $detEvaluacion->save();
     
                         }
 

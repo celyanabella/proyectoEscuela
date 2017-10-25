@@ -1,5 +1,8 @@
+@extends ('layouts.maestro')
+@section ('contenido')
+
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-create">
+role="dialog" tabindex="-1" id="modal-createEval">
 	{!!Form::open(array('url'=>'evaluacion','method'=>'POST','autocomplete'=>'off'))!!}
 	{{Form::token()}}
 
@@ -12,7 +15,8 @@ role="dialog" tabindex="-1" id="modal-create">
 				aria-label="Close">
                      <span aria-hidden="true">×</span>
                 </button>
-                <h2 class="modal-title">Nueva Evaluacion</h2 >
+                <h2 class="modal-title">Nueva Evaluacion para {{$nMateria}}</h2 >
+				<h3 class="modal-title">{{$nGrado}} "{{$nSeccion}}" {{$nTurno}}</h3>
 				<h4>Seleccione los parametros para la nueva evaluacion <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Defina una evaluacion y asignela a un trimestre y actividad en especifico"></i></h4>
 			</div>
 			<div class="modal-body">
@@ -34,7 +38,7 @@ role="dialog" tabindex="-1" id="modal-create">
                 <div class="form-group col-md-4">
 						<div class="form-group">
 						<label>Actividades</label>
-						<select name="idgrado" class="form-control">
+						<select name="idactividad" class="form-control">
 							@foreach ($actividades as $actividad)
 							<option value="{{$actividad->id_actividad}}">{{$actividad->nombre}}</option>
 							@endforeach
@@ -49,24 +53,12 @@ role="dialog" tabindex="-1" id="modal-create">
 						</div>
 				</div>
 
-                <div class="form-group col-md-4">
-						<div class="form-group">
-						<label>Materia</label>
-						<select name="idmateria" class="form-control">
-							@foreach ($materias as $materia)
-                            @if($materia->estado=='Activo')
-                                <option value="{{$materia->id_materia}}">{{$materia->nombre}}</option>
-                            @endif
-							
-							@endforeach
-						</select>
-						</div>
-				</div>
+               
                 
 
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+			<a href={{URL::action('EvaluacionController@index')}}><button type="button" class="btn btn-default">Cerrar</button></a>	
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</div>
@@ -74,3 +66,6 @@ role="dialog" tabindex="-1" id="modal-create">
 	{{Form::Close()}}
 
 </div>
+
+
+@endsection
