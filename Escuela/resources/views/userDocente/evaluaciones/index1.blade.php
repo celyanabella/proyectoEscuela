@@ -39,7 +39,7 @@
 			<div class="form-group">
 			
 			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Crea una nueva evaluacion para la actual materia" ></i>Nueva Evaluacion</a>
-				@include('evaluaciones.modal')
+				@include('userDocente.evaluaciones.modal1')
 			</div>
 		</div>
 
@@ -65,12 +65,12 @@
 				<div class="panel-heading">
 					<ul class="nav nav-tabs">
 						<?php $a = 0; ?>
-						@foreach($materias as $item)
+						@foreach($asig_mat as $item)
 						@if($item->estado=='Activo')
 							@if($a == 0)
-							<li class="active"><a href="#{{$item->nombre}}" data-toggle="tab">{{$item->nombre}}</a></li>
+							<li class="active"><a href="#{{$item->nombremateria}}" data-toggle="tab">{{$item->nombremateria}}</a></li>
 							@else
-							<li><a href="#{{$item->nombre}}" data-toggle="tab">{{$item->nombre}}</a></li>
+							<li><a href="#{{$item->nombremateria}}" data-toggle="tab">{{$item->nombremateria}}</a></li>
 							@endif
 							<?php $a=$a+1; ?>
 						@else
@@ -84,19 +84,22 @@
 				</div>
 				<div class="panel-body">
 					<div class="tab-content">
+
+				
+
 					<?php $b = 0; ?>
-						@foreach($materias as $item)
+						@foreach($asig_mat as $item)
 						@if($item->estado=='Activo')
 						@if($b == 0)
-						<div class="tab-pane fade in active" id="{{$item->nombre}}">
+						<div class="tab-pane fade in active" id="{{$item->nombremateria}}">
 						@else
-						<div class="tab-pane fade" id="{{$item->nombre}}">
+						<div class="tab-pane fade" id="{{$item->nombremateria}}">
 						@endif
 						<?php $b=$b+1; ?>
 							<div class="row">
 								<div class="col-md-12">
 									
-										<h2>Porcentaje asignado a: {{$item->nombre}}</h2>
+										<h2>Porcentaje asignado a: {{$item->nombremateria}}</h2>
 											<div class="progress">
 												<div class="progress-bar progress-bar-success" role="progressbar" style="width:40%">
 												Evaluacion 1
@@ -118,7 +121,7 @@
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-condensed table-hover">
 										<thead>
-											<th>Nombre</th>
+											<th>Evaluacion</th>
 											<th>Actividad</th>
 											<th>Periodo</th>
 											<th>Porcentaje</th>
@@ -126,7 +129,7 @@
 										</thead>
               
 											<tr>
-												<td>{{$item->nombre}}</td>
+												<td>{{$item->nombremateria}}</td>
 												<td></td>
 												<td></td>
 												<td></td>

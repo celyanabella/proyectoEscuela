@@ -123,7 +123,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{URL::action('EvaluacionController@index')}}"><i class="fa fa-circle-o"></i> Gestionar Evaluaciones</a></li>
-                
+                 <li><a href="{{URL::action('EvaluacionController@indice')}}"><i class="fa fa-circle-o"></i> Gestionar Evaluaciones OP2</a></li>
               </ul>
             </li>
             @endif 

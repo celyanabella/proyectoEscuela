@@ -46,7 +46,7 @@
             <legend>VESPERTINO</legend>
 
             @foreach($asig_ver as $asv)
-
+ 
             <a href="{{ url('userDocente/lista1/estudiante', ['a1' => $asv->id_asignacion, 'a2' => $asv->id_asignacion,'nG'=>$asv->nombregrado , 'nS'=>$asv->nombreseccion,'nT'=>$asv->nombreturno, 'nM'=>$asv->nombremateria]) }}" >
               <div class="boot col-lg-4 col-md-4 col-sm-4 col-xs-12">
                   <div class="div-square">

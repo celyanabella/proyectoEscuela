@@ -18,9 +18,14 @@ use Carbon\Carbon;
 
 class EvaluacionController extends Controller
 {
-    /* public function index(Request $request)
+     public function indice(Request $request)
     {
         $usuarioactual=\Auth::user();
+
+        //Se busca el docente registrado
+        $id_user = $usuarioactual->id;
+        $det_user = MaestroUser::where('id', $id_user)->first();
+        $mdui = $det_user->mdui;
 
         //catalogo de trimestres
         $trimestres=DB::table('trimestre')->get();
@@ -30,9 +35,50 @@ class EvaluacionController extends Controller
         $materias=DB::table('materia')
         ->orderby('materia.nombre','asc')
         ->get();
+        $query3 = Carbon::now();
+        $query3 = $query3->format('Y');
 
-        return view('userDocente.evaluaciones.index',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres,"materias"=>$materias]);
-    } */
+        //Asignaciones en el turno matutino
+
+        $asig_mat =DB::table('asignacion')
+        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre',
+        'maestro.apellido', 'materia.nombre as nombremateria','materia.estado', 'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion',
+        'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
+        ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
+        ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
+        ->join('materia as materia', 'asignacion.id_materia', '=', 'materia.id_materia', 'full outer')
+        ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
+        ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
+        ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
+        ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
+        ->Where('asignacion.anioasignacion', '=', $query3)
+        ->Where('maestro.mdui', '=', $mdui)
+        ->Where('detalle_grado.idturno', '=', 1)    //Matutino
+        ->orderBy('detalle_grado.idgrado', 'asc')
+        ->get();
+
+
+    //Asignaciones en el turno vespertino
+
+    $asig_ver =DB::table('asignacion')
+        ->select('asignacion.id_asignacion', 'asignacion.id_detalleasignacion', 'asignacion.id_materia', 'asignacion.mdui', 'asignacion.anioasignacion', 'maestro.nombre',
+        'maestro.apellido', 'materia.nombre as nombremateria', 'detalle_asignacion.iddetallegrado', 'detalle_grado.iddetallegrado', 'detalle_grado.idgrado', 'detalle_grado.idseccion',
+        'detalle_grado.idturno', 'turno.nombre as nombreturno', 'seccion.nombre as nombreseccion', 'grado.nombre as nombregrado')
+        ->join('maestro as maestro', 'asignacion.mdui', '=', 'maestro.mdui', 'full outer')
+        ->join('detalle_asignacion as detalle_asignacion', 'asignacion.id_detalleasignacion', '=', 'detalle_asignacion.id_detalleasignacion', 'full outer')
+        ->join('materia as materia', 'asignacion.id_materia', '=', 'materia.id_materia', 'full outer')
+        ->join('detalle_grado as detalle_grado', 'detalle_asignacion.iddetallegrado', '=', 'detalle_grado.iddetallegrado', 'full outer')
+        ->join('turno as turno', 'detalle_grado.idturno', '=', 'turno.idturno', 'full outer')
+        ->join('seccion as seccion', 'detalle_grado.idseccion', '=', 'seccion.idseccion', 'full outer')
+        ->join('grado as grado', 'detalle_grado.idgrado', '=', 'grado.idgrado', 'full outer')
+        ->Where('asignacion.anioasignacion', '=', $query3)
+        ->Where('maestro.mdui', '=', $mdui)
+        ->Where('detalle_grado.idturno', '=', 2)    //Vespertino
+        ->orderBy('detalle_grado.idgrado', 'asc')
+        ->get();
+
+        return view('userDocente.evaluaciones.index1',['usuarioactual'=>$usuarioactual,"actividades"=>$actividades,"trimestres"=>$trimestres,"materias"=>$materias,"asig_mat"=>$asig_mat, "asig_ver"=>$asig_ver]);
+    } 
 
 
     public function index(Request $request)
@@ -112,6 +158,7 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
+        
     }
 
     public function getLista(Request $request, $a1, $a2, $nG, $nS, $nT,$nM)
@@ -121,7 +168,7 @@ class EvaluacionController extends Controller
            /*  $id=$a1;
             $id2=$a2; */
 
-            $detalleEvaluacion = DetalleEvaluacion::where('id_asignacion', $a1)->first();
+          
 
            /*  //Se procede a buscar la  asignacion dado el id_asignacion
             $asig = Asignacion::where('id_asignacion', $id)->first();
@@ -157,6 +204,14 @@ class EvaluacionController extends Controller
             $trimestres=DB::table('trimestre')->get();
             $actividades=DB::table('actividad')->get();
 
+            $detalleEvaluacion = DB::table('detalleevaluacion')
+            ->select('detalleevaluacion.id_evaluacion','evaluacion.id_evaluacion','evaluacion.id_actividad','evaluacion.nombre as nombreEvaluacion',
+            'evaluacion.porcentaje as pEval','actividad.id_actividad','actividad.id_trimestre','actividad.nombre as nombreActividad','actividad.porcentaje as pAct',
+            'trimestre.id_trimestre','trimestre.nombre as nombreTrimestre','evaluacion.estado')
+            ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
+            ->join('actividad as actividad','evaluacion.id_actividad','=','actividad.id_actividad', 'full outer')
+            ->join('trimestre as trimestre','actividad.id_trimestre','=','trimestre.id_trimestre', 'full outer')
+            ->get();
             //$query3 = 2017;
            /*  $query = trim($request->get('searchText'));
             $est = DB::table('estudiante')
@@ -176,7 +231,9 @@ class EvaluacionController extends Controller
                     return view("userDocente.lista.estudiantes", ["date"=>$date, "nGrado"=>$nG, "nSeccion"=>$nS, "nTurno"=>$nT, "est"=>$est, "usuarioactual"=>$usuarioactual]);
             } */
 
-            return view('userDocente.evaluaciones.modal', ["actividades"=>$actividades,"trimestres"=>$trimestres,  "nGrado"=>$nG, "nSeccion"=>$nS, "nTurno"=>$nT,"nMateria"=>$nM, "usuarioactual"=>$usuarioactual]);
+
+
+            return view("userDocente.evaluaciones.lista", ["actividades"=>$actividades,"trimestres"=>$trimestres,  "nGrado"=>$nG, "nSeccion"=>$nS, "nTurno"=>$nT,"nMateria"=>$nM, "usuarioactual"=>$usuarioactual, "evaluaciones"=>$detalleEvaluacion]);
         }
     }
 
