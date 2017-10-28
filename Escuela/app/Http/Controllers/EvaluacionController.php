@@ -9,11 +9,12 @@ use Escuela\Actividad;
 use Escuela\Materia;
 use Escuela\MaestroUser;
 use Escuela\DetalleEvaluacion;
+use Escuela\Evaluacion;
 use DB;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 
- //Para la zona fecha horaria
+
 
 
 class EvaluacionController extends Controller
@@ -158,15 +159,28 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
-        
+        $evaluacion = new Evaluacion;
+        $evaluacion->id_actividad=$request->get('idactividad');
+        $evaluacion->nombre=$request->get('nombreEvaluacion');
+        $evaluacion->porcentaje=$request->get('porcentaje');
+        $evaluacion->estado='Activo';
+        $evaluacion->save();
+
+        $detEval= DetalleEvaluacion::where('id_asignacion',$request->get('asg'))->first();
+
+        $detEval->id_evaluacion = $evaluacion->id_evaluacion;
+        $detEval->update();
+
+        return Redirect::to('evaluacion');
+
     }
 
     public function getLista(Request $request, $a1, $a2, $nG, $nS, $nT,$nM)
     {
         $usuarioactual=\Auth::user();
         if ($request) {
-           /*  $id=$a1;
-            $id2=$a2; */
+            $id=$a1;
+           /* $id2=$a2; */
 
           
 
@@ -211,6 +225,7 @@ class EvaluacionController extends Controller
             ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
             ->join('actividad as actividad','evaluacion.id_actividad','=','actividad.id_actividad', 'full outer')
             ->join('trimestre as trimestre','actividad.id_trimestre','=','trimestre.id_trimestre', 'full outer')
+            ->where('detalleevaluacion.id_asignacion','=',$id)
             ->get();
             //$query3 = 2017;
            /*  $query = trim($request->get('searchText'));
@@ -233,7 +248,7 @@ class EvaluacionController extends Controller
 
 
 
-            return view("userDocente.evaluaciones.lista", ["actividades"=>$actividades,"trimestres"=>$trimestres,  "nGrado"=>$nG, "nSeccion"=>$nS, "nTurno"=>$nT,"nMateria"=>$nM, "usuarioactual"=>$usuarioactual, "evaluaciones"=>$detalleEvaluacion]);
+            return view('userDocente.evaluaciones.lista', ["asignacion"=>$a1, "actividades"=>$actividades,"trimestres"=>$trimestres,  "nGrado"=>$nG, "nSeccion"=>$nS, "nTurno"=>$nT,"nMateria"=>$nM, "usuarioactual"=>$usuarioactual, "evaluaciones"=>$detalleEvaluacion]);
         }
     }
 

@@ -1,12 +1,10 @@
-@extends ('layouts.maestro')
-@section ('contenido')
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-createEval">
+role="dialog" tabindex="-1" id="modal-create">
 	{!!Form::open(array('url'=>'evaluacion','method'=>'POST','autocomplete'=>'off'))!!}
 	{{Form::token()}}
 
-
+	<input type="text" name="asg" value={{$asignacion}}  hidden>
 
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -21,6 +19,12 @@ role="dialog" tabindex="-1" id="modal-createEval">
 			</div>
 			<div class="modal-body">
 				
+
+	<div class="form-group col-md-4">
+				<label for="">Nombre Evaluacion</label>
+				{!! Form::text('nombreEvaluacion', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Nombre de Evaluacion', 'autofocus'=>'on']) !!}
+			</div>
+
 
 	<div class="form-group col-md-4">
 		<div class="form-group">
@@ -53,12 +57,14 @@ role="dialog" tabindex="-1" id="modal-createEval">
 						</div>
 				</div>
 
+			
+
                
                 
 
 
 			<div class="modal-footer">
-			<a href={{URL::action('EvaluacionController@index')}}><button type="button" class="btn btn-default">Cerrar</button></a>	
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>	
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</div>
@@ -67,5 +73,3 @@ role="dialog" tabindex="-1" id="modal-createEval">
 
 </div>
 
-
-@endsection

@@ -9,9 +9,9 @@
 <div class="container" >
 	<div class="row" >
 		<div class="col-md-3">
-				<h3>Grado: {{$nGrado}}   </h3>
-                <h3>Seccion: "{{$nSeccion}}"</h3>
-                <h3>Turno: {{$nTurno}}</h3>
+				<h5>Grado: {{$nGrado}}   </h5>
+                <h5>Seccion: "{{$nSeccion}}"</h5>
+                <h5>Turno: {{$nTurno}}</h5>
 		</div>
 	</div>
 </div>
@@ -40,24 +40,13 @@
 
 <div class="row">
 	<div class="col-md-12">
-
-		
-
 		<div class="col-md-2">
 			<div class="form-group">
-			
 			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Asigne un docente a un grado en especifico" ></i> Nueva Evaluacion</a>
 				@include('userDocente.evaluaciones.modal')
 			</div>
 		</div>
-
-		<div class="col-md-2">
-			<div class="form-group">
-			{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
-			<button type="submit" class="btn form-control btn-danger"><i class="fa fa-file"></i> Generar PDF</button>
-			{!!Form::close()!!}
-			</div>
-		</div>
+		
 	</div>
 </div>
 
@@ -67,8 +56,12 @@
  opss! La combinacion <strong>{{Session::get('M1')}}</strong> no esta definida. Puede agregarla <a href="{{URL::action('CupoController@index')}}">aqui</a>
 </div>
 @endif
+
+<?php      
+$ban=array_pop($evaluaciones);
+?>
 	
-@if($evaluaciones==null)
+@if($ban->nombreEvaluacion==null)
 
 <h1><i class="fa fa-exclamation-circle"></i> No hay evaluaciones disponibles </h1>
 @else
