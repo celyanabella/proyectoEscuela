@@ -18,11 +18,11 @@
 <div class="container" >
 	<div class="row" >
 		<div class="col-md-3">
-			@if (Session::has('message'))
+			@if (Session::has('fallo'))
 			<p class="alert alert-danger">{{ Session::get('message')}}</p>
 			@endif
 
-			@if (Session::has('si'))
+			@if (Session::has('exito'))
 			<p class="alert alert-success">{{ Session::get('si')}}</p>
 			@endif
 
@@ -57,7 +57,7 @@
 </div>
 @endif
 
-<?php      
+<?php
 $ban=array_pop($evaluaciones);
 ?>
 	
@@ -86,12 +86,10 @@ $ban=array_pop($evaluaciones);
 					
 					
 					<td>
-					@if($evaluacion->estado=='activo')
+					@if($evaluacion->estado=='Activo')
 						<a href="#"><button class="btn btn-warning">Editar</button></a>
                         <a href="#"><button class="btn btn-danger">Eliminar</button></a>
 					@endif
-				
-						
 					</td>
 				</tr>
 			  @endforeach

@@ -226,10 +226,13 @@ class AsignacionController extends Controller
                         $detalleAsignacion->coordinador='1';
                         $detalleAsignacion->update();
 
+                        
                         //se guardan los detalles evaluacion por cada asignacion creada
+                        for ($i=0; $i < 5; $i++) { 
                         $detEvaluacion= new DetalleEvaluacion;
                         $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
                         $detEvaluacion->save();
+                        }
 
                         
                     }
@@ -244,10 +247,12 @@ class AsignacionController extends Controller
                         $asignacion->anioasignacion=$request->get('idanio');
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                       //se  crea el detalle asignacion
-                        $detEvaluacion= new DetalleEvaluacion;
-                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
-                        $detEvaluacion->save();
+                        //se guardan los detalles evaluacion por cada asignacion creada
+                        for ($i=0; $i < 5; $i++) { 
+                            $detEvaluacion= new DetalleEvaluacion;
+                            $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                            $detEvaluacion->save();
+                            }
 
 
                     break;    
@@ -260,10 +265,12 @@ class AsignacionController extends Controller
                         $asignacion->anioasignacion=$request->get('idanio');
                        // $asignacion->id_materia=$materia->id_materia;
                         $asignacion->save();
-                       //se crea el detalle asignacion
-                        $detEvaluacion= new DetalleEvaluacion;
-                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
-                        $detEvaluacion->save();
+                        //se guardan los detalles evaluacion por cada asignacion creada
+                        for ($i=0; $i < 5; $i++) { 
+                            $detEvaluacion= new DetalleEvaluacion;
+                            $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                            $detEvaluacion->save();
+                            }
                     break; 
                     
                     default:
@@ -316,10 +323,14 @@ class AsignacionController extends Controller
                         $asignacion->mdui=$maestroR;
                         $asignacion->anioasignacion=$request->get('idanio');
                         $asignacion->save();
-                        //se guarda en un nuevo detalle evaluacion
-                        $detEvaluacion= new DetalleEvaluacion;
-                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
-                        $detEvaluacion->save();
+
+                         //se guardan los detalles evaluacion por cada asignacion creada
+                         for ($i=0; $i < 5; $i++) { 
+                            $detEvaluacion= new DetalleEvaluacion;
+                            $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                            $detEvaluacion->save();
+                            }//fin for
+
                         }else{
                             Session::flash('no','Error: El Grado ya fue asignado, intente nuevamente');
                             return Redirect::to('asignacion');
@@ -362,10 +373,12 @@ class AsignacionController extends Controller
                             $detaAsignacion->coordinador='1';
                             $detaAsignacion->update();
     
-                        //se guarda en un nuevo detalle evaluacion
-                        $detEvaluacion= new DetalleEvaluacion;
-                        $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
-                        $detEvaluacion->save();
+                         //se guardan los detalles evaluacion por cada asignacion creada
+                         for ($i=0; $i < 5; $i++) { 
+                            $detEvaluacion= new DetalleEvaluacion;
+                            $detEvaluacion->id_asignacion=$asignacion->id_asignacion;
+                            $detEvaluacion->save();
+                            }//fin for
     
                         }
 

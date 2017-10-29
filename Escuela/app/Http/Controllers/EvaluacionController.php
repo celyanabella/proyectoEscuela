@@ -166,12 +166,23 @@ class EvaluacionController extends Controller
         $evaluacion->estado='Activo';
         $evaluacion->save();
 
-        $detEval= DetalleEvaluacion::where('id_asignacion',$request->get('asg'))->first();
+        $detalles=DetalleEvaluacion::where('id_asignacion',$request->get('asg'))->where('id_evaluacion',null) ->get();
+        foreach ($detalles as $detalle) {
+            if($detalle->id_evaluacion==null)
+            {
+                $detalle->id_evaluacion = $evaluacion->id_evaluacion;
+                $detalle->update();
+                Session::flash('exito',"se guardo exitosamente la evaluacion");
+                return back();
+            }
 
-        $detEval->id_evaluacion = $evaluacion->id_evaluacion;
-        $detEval->update();
+            
 
-        return Redirect::to('evaluacion');
+        }
+        //$detEval= DetalleEvaluacion::where('id_asignacion',$request->get('asg'))->first();
+        Session::flash('fallo',"Hubo un error, verifique si ha alcanzado el numero maximo de evaluaciones");
+        
+        return back();
 
     }
 
@@ -218,11 +229,12 @@ class EvaluacionController extends Controller
             $trimestres=DB::table('trimestre')->get();
             $actividades=DB::table('actividad')->get();
 
-            $detalleEvaluacion = DB::table('detalleevaluacion')
-            ->select('detalleevaluacion.id_evaluacion','evaluacion.id_evaluacion','evaluacion.id_actividad','evaluacion.nombre as nombreEvaluacion',
+            $detalleEvaluacion = DB::table('evaluacion')
+            ->select('detalleevaluacion.id_evaluacion','detalleevaluacion.id_asignacion','evaluacion.id_evaluacion','evaluacion.id_actividad','evaluacion.nombre as nombreEvaluacion',
             'evaluacion.porcentaje as pEval','actividad.id_actividad','actividad.id_trimestre','actividad.nombre as nombreActividad','actividad.porcentaje as pAct',
             'trimestre.id_trimestre','trimestre.nombre as nombreTrimestre','evaluacion.estado')
-            ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
+           // ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
+            ->join('detalleevaluacion as detalleevaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
             ->join('actividad as actividad','evaluacion.id_actividad','=','actividad.id_actividad', 'full outer')
             ->join('trimestre as trimestre','actividad.id_trimestre','=','trimestre.id_trimestre', 'full outer')
             ->where('detalleevaluacion.id_asignacion','=',$id)
