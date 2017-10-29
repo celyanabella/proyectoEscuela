@@ -269,14 +269,8 @@ class EvaluacionController extends Controller
     }
 
 
-    public function edit($g, $s, $t)
+    public function edit($id)
     {
-        $usuarioactual=\Auth::user();
-
-        if ($g == 1 or $g == 2 or $g == 3) {
-            return view('userDocente.notas.show', ["usuarioactual"=>$usuarioactual]);
-        } elseif ($g == 4 or $g == 5 or $g == 6 or $g == 7 or $g == 8 or $g == 9) {
-             return view("userDocente.notas.edit", ["usuarioactual"=>$usuarioactual]);
-        }
+        
     }
 }

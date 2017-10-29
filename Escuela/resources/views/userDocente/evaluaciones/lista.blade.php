@@ -64,10 +64,11 @@
 @endif
 
 <?php
-$ban=true;
+$copia=$evaluaciones;
+$ban=array_shift($copia);
 ?>
 	
-@if($evaluaciones==null)
+@if($ban->nombreEvaluacion==null)
 
 <h1><i class="fa fa-exclamation-circle"></i> No hay evaluaciones disponibles </h1>
 @else
