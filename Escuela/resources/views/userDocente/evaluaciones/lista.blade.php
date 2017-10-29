@@ -1,15 +1,22 @@
 @extends ('layouts.maestro')
 @section('contenido')
-
+<div class="container" >
+		<div class="row" >
+			<div class="col-md-1">
+					<a class="btn btn-primary form-control" href="{{URL::action('EvaluacionController@index')}}"><i class="fa fa-chevron-left" ></i> Atrás</a>
+			</div>
+		</div>
+	</div>
 <div class="row" >
-	<blockquote><h1>Evaluaciones de {{$nMateria}}     <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Asigne maestros a un grado especifico"></i></h1></blockquote>	
+		
+	<blockquote><h1>Evaluaciones de {{$nMateria}}     <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Aqui podra crear evaluaciones de la materia {{$nMateria}}"></i></h1></blockquote>	
 		
 </div>
 
 <div class="container" >
 	<div class="row" >
 		<div class="col-md-5">
-	<h5><strong>Grado: </strong>{{$nGrado}} <strong>Seccion: </strong> "{{$nSeccion}}" <strong>Turno:</strong> {{$nTurno}} </h5>
+	<h4><strong>Grado: </strong>{{$nGrado}} <strong>Seccion: </strong> "{{$nSeccion}}" <strong>Turno:</strong> {{$nTurno}} </h4>
                 
 		</div>
 	</div>
@@ -41,7 +48,7 @@
 	<div class="col-md-12">
 		<div class="col-md-2">
 			<div class="form-group">
-			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Asigne un docente a un grado en especifico" ></i> Nueva Evaluacion</a>
+			<a class="btn btn-success form-control" href="" data-target="#modal-create" data-toggle="modal" ><i class="fa fa-fw -square -circle fa-plus-square" href=# data-toggle="tooltip" title="Haga clic aqui para crear una nueva evaluacion" ></i> Nueva Evaluacion</a>
 				@include('userDocente.evaluaciones.modal')
 			</div>
 		</div>
@@ -60,7 +67,7 @@
 $ban=true;
 ?>
 	
-@if($ban==null)
+@if($evaluaciones==null)
 
 <h1><i class="fa fa-exclamation-circle"></i> No hay evaluaciones disponibles </h1>
 @else

@@ -16,12 +16,13 @@ use Carbon\Carbon;
 
 
 
-
 class EvaluacionController extends Controller
 {
      public function indice(Request $request)
     {
         $usuarioactual=\Auth::user();
+
+     
 
         //Se busca el docente registrado
         $id_user = $usuarioactual->id;
@@ -140,8 +141,8 @@ class EvaluacionController extends Controller
             ->get();
 
 
-
-
+            
+           
 
          return view('userDocente.evaluaciones.index', ["date"=>$date,"mdui"=>$mdui,"asig_mat"=>$asig_mat, "asig_ver"=>$asig_ver, "usuarioactual"=>$usuarioactual]);
 
@@ -159,6 +160,8 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
+        
+
         $evaluacion = new Evaluacion;
         $evaluacion->id_actividad=$request->get('idactividad');
         $evaluacion->nombre=$request->get('nombreEvaluacion');
@@ -181,7 +184,6 @@ class EvaluacionController extends Controller
         }
         //$detEval= DetalleEvaluacion::where('id_asignacion',$request->get('asg'))->first();
         Session::flash('fallo',"Hubo un error, verifique si ha alcanzado el numero maximo de evaluaciones");
-        
         return back();
 
     }
@@ -192,9 +194,12 @@ class EvaluacionController extends Controller
         if ($request) {
             $id=$a1;
            /* $id2=$a2; */
+           
 
           
+           
 
+          
            /*  //Se procede a buscar la  asignacion dado el id_asignacion
             $asig = Asignacion::where('id_asignacion', $id)->first();
 

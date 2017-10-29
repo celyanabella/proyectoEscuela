@@ -6,6 +6,8 @@ role="dialog" tabindex="-1" id="modal-create">
 
 	<input type="text" name="asg" value={{$asignacion}}  hidden>
 
+	
+
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
