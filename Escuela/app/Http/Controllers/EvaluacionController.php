@@ -229,15 +229,14 @@ class EvaluacionController extends Controller
             $trimestres=DB::table('trimestre')->get();
             $actividades=DB::table('actividad')->get();
 
-            $detalleEvaluacion = DB::table('evaluacion')
+            $detalleEvaluacion = DB::table('detalleevaluacion')
             ->select('detalleevaluacion.id_evaluacion','detalleevaluacion.id_asignacion','evaluacion.id_evaluacion','evaluacion.id_actividad','evaluacion.nombre as nombreEvaluacion',
             'evaluacion.porcentaje as pEval','actividad.id_actividad','actividad.id_trimestre','actividad.nombre as nombreActividad','actividad.porcentaje as pAct',
             'trimestre.id_trimestre','trimestre.nombre as nombreTrimestre','evaluacion.estado')
-           // ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
-            ->join('detalleevaluacion as detalleevaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
+            ->join('evaluacion as evaluacion','detalleevaluacion.id_evaluacion','=','evaluacion.id_evaluacion','full outer')
             ->join('actividad as actividad','evaluacion.id_actividad','=','actividad.id_actividad', 'full outer')
             ->join('trimestre as trimestre','actividad.id_trimestre','=','trimestre.id_trimestre', 'full outer')
-            ->where('detalleevaluacion.id_asignacion','=',$id)
+            ->Where('detalleevaluacion.id_asignacion','=',$id)
             ->get();
             //$query3 = 2017;
            /*  $query = trim($request->get('searchText'));

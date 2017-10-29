@@ -381,14 +381,8 @@ class AsignacionController extends Controller
                             }//fin for
     
                         }
-
-                        
                     }
-                        
-
-                        
                     }
-
                     //return Redirect::to('asignacion/'.$ban);
                     Session::flash('si','Asignacion Guardada Con Exito');
                     return Redirect::to('asignacion');

@@ -8,10 +8,9 @@
 
 <div class="container" >
 	<div class="row" >
-		<div class="col-md-3">
-				<h5>Grado: {{$nGrado}}   </h5>
-                <h5>Seccion: "{{$nSeccion}}"</h5>
-                <h5>Turno: {{$nTurno}}</h5>
+		<div class="col-md-5">
+	<h5><strong>Grado: </strong>{{$nGrado}} <strong>Seccion: </strong> "{{$nSeccion}}" <strong>Turno:</strong> {{$nTurno}} </h5>
+                
 		</div>
 	</div>
 </div>
@@ -58,10 +57,10 @@
 @endif
 
 <?php
-$ban=array_pop($evaluaciones);
+$ban=true;
 ?>
 	
-@if($ban->nombreEvaluacion==null)
+@if($ban==null)
 
 <h1><i class="fa fa-exclamation-circle"></i> No hay evaluaciones disponibles </h1>
 @else
