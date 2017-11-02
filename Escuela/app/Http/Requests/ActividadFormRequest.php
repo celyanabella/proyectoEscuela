@@ -25,8 +25,8 @@ class ActividadFormRequest extends Request
     {
         return [
             //
-        'periodo'=>'required|max:50',
-        'porcentaje'=> 'required|Numeric'
+        'nombre'=>'required|max:50',
+        'porcentaje'=> 'Integer|Min:10|Max:40'
             
         ];
     }

@@ -2,7 +2,7 @@
 @extends ('layouts.admin')
 @section ('contenido')
 	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h3>Nueva Actividad</h3>
 
 
@@ -20,33 +20,71 @@
 			{!!Form::open(array('url'=>'detalle/actividad','method'=>'POST','autocomplete'=>'off'))!!}
             {{Form::token()}}
 
-            <div class="form-group">
-            	<label for="periodo">Periodo</label>
-            	<input type="text" name="periodo" class="form-control" placeholder="Digite Periodo...">
-            </div>
-            <div class="form-group" >
-            	<label for="porcentaje">Porcentaje</label>
-            	<input type="text" name="porcentaje" class="form-control" placeholder="Digite el Porcentaje...">
-            </div>
-
-
-
-         <div class="form-group">
-        
-
-                        <a href="{{URL::action('ActividadController@index')}}" class="btn btn-danger">Porcentaje</a>
-            </div>
-
- 
-
-            
-            <div class="form-group">
-            	<button class="btn btn-primary" type="submit">Guardar</button>
-            	<a href="{{URL::action('ActividadController@index')}}" class="btn btn-danger">Cancelar</a>
+            <div class="row">
+            	<div class="col-md-3" >
+		            <div class="form-group" >
+		            	<label for="trimestre">Seleccione el Trimestre</label>
+		            	{{ Form::select('id_trimestre', $trimestres->pluck('nombre','id_trimestre'), null, ['class'=>'form-control']) }}
+		            </div>
+	            </div>
+	            <div class="col-md-4">
+		            <div class="form-group">
+		            	<label for="periodo">Nombre de la Actividad</label>
+		            	{!! Form::text('nombre', null, ['class' => 'form-control' , 'required' => 'required', 'placeholder'=>'Introduzca la actividad', 'autofocus'=>'on']) !!}
+		            </div>
+	            </div>
+	            <div class="col-md-3">
+		            <div class="form-group" >
+		            	<label for="trimestre">Porcentaje</label>
+		            	{!! Form::number('porcentaje', null, ['class' => 'form-control' , 'id'=>'pporcentaje', 'required' => 'required', 'placeholder'=>'Introduzca número entero...', 'autofocus'=>'on']) !!}
+		            </div>
+	            </div>
             </div>
 
+            <div class="row">
+            	<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 col-md-offset-8">
+	            	<div class="form-group">
+		            	<a href="{{URL::action('ActividadController@index')}}" class="btn btn-danger">Cancelar</a>
+		            	<button class="btn btn-primary" type="submit">Guardar</button>
+		            </div>
+	            </div>
+            </div>
 			{!!Form::close()!!}		
             
 		</div>
 	</div>
+
+@push('scripts')
+<script>
+
+	$(document).ready(function(){
+		$('#bt_add').click(function(){
+			agregar();
+		});
+	});
+
+	var cont = 0;
+	//$('#guardar').hide(); //Botón guardar inicialmente oculto
+
+	function agregar(){
+		numero =$('#pporcentaje').val();
+
+		function esEntero(numero){
+		    if (isNaN(numero)){
+		        alert ("Ups... " + numero + " no es un número.");
+		    }
+		    else{
+		        if (numero % 1 == 0) {
+		            alert ("Es un numero entero");
+		        }
+		        else{
+		            alert ("Es un numero decimal");
+		        }
+		    }
+		}
+	}
+
+
+</script>
+@endpush
 @endsection

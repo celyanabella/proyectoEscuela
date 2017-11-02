@@ -37,7 +37,7 @@
 <div class="form-group col-md-3 col-xs-4">
 
                       <label for="id_tipo">Tipo Usuario</label>
-                      <select id="id_tipo" name="id_tipo" class="form-control" >
+                      <select id="id_tipo" name="tipoUsuario" class="form-control" >
                       <?php  for($i=0;$i<=count($tiposusuario)-1;$i++){   ?>
                       <option value="<?= $tiposusuario[$i]->id  ?>" ><?= $tiposusuario[$i]->nombre ?> </option>
                       <?php  } ?>
@@ -48,7 +48,7 @@
 <div class="form-group col-md-3 col-xs-4">
 
                       <label for="maestros">Seleccione un Maestro</label>
-                      <select id="maestros" name="maestros" class="form-control" >
+                      <select id="maestros" name="mdui" class="form-control" >
                       <?php  for($i=0;$i<=count($maestros)-1;$i++){   ?>
                       <option value="<?= $maestros[$i]->mdui  ?>" ><?= $maestros[$i]->nombre ?> </option>
                       <?php  } ?>

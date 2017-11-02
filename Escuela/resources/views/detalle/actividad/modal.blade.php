@@ -11,7 +11,7 @@ role="dialog" tabindex="-1" id="modal-delete-{{$gr->id_actividad}}">
                 <h4 class="modal-title">Eliminar Actividad</h4>
 			</div>
 			<div class="modal-body">
-				<p>Confirme si desea Eliminar la actividad: {{ $gr->periodo }}</p>
+				<p>Confirme si desea Eliminar la actividad "{{ $gr->nombre }} {{ $gr->porcentaje }}% "</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
