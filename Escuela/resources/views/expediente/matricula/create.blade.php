@@ -19,7 +19,6 @@
 </div>
 
 
-
 {!!Form::open(array('url'=>'expediente/matricula','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
             {{Form::token()}}
 
@@ -257,7 +256,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos del Contacto de Emergencia</label>
-				{!! Form::text('apellido4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Describa la enfermedad...', 'autofocus'=>'on']) !!}
+				{!! Form::text('apellido4', null, ['class' => 'form-control', 'required' => 'required' ,'placeholder'=>'Apellidos completos', 'autofocus'=>'on']) !!}
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
@@ -321,8 +320,8 @@
 		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12" id="guardar">
 			<div class="form-group">
 			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
-            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
             	<a href="{{URL::action('MatriculaController@index')}}" class="btn btn-danger col-md-4">Cancelar</a>
+            	<button class="btn btn-primary col-md-4 col-md-offset-2" type="submit">Guardar</button>
             </div>
 		</div>
 		

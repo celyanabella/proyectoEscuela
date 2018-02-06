@@ -18,6 +18,7 @@ use Escuela\DetalleGrado;
 use Escuela\DetallePariente;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 
 
@@ -149,7 +150,7 @@ class MatriculaController extends Controller
                 }
 
         		$matricula->estado='Activo';
-        		$matricula->cePrevio=$request->get('cePrevio');
+        		$matricula->ceprevio=$request->get('cePrevio');
 
         		if(Input::hasFile('fotografia')){
         		$file = Input::file('fotografia');
@@ -159,15 +160,36 @@ class MatriculaController extends Controller
 
         		//Ahora se procede al tratamiento de DetalleGrado
 
-        		$detalleGrado = new DetalleGrado();
-        		$detalleGrado->idgrado = $request->get('idgrado');
-    	    	$detalleGrado->idseccion = $request->get('idseccion');
-    	    	$detalleGrado->idturno = $request->get('idturno');
-    	    	$detalleGrado->save();
-        	
-        		//Se hace la fk a la tabla matricula.
+        		$idgrado = $request->get('idgrado');
+    	    	$idseccion = $request->get('idseccion');
+    	    	$idturno = $request->get('idturno');
 
-        		$matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+                $detalleGrado = DetalleGrado::where('idgrado','=',$idgrado)->where('idseccion','=',$idseccion)
+                ->where('idturno','=',$idturno)->first();
+
+                $ban = 0;
+
+
+                //Se hace la fk a la tabla matricula.
+
+                if(!is_null($detalleGrado)){
+                    $matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+                    $ban = 1;
+                }
+
+                //Validacion de combinacion Grado, Seccion, Turno
+
+                $grado = Grado::where('idgrado','=',$idgrado)->first();
+                $seccion = Seccion::where('idseccion','=',$idseccion)->first();
+                $turno = Turno::where('idturno','=',$idturno)->first();
+
+                if($ban == 0) {
+                    Session::flash('message', '"'.$grado->nombre.'"'.'"'.$seccion->nombre.'"'.'"'.$turno->nombre.'"'.' Esa Asignación no exite, Por favor configure esa combinación');
+                    return Redirect::to('expediente/matricula');
+                }else{
+                Session::flash('create', ''.' Matricula Guardada Correctamente');
+                 }
+
 
         		//Ahora de procede al tratamiento de Estudiante.
 
@@ -293,8 +315,8 @@ class MatriculaController extends Controller
 
         } catch(\Exception $e)
         {
-            DB::rollback();
-        }    		
+          DB::rollback();
+        }    	
 
     	return Redirect::to('expediente/matricula');
     }
@@ -335,15 +357,6 @@ class MatriculaController extends Controller
 
         $count = DetallePariente::where('nie', $nie)->count();
 
-        /*for ($i=0; $i <$count ; $i++) { 
-            $ids[$i] = $parientes[$i]->id_matricula;
-        }
-
-        for ($i=0; $i <$count ; $i++) { 
-            $matriculas = DB::table('matricula as ma')
-            ->where('ma.id_matricula',$ids[$i])
-            ->get();
-        }*/
 
         $parientess = DB::table('matricula as ma')
             #->join('detalle_grado as dg','ma.iddetallegrado','=','dg.iddetallegrado')
@@ -461,7 +474,7 @@ class MatriculaController extends Controller
             }
 
             $matricula->estado='Activo';
-            $matricula->cePrevio=$request->get('cePrevio');
+            $matricula->ceprevio=$request->get('cePrevio');
 
             if(Input::hasFile('fotografia')){
             $file = Input::file('fotografia');
@@ -471,16 +484,35 @@ class MatriculaController extends Controller
 
             //Ahora se procede al tratamiento de DetalleGrado
 
-            $iddg = $matricula->iddetallegrado;                   //Obtengo el id
-            $detalleGrado = DetalleGrado::findOrFail($iddg);      //Se busca en la BD
-            $detalleGrado->idgrado = $request->get('idgrado');
-            $detalleGrado->idseccion = $request->get('idseccion');
-            $detalleGrado->idturno = $request->get('idturno');
-            $detalleGrado -> update();
-        
+            $idgrado = $request->get('idgrado');
+            $idseccion = $request->get('idseccion');
+            $idturno = $request->get('idturno');
+
+            $detalleGrado = DetalleGrado::where('idgrado','=',$idgrado)->where('idseccion','=',$idseccion)
+            ->where('idturno','=',$idturno)->first();
+
+            $ban = 0;
+
+
             //Se hace la fk a la tabla matricula.
 
-            ################$matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+            if(!is_null($detalleGrado)){
+                $matricula->iddetallegrado = $detalleGrado->iddetallegrado;
+                $ban = 1;
+            }
+
+            //Validacion de combinacion Grado, Seccion, Turno
+
+            $grado = Grado::where('idgrado','=',$idgrado)->first();
+            $seccion = Seccion::where('idseccion','=',$idseccion)->first();
+            $turno = Turno::where('idturno','=',$idturno)->first();
+
+            if($ban == 0) {
+                Session::flash('message', '"'.$grado->nombre.'"'.'"'.$seccion->nombre.'"'.'"'.$turno->nombre.'"'.' Esa Asignación no exite, Por favor configure esa combinación');
+                return Redirect::to('expediente/matricula');
+            }else{
+                Session::flash('update', ''.' Actualización Exitosa');
+            }
 
             //Ahora de procede al tratamiento de Estudiante.
             $nie = $matricula->nie;

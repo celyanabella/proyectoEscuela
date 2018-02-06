@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilosMaestro.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -26,7 +28,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="{{ route('login')}}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>JS</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -62,7 +64,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="logout" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                      <a href="{{ route('logout')}}" class="btn btn-default btn-flat">Cerrar Sesión</a>
                     </div>
                   </li>
                 </ul>
@@ -97,6 +99,8 @@
                 <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
               </ul>
             </li>
+
+            @if($usuarioactual->tipoUsuario==2) 
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pencil-square-o"></i>
@@ -104,10 +108,27 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
+            @endif 
+            
+            @if($usuarioactual->tipoUsuario==2) 
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pencil-square-o"></i>
+                <span>Evaluaciones</span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('EvaluacionController@index')}}"><i class="fa fa-circle-o"></i> Gestionar Evaluaciones</a></li>
+                 <li><a href="{{URL::action('EvaluacionController@indice')}}"><i class="fa fa-circle-o"></i> Gestionar Evaluaciones OP2</a></li>
+              </ul>
+            </li>
+            @endif 
+
+
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
@@ -126,23 +147,17 @@
         <!-- /.sidebar -->
       </aside>
 
-
-
-
-
        <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        
         <!-- Main content -->
         <section class="content">
-          
+          @yield('contentMaestro')
           <div class="row">
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Sistema Escolar</h3>
-                  
+                  <h3 class="box-title">Centro Escolar Jardines de la Sabana</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     
@@ -187,6 +202,11 @@
     <script src="{{asset('js/app.min.js')}}"></script>
     
     <script src="{{asset('js/sistemalaravel.js')}}"></script>
-    
+    <script src="{{asset('js/morris/morris.js')}}"></script>
+    <script src="{{asset('js/morris/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{asset('js/donut.js')}}"></script>
+
+
+
   </body>
 </html>

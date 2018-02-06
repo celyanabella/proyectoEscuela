@@ -19,9 +19,9 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
  
  /*DESCOMENTAR ESTE GRUPO DE RUTAS CUANDO SE QUIERA AGREAGAR EL PRIMER USUARIO EN LA BASE DE DATOS*/
-  //Route::get('register', 'Auth\AuthController@getRegister');
-    //Route::get('register', 'Auth\AuthController@tregistro'); 
-    //Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
+    Route::get('register', 'Auth\AuthController@getRegister');
+    Route::get('register', 'Auth\AuthController@tregistro'); 
+    Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);
 
 });
 
@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'usuarioAdmin'], function () {
       
       Route::get('form_nuevo_usuario', ['as' => 'form_nuevo_usuario', 'uses' => 'UsuariosController@form_nuevo_usuario']);
-      Route::post('agregar_nuevo_usuario', 'UsuariosController@agregar_nuevo_usuario');
+      Route::post('agregar_nuevo_usuario', 'UsuariosController@agregar_nuevo_usuario','UsuariosController@agregar_detalle');
       Route::get('listado_usuarios/{page?}', ['as' => 'listado_usuarios/{page?}', 'uses' => 'UsuariosController@listado_usuarios']);
       Route::get('form_editar_usuario/{id}', 'UsuariosController@form_editar_usuario');
     /*Route::post('editar_usuario', 'UsuariosController@editar_usuario');*/
@@ -77,17 +77,49 @@ Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 
+//rutas materia
+Route::resource('detalle/materia','MateriaController');
+Route::resource('detalle/actividad','ActividadController'); //Ruta de gestion de actividades 
 
 
-#Route::get('reporte','ReporteController@index');
+//Rutas de Gestion de docentes
+Route::resource('docente/cvitae','HojaVidaController');
+Route::get('municipios/{id}','HojaVidaController@getMunicipios');
+Route::resource('docente/estudios','MaestroEstudiosController');
+Route::resource('docente/capacitaciones','MaestroCapacitacionController');
+Route::resource('docente/trabajos','MaestroTrabajoController');
 
-#Route::post('recuperandoDatos','ReporteController@store');
+
+Route::resource('asignacion', 'AsignacionController');
+
+Route::resource('asignacion_cupos', 'CupoController');
+Route::resource('asignacion_Usuarios', 'AsignacionUserController');
+
+Route::resource('asignacion', 'AsignacionController');
 
 
 
 
+Route::resource('asignacion/materia', 'AsignacionMateriaController');
 
+Route::get('asignacion/{valor}','AsignacionController@show');
 
+Route::resource('imprimir','ImprimirController');
+
+Route::get('matripdf', function() {
+  $pdf = PDF::loadView('matricul');
+  return $pdf->download('MatriculaInscrpcion.pdf');
+});
+
+Route::get('hojavidapdf', function(){
+  $pdf = PDF::loadView('hojavid');
+  return $pdf->download('HojaVida.pdf');
+});
+
+Route::get('libretapdf', function(){
+  $pdf = PDF::loadView('libreta')->setPaper('Letter', 'landscape')->setWarnings(false)->save('LibretaNotas.pdf');
+  return $pdf->download('LibretaNotas.pdf');
+});
 
 
 
@@ -118,19 +150,24 @@ Route::resource('detalle/turno','TurnoController');
 
 
 
-
-
-
-
-
-
 //grupo de rutas para usuario standar
 
 Route::group(['middleware' => 'usuarioStandard'], function () { 
      
   #Route::resource('expediente/matricula','MatriculaController');     //Nuevo Ingreso
-  #Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso 
+  #Route::resource('expediente/matricula2','Matricula2Controller');  //Antiguo Ingreso
 
+  //RUTAS DE USUARIO DOCENTE
+  Route::get('userDocente/lista/estudiante/{a1}/{a2}', ['as' => 'lista', 'uses' => 'MaestroUserController@getLista']);
+  Route::get('userDocente/trim/notas/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'MaestroUserController@edit']);
+  Route::resource('userDocente/materia','MaestroUserController');  //Materias del docente
+  Route::resource('evaluacion', 'EvaluacionController');
+  Route::get('eval','EvaluacionController@indice');
+ 
+
+  //{id_asignacion}{id_asignacion}{nombreGrado}{nombreSeccion}{nombreTurno}{nombreMateria}
+  Route::get('userDocente/lista1/estudiante/{a1}/{a2}/{nG}/{nS}/{nT}/{nM}', ['as' => 'lista1', 'uses' => 'EvaluacionController@getLista']);
+ // Route::get('userDocente/trim/notas1/{g}/{s}/{t}', ['as' => 'notas', 'uses' => 'EvaluacionController@edit']);
 });
 
 

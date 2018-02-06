@@ -21,8 +21,8 @@
             </div>
             
             <div class="form-group">
-            	<button class="btn btn-primary" type="submit">Guardar</button>
             	<a href="{{URL::action('TipoResponsableController@index')}}" class="btn btn-danger">Cancelar</a>
+            	<button class="btn btn-primary" type="submit">Guardar</button>
             </div>
 
 			{!!Form::close()!!}		

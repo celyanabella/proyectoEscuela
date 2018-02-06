@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		
-		<blockquote><h1>Listados de Estudiantes</h1></blockquote>
+		<blockquote><h1>Listados de Estudiantes <i class="fa fa-info-circle" aria-hidden="true" href="#" data-toggle="tooltip" data-placement="right" title="Aqui podra generar listados de estudiantes"></i></h1></blockquote>
 		@include('datos.Estudiante.search')
 		
 		{!! Form::open(['action' =>'ReporteController@store','class'=>'form-center' ]) !!}
@@ -12,13 +12,26 @@
 			<input type="text" name="seccion" value={{$seccion}} placeholder="seccion" hidden>
 			<input type="text" name="turno" value={{$turno}} placeholder="turno" hidden>
 		    <input type="text" name="anio" value={{$searchYear}} placeholder="turno" hidden>
-			<button type="submit" class="btn btn-danger">Generar PDF</button>
+			<button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="Genere un PDF listo para imprimir el cual contendra una lista de estudiantes">Generar PDF</button>
 			</div>
 	{!!Form::close()!!}
 		
 		
 	</div>
 </div>
+@if($estudiantes==null)
+
+
+@if(Session::has('error1'))
+<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+<strong>Oh!</strong> Al parece no hay un resultado con {{Session::get('error1')}}
+@endif
+
+<h1><i class="fa fa-exclamation-circle"></i> No hay resultados </h1>
+
+@else
+<h4>Mostrando resultados del año: {{$searchYear}}</h4>
+
 
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -48,5 +61,5 @@
 	
 	</div>
 </div>
-
+@endif
 @endsection

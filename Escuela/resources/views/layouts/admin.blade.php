@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
+    <link rel="stylesheet" href="{{asset('css/estilosAdmin.css')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
@@ -27,7 +28,7 @@
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="{{ route('login')}}" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>JS</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -98,21 +99,9 @@
                 <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
               </ul>
             </li>
-            
-            @if($usuarioactual->tipo($usuarioactual->tipoUsuario)==1)
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-folder-open-o"></i>
-                <span>Docentes</span>
-                 <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i>Consultar Docentes</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Coordinación </a></li>
-              </ul>
-            </li>
-            @endif
 
+
+            @if($usuarioactual->tipoUsuario==2) 
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pencil-square-o"></i>
@@ -120,10 +109,23 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Agregar Notas</a></li>
+                <li><a href="{{URL::action('MaestroUserController@index')}}"><i class="fa fa-circle-o"></i> Consultar Notas</a></li>
               </ul>
             </li>
+            @endif
+
+            @if($usuarioactual->tipoUsuario==1) 
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-folder-open"></i> <span>Gestion de Docentes</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+              <li><a href="{{URL::action('HojaVidaController@index')}}"><i class="fa fa-circle-o"></i> Consultar Docente</a></li>
+              </ul>
+            </li>
+            @endif
             
             @if($usuarioactual->tipoUsuario==1) 
             <li class="treeview">
@@ -134,6 +136,19 @@
               <ul class="treeview-menu">
               <li><a href="{{ route('form_nuevo_usuario') }}"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
               <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
+              </ul>
+            </li>
+            @endif
+             @if($usuarioactual->tipoUsuario==1)
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-gears"></i>
+                <span>Gestion de Cupos</span>
+                 <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('CupoController@create')}}"><i class="fa fa-circle-o"></i> Generar Cupos</a></li>
+                <li><a href="{{URL::action('CupoController@index')}}"><i class="fa fa-circle-o"></i> Consultar Cupos</a></li>
               </ul>
             </li>
             @endif
@@ -149,10 +164,16 @@
                 <li><a href="{{URL::action('TurnoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Turnos</a></li>
                 <li><a href="{{URL::action('GradoController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Grados</a></li>
                 <li><a href="{{URL::action('SeccionController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Secciones</a></li>
+                <li><a href="{{URL::action('MateriaController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Materia</a></li>
+                <li><a href="{{URL::action('ActividadController@index')}}"><i class="fa fa-circle-o"></i> Gestión de Actividades</a></li>
                 <li><a href="{{URL::action('TipoResponsableController@index')}}"><i class="fa fa-circle-o"></i> Catálogo de responsables</a></li>
+                 <li><a href="{{URL::action('AsignacionController@index')}}"><i class="fa fa-circle-o"></i> Asignacion Maestro-Materia </a></li>
               </ul>
             </li>
             @endif
+
+
+            @if($usuarioactual->tipoUsuario==1) 
             <li>
               <a href="#">
                 <i class="fa fa-file-pdf-o"></i> <span>Reportes</span>
@@ -161,7 +182,20 @@
               <ul class="treeview-menu">
                 <li><a href="{{URL::action('EstudianteController@index')}}"><i class="fa fa-circle-o"></i> Consulta de Estudiantes</a></li>
               </ul>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Consultar Matricula</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li><a href="{{URL::action('HojaVidaController@index')}}"><i class="fa fa-circle-o"></i> Consultar Docentes</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li><a href=""><i class="fa fa-circle-o"></i> Libreta de Notas</a></li>
+              </ul>
+                <ul class="treeview-menu">
+                <li><a href="{{URL::action('ImprimirController@index')}}"><i class="fa fa-circle-o"></i> Imprimir</a></li>
+              </ul>
             </li>
+            @endif 
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
@@ -194,7 +228,7 @@
         
         <!-- Main content -->
         <section class="content">
-          
+          @yield('contenidoAdmin')
           <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -244,6 +278,14 @@
     <script src="{{asset('js/app.min.js')}}"></script>
     
     <script src="{{asset('js/sistemalaravel.js')}}"></script>
+
+    <!-- AdminLTE App -->
+    <script src="{{asset('js/dropdown.js')}}"></script>
+
+    <!-- Gráfico -->
+    <script src="{{asset('js/morris/morris.js')}}"></script>
+    <script src="{{asset('js/morris/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{asset('js/chart.js')}}"></script>
     
   </body>
 </html>

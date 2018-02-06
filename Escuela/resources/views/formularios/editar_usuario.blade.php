@@ -49,7 +49,7 @@
                       <input type="text" class="form-control" id="email" name="email" value="<?= $usuario->email; ?>" placeholder="email" >
 </div>
 
-<div class="form-group col-xs-6">
+<div class="form-group col-xs-4">
                       <label for="email">password*</label>
                       <input type="text" class="form-control" id="password" value="<?= $usuario->password; ?>" name="password" p required >
 </div>

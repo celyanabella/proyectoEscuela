@@ -20,8 +20,8 @@
             	<input type="text" name="nombre" class="form-control" placeholder="Digite Grado...">
             </div>
             <div class="form-group">
-            	<button class="btn btn-primary" type="submit">Guardar</button>
             	<a href="{{URL::action('GradoController@index')}}" class="btn btn-danger">Cancelar</a>
+            	<button class="btn btn-primary" type="submit">Guardar</button>
             </div>
 
 			{!!Form::close()!!}		

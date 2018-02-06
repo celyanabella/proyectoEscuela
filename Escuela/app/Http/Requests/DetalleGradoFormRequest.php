@@ -24,9 +24,10 @@ class DetalleGradoFormRequest extends Request
     public function rules()
     {
         return [
-            'idgrado'=>'required',
-            'idseccion'=>'required',
-            'idturno'=>'required'
+            'grado'=>'required',
+            'seccion'=>'required',
+            'turno'=>'required',
+            'cupo'=> 'required',
         ];
     }
 }
